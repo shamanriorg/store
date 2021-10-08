@@ -15,7 +15,7 @@
     "postcard"
   ],
   "author": "Igor Matveev @itveev",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/shamanriorg/store/issues"
   },
