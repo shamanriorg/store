@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "store",
   "scripts": {
-    "dev": "SET env:NODE_ENV=development && npx tailwindcss -i dev.css -o prod.css",
-    "prod": "SET env:NODE_ENV=production && npx tailwindcss -i dev.css -o prod.css"
+    "dev": "SET NODE_ENV=development&&npx tailwindcss -i dev.css -o prod.css",
+    "prod": "SET NODE_ENV=production&&npx tailwindcss -i dev.css -o prod.css"
   },
   "keywords": [
     "postcard"
