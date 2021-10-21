@@ -3,24 +3,328 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="preload" href="Beryozki.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <link href="prod.css" rel="stylesheet">
     <style>
-
+      /* .picture {
+        height: 40px;
+        width: 60px;
+        background-image: url('menu.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      } */
     </style>
   </head>
-  <body>
-    <header>  
+  <body class="bg-gray-50">
+    <header> 
+      <div class="flex text-6xl text-center uppercase font-medium text-gray-900">
+        <h1 class="flex-1" >
+          Shamanri
+        </h1>
+      </div>
+      <!-- <div class="flex flex-row justify-between"> -->
+        <div class="flex relative items-start flex-col lg:flex-row lg:justify-center">
+          <button class="lg:hidden fixed top-3 left-3 font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
+            type="button" onclick="openDropdown(event,'dropdown-menu')">
+            Меню
+          </button>
+          <div class="fixed top-12 left-3 lg:relative lg:top-0 lg:left-0">
+            <div class="hidden absolute lg:static bg-white lg:flex lg:bg-transparent lg:shadow-none z-50 float-left py-2 lg:py-0 text-left rounded-sm shadow-md"
+              style="min-width:12rem" id="dropdown-menu">
+              <a href="#"
+                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                Открытки
+              </a>
+              <a href="#"
+                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                Платки
+              </a>
+              <a href="#"
+                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                Принты
+              </a>
+              <a href="#"
+                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                Иллюстрации
+              </a>
+            </div>
+          </div>
+          <button class="fixed top-3 right-3 font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
+            type="button">
+            Корзина
+          </button>
+        </div>
+        <!-- <button class="font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
+            type="button">
+            Корзина
+          </button> -->
+      <!-- </div> -->
+      <!-- cards / headscarf / prints / illustrations контакты доставка -->
+      <!-- menu button for phone screens -->
+      <!-- cart icon -->
+      <!-- lang button -->
+      <!-- breadcrumbs ? -->
+      <!--  -->
     </header> 
     <!-- <aside>
       sidebar
     </aside> -->
     <main>
       <!-- content -->
-      <section>
+      <!-- <section>
         Test
-      </section>
+      </section> -->
+      <!-- cards -->
+      <!-- <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div>
+      <div class="flex  text-center gap-4 flex-row flex-wrap">
+        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
+          11111111111111111111111111
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
+          22222222222222222222222222
+        </div>
+        <div class="flex-1 overflow-ellipsis bg-yellow-400">
+          33333333333333333333333 3333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
+          333333333333333333333333333333333333333333333
+        </div>
+        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
+          444444444444444444444
+        </div>
+      </div> -->
+      <!-- cards -->
+      <!-- <div class="grid text-center grid-flow-col auto-cols-auto gap-4 ">
+        <div class="bg-yellow-200 min-w-max">
+          1
+        </div>
+        <div class="bg-yellow-300 min-w-full">
+          2
+        </div>
+        <div class="bg-yellow-400 ">
+          3
+        </div>
+        <div class="bg-yellow-500 ">
+          4
+        </div>
+      </div> -->
     </main>
     <footer>
+      <!-- insta /email /tel /write to us -->
     </footer>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script> -->
+    <script>
+      function openDropdown(event, dropdownID) {
+        let element = event.target;
+        // var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
+        //   placement: 'bottom-start'
+        // });
+        document.getElementById(dropdownID).classList.toggle("hidden");
+        // document.getElementById(dropdownID).classList.toggle("flex");
+      }
+    </script>
   </body>
 </html>

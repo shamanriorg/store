@@ -2,22 +2,14 @@
   "name": "store",
   "version": "0.0.1",
   "description": "store",
-  "main": "index.html",
   "scripts": {
-    "dev": "SET env:NODE_ENV=development && npx tailwindcss -i dev.css -o prod.css",
-    "prod": "SET env:NODE_ENV=production && npx tailwindcss -i dev.css -o prod.css"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shamanriorg/store.git"
+    "dev": "SET NODE_ENV=development&&npx tailwindcss -i dev.css -o prod.css",
+    "prod": "SET NODE_ENV=production&&npx tailwindcss -i dev.css -o prod.css"
   },
   "keywords": [
     "postcard"
   ],
   "author": "Igor Matveev @itveev",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/shamanriorg/store/issues"
-  },
-  "homepage": "https://github.com/shamanriorg/store#readme"
+  "license": "MIT",
+  "homepage": "https://shamanriorg.github.io/store/"
 }
