@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    /* font-family: Beryozki, sans-serif; */
+    font-family: sans-serif;
+  }
+}
+
+@layer components {
+  .logo-cont {
+    @apply flex text-6xl text-center uppercase font-medium text-gray-800;
+  }
+}
+
+/* @font-face {
+  font-family: 'Beryozki';
+  src: url('Beryozki.woff2') format('woff2'),
+    url('Beryozki.woff') format('woff');
+  font-weight: bolder;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  ascent-override: 90%;
+  font-display: swap;
+} */
