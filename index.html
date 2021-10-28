@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Магазин открыток, принтов, платков, иллюстрации | Иллюстратор(настроения) Мария Матвеева | Shamanri Art</title>
+  <!-- application name ? -->
+    <meta name="description" content="Imageinf.org is a service for obtaining and modifying image information such as gps coordinates, location, camera, date, time and file info.">
+    <meta name="keywords" content="image location, geotag, georeferencing, photo information, image, photo, picture, gps, geo, jpg, coordinates, exif">
     <!-- <link rel="preload" href="Beryozki.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <link href="prod.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" /> -->
     <style>
       /* .picture {
         height: 40px;
@@ -13,6 +18,41 @@
         background-repeat: no-repeat;
         background-position: center;
       } */
+      .carousel-open:checked+.carousel-item {
+          position: static;
+          opacity: 100;
+        }
+      
+        .carousel-item {
+          -webkit-transition: opacity 0.3s ease-out;
+          transition: opacity 0.3s ease-out;
+        }
+      
+        #card-1:checked~.control-1,
+        #card-2:checked~.control-2,
+        #card-3:checked~.control-3 {
+          display: grid;
+          /* display: block; */
+        }
+      
+        .carousel-indicators {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 2%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 10;
+        }
+      
+        #card-1:checked~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #card-2:checked~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #card-3:checked~.carousel-indicators li:nth-child(3) .carousel-bullet {
+          color: rgba(17, 24, 39, 1);
+          /*Set to match the Tailwind colour you want the active one to be */
+        }
     </style>
   </head>
   <body class="bg-gray-50">
@@ -23,13 +63,13 @@
         </h1>
       </div>
       <!-- <div class="flex flex-row justify-between"> -->
-        <div class="flex relative items-start flex-col lg:flex-row lg:justify-center">
+        <div class="flex relative items-start flex-col lg:flex-row lg:justify-center z-50">
           <button class="lg:hidden fixed top-3 left-3 font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
             type="button" onclick="openDropdown(event,'dropdown-menu')">
             Меню
           </button>
           <div class="fixed top-12 left-3 lg:relative lg:top-0 lg:left-0">
-            <div class="hidden absolute lg:static bg-white lg:flex lg:bg-transparent lg:shadow-none z-50 float-left py-2 lg:py-0 text-left rounded-sm shadow-md"
+            <div class="hidden absolute lg:static bg-white lg:flex lg:bg-transparent lg:shadow-none float-left py-2 lg:py-0 text-left rounded-sm shadow-md"
               style="min-width:12rem" id="dropdown-menu">
               <a href="#"
                 class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
@@ -59,7 +99,7 @@
             Корзина
           </button> -->
       <!-- </div> -->
-      <!-- cards / headscarf / prints / illustrations контакты доставка -->
+      <!-- cards / scarf / prints / illustrations контакты доставка -->
       <!-- menu button for phone screens -->
       <!-- cart icon -->
       <!-- lang button -->
@@ -69,7 +109,83 @@
     <!-- <aside>
       sidebar
     </aside> -->
-    <main>
+    <main class="flex justify-center">
+      <!-- Открытки -->
+      <div class="flex flex-1 max-w-screen-lg justify-center">
+        <!-- Карусель -->
+        <div class="w-2/3   carousel relative rounded-sm overflow-hidden shadow-md">
+          <div class="carousel-inner relative overflow-hidden w-full text-xl">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="card-1" name="carousel" aria-hidden="true" hidden
+              checked="checked">
+            <div class="h-80 carousel-item absolute opacity-0 bg-center" style="background-image: url(https://mdbootstrap.com/img/new/slides/052.jpg)">
+            
+            </div>
+            <label for="card-3" class="bg-opacity-70 control-1 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black  rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto ">&#8249;</span> 
+            </label>
+            <label for="card-2" class="bg-opacity-70 control-1 w-10 h-10 mr-2 md:mr-10 
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto text-xl">&#8250;</span>
+            </label>
+        
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="card-2" name="carousel" aria-hidden="true" hidden="">
+            <div class="h-80 carousel-item absolute opacity-0 bg-center" style="background-image: url(https://mdbootstrap.com/img/new/slides/043.jpg)">
+            </div>
+            <label for="card-1" class="bg-opacity-70 control-2 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-3" class="bg-opacity-70 control-2 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="card-3" name="carousel" aria-hidden="true" hidden="">
+            <div class="h-80 carousel-item absolute opacity-0" style="background-image: url(https://mdbootstrap.com/img/new/slides/054.jpg)">
+            </div>
+            <label for="card-2" class="bg-opacity-70 control-3 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-1" class="bg-opacity-70 control-3 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!-- Add additional indicators for each slide-->
+            <ol class="carousel-indicators">
+              <li class="inline-block mr-3">
+                <label for="card-1"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-2"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-3"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+            </ol>
+        
+          </div>
+        </div>
+        <!-- Текст -->
+        <div class="w-1/3  text-lg">
+          Открытки коллекции и поштучно, собери свой набор, конструктор
+        </div>
+      </div>
       <!-- content -->
       <!-- <section>
         Test
