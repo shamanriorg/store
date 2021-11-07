@@ -5,7 +5,8 @@
 @layer base {
   body {
     /* font-family: Beryozki, sans-serif; */
-    font-family: sans-serif;
+    font-family: Haymaker, sans-serif;
+    /* font-family: sans-serif; */
   }
 }
 
@@ -25,3 +26,13 @@
   ascent-override: 90%;
   font-display: swap;
 } */
+@font-face {
+  font-family: 'Haymaker';
+  src: url('Haymaker.woff2') format('woff2'),
+    url('Haymaker.woff') format('woff');
+  /* font-weight: bolder; */
+  font-style: normal;
+  /* letter-spacing: 0.1em; */
+  /* ascent-override: 90%; */
+  font-display: swap;
+}
