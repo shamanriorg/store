@@ -3,68 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Открытки, принты, платки, иллюстрации Марии Матвеевой купить</title>
+    <title>Авторские открытки Марии Матвеевой купить</title>
+    <!-- <title>Душевные открытки Марии Матвеевой</title> -->
     <!-- <title>Иллюстратор Мария Матвеева | Открытки, принты, платки, иллюстрации </title> - плохо-->
     <!-- <title>(Купить) Авторская продукция иллюстратора Марии Матвеевой</title> -->
     <!-- <title>Авторская продукция иллюстратоа Марии Матвеевой</title> -->
     <!-- <title>Купить открытки иллюстратоа Марии Матвеевой</title> -->
   <!-- application name ? -->
-    <meta name="description" content="Авторские открытки, платки, принты и иллюстрации Марии Матвеевой купить в интернет-магазине Shamanri">
-    <meta name="keywords" content="открытки, платки, принты, иллюстрации, авторская продукция, иллюстратор мария матвеева">
+    <meta name="description" content="Авторские открытки иллюстратора Марии Матвеевой купить в интернет-магазине Shamanri">
+    <meta name="keywords" content="открытки, авторская продукция, иллюстратор мария матвеева">
     <!-- <link rel="preload" href="Beryozki.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
-    <link rel="preload" href="Haymaker.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <!-- <link rel="preload" href="Haymaker.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <link href="prod.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" /> -->
     <style>
-      /* .picture {
-        height: 40px;
-        width: 60px;
-        background-image: url('menu.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-      } */
-      /* fonts 900 - main headers, 800 - main controls, 700 - headers, controls ? , 600 - main text, 500 - help text, 400 - strike text */
-      .carousel-open:checked+.carousel-item {
-          position: static;
-          opacity: 100;
-        }
       
-        .carousel-item {
-          -webkit-transition: opacity 0.3s ease-out;
-          transition: opacity 0.3s ease-out;
-        }
-      
-        #card-1:checked~.control-1,
-        #card-2:checked~.control-2,
-        #card-3:checked~.control-3 {
-          display: grid;
-          /* display: block; */
-        }
-      
-        .carousel-indicators {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          position: absolute;
-          bottom: 2%;
-          left: 0;
-          right: 0;
-          text-align: center;
-          z-index: 10;
-        }
-      
-        #card-1:checked~.carousel-indicators li:nth-child(1) .carousel-bullet,
-        #card-2:checked~.carousel-indicators li:nth-child(2) .carousel-bullet,
-        #card-3:checked~.carousel-indicators li:nth-child(3) .carousel-bullet {
-          color: rgba(17, 24, 39, 1);
-          /*Set to match the Tailwind colour you want the active one to be */
-        }
     </style>
   </head>
   <body class="bg-gray-50">
     <header> 
       <div class="flex text-6xl text-center uppercase font-medium text-gray-900">
-        <h1 class="flex-1" >Shamanri</h1>
+        <h1 class="flex-1">Shamanri</h1>
       </div>
       <!-- <div class="flex flex-row justify-between"> -->
         <div class="flex relative items-start flex-col lg:flex-row lg:justify-center z-50">
@@ -95,7 +54,7 @@
               </a>
             </div>
           </div>
-          <button class="fixed top-3 right-3 font-semibold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
+          <button class="fixed top-3 right-3 font-bold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
             type="button">
             Корзина
           </button>
@@ -117,91 +76,190 @@
     </aside> -->
     <main class="flex justify-center">
       <!-- Открытки -->
-      <div class="flex flex-1 max-w-screen-lg justify-center mt-2">
-        <!-- Карусель -->
-        <div class="w-3/4   carousel relative rounded-lg overflow-hidden shadow-md">
-          <div class="carousel-inner relative overflow-hidden w-full text-xl">
-            <!--Slide 1-->
-            <input class="carousel-open" type="radio" id="card-1" name="carousel" aria-hidden="true" hidden
-              checked="checked">
-            <div class="h-80 carousel-item absolute opacity-0 bg-center" style="background-image: url(https://mdbootstrap.com/img/new/slides/052.jpg)">
-            
+      <div class="flex-col flex-1 justify-center max-w-screen-lg mt-2">
+        <!-- Галерея -->
+        <!-- <div class="flex text-center uppercase  text-gray-900"> -->
+        <h2 class="flex-1 text-3xl text-center text-gray-800" >Открытки</h2>
+        <!-- </div> -->
+        <div class="container px-4 py-4 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="lg:w-1/3 w-1/2 p-2 cursor-pointer" onclick="togglePreview(event)">
+              <!-- <div class="flex relative "> -->
+              <div class="flex flex-col  bg-white rounded-lg border-4 border-gray-200 px-4 py-3 h-96">
+                <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
+                <img alt="gallery" class=" flex-grow object-cover object-center rounded-lg mb-2"
+                  src="https://dummyimage.com/600x360">
+                <div class="flex justify-between items-center">
+                  <span class="text-lg font-bold">450р</span> 
+                  <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
+                  <button class=" bg-gray-600 hover:bg-gray-700 text-white px-3
+                    py-1.5 rounded-lg" onclick="event.stopPropagation();"
+                  >
+                    В корзину
+                  </button>
+                </div>
+                <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
+                <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
+                  <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                  <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
+                  <div>Предметов: 5 ?</div>
+                  <p>Описание истории про медведЯ ?</p>
+                  <div>Размер Материал покрытие ?</div>
+                  <div>Вкладки ? увеличение ?</div>
+                  <div>Цена /Количество / корзина</div>
+                </div> -->
+              </div>
             </div>
-            <label for="card-3" class="bg-opacity-70 control-1 w-10 h-10 ml-2 md:ml-10
-              absolute cursor-pointer hidden font-bold text-black  rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
-              <span class="my-auto ">&#8249;</span> 
-            </label>
-            <label for="card-2" class="bg-opacity-70 control-1 w-10 h-10 mr-2 md:mr-10 
-              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
-              <span class="my-auto text-xl">&#8250;</span>
-            </label>
-            <!-- <a href="/cards.html" class="link-1 absolute uppercase text-xl
-              font-semibold bg-white bg-opacity-70 text-gray-800 hover:bg-opacity-100
-              inset-0 m-auto rounded-sm px-2" style="width: fit-content; height: fit-content;">
-              Открытки
-            </a> -->
-        
-            <!--Slide 2-->
-            <input class="carousel-open" type="radio" id="card-2" name="carousel" aria-hidden="true" hidden="">
-            <div class="h-80 carousel-item absolute opacity-0 bg-center" style="background-image: url(https://mdbootstrap.com/img/new/slides/043.jpg)">
+            <div class="lg:w-1/3 w-1/2 p-2 ">
+              <!-- <div class="flex relative "> -->
+              <div class="flex flex-col  bg-white rounded-lg border-4 border-gray-200 px-4 py-3 h-96">
+                <h2 class=" tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                <h1 class=" text-lg text-gray-900 mb-2">Новый год 5</h1>
+                <img alt="gallery" class=" flex-grow object-cover object-center rounded-lg mb-2"
+                  src="https://dummyimage.com/600x360">
+                <div class="flex justify-between items-center">
+                  <span class="text-lg font-bold">450р</span> 
+                  <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
+                  <button class=" bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg">В корзину</button>
+                </div>
+                <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
+                <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
+                  <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                  <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
+                  <div>Предметов: 5 ?</div>
+                  <p>Описание истории про медведЯ ?</p>
+                  <div>Размер Материал покрытие ?</div>
+                  <div>Вкладки ? увеличение ?</div>
+                  <div>Цена /Количество / корзина</div>
+                </div> -->
+              </div>
             </div>
-            <label for="card-1" class="bg-opacity-70 control-2 w-10 h-10 ml-2 md:ml-10
-              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
-              <span class="my-auto">&#8249;</span>
-            </label>
-            <label for="card-3" class="bg-opacity-70 control-2 w-10 h-10 mr-2 md:mr-10
-              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
-              <span class="my-auto">&#8250;</span>
-            </label>
-        
-            <!--Slide 3-->
-            <input class="carousel-open" type="radio" id="card-3" name="carousel" aria-hidden="true" hidden="">
-            <div class="h-80 carousel-item absolute opacity-0" style="background-image: url(https://mdbootstrap.com/img/new/slides/054.jpg)">
+            <div class="lg:w-1/3 w-1/2 p-2">
+              <div class="flex relative ">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/601x361">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
+                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                </div>
+              </div>
             </div>
-            <label for="card-2" class="bg-opacity-70 control-3 w-10 h-10 ml-2 md:ml-10
-              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
-              <!-- <i class="fas fa-angle-left mt-3"></i> -->
-              <span class="my-auto">&#8249;</span>
-            </label>
-            <label for="card-1" class="bg-opacity-70 control-3 w-10 h-10 mr-2 md:mr-10
-              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
-              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
-              <span class="my-auto">&#8250;</span>
-            </label>
-        
-            <!-- Add additional indicators for each slide-->
-            <ol class="carousel-indicators">
-              <li class="inline-block mr-3">
-                <label for="card-1"
-                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
-              </li>
-              <li class="inline-block mr-3">
-                <label for="card-2"
-                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
-              </li>
-              <li class="inline-block mr-3">
-                <label for="card-3"
-                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
-              </li>
-            </ol>
-        
+            <div class="lg:w-1/3 w-1/2 p-2">
+              <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/603x363">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The 400 Blows</h1>
+                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 w-1/2 p-2">
+              <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/602x362">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Neptune</h1>
+                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 w-1/2 p-2">
+              <div class="flex relative">
+                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/605x365">
+                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
+                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Holden Caulfield</h1>
+                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Текст -->
-        <div class="w-1/4 h-full flex text-xl text-gray-700 text-center">
-          <a href="/cards.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
-            <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
-              <span class="text-gray-800 text-2xl font-semibold">Открытки</span>
-              коллекции и поштучно, собери свой набор, заходи, уже можно!
-            </span>
-          </a>
+      </div>
+      <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50
+        outline-none focus:outline-none justify-center items-center"
+        id="modal-preview"
+      >
+        <div class="relative w-auto my-6 mx-auto h-5/6 max-w-3xl">
+          <!--content-->
+          <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full
+              h-full bg-white"
+          >
+            <!--header-->
+            <div
+              class="flex items-start justify-between p-5 border-b border-solid
+                border-gray-300 rounded-t"
+            >
+              <h3 class="text-3xl text-gray-800">Набор:</h3>
+              <h3 class="text-3xl text-gray-800 font-bold ml-1">Новый год 5</h3>
+              <button class=" p-1 ml-auto bg-transparent border-0 text-gray-400
+                  float-right text-3xl leading-none font-semibold outline-none
+                  focus:outline-none "
+                onclick="togglePreview('modal-preview')"
+              >
+                <span class="bg-transparent h-6 w-6 text-2xl block"
+                >&#10006;</span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="flex flex-grow flex-col px-6 py-4 bg-white rounded-lg">
+              <img alt="Набор" class="max-h-96 flex-grow object-cover object-center rounded-lg mb-2"
+                src="https://dummyimage.com/600x360">
+              <div class="flex justify-start items-center">
+                <div class="pr-1 text-gray-800 border-r border-solid
+                border-gray-400"> Предметов:
+                  <span class="text-gray-700 font-bold">5</span> 
+                </div>
+                <div class="pl-1 text-gray-800 pr-1 border-r border-solid
+                border-gray-400"> Материал:
+                  <span class="text-gray-700 font-bold">Матовая бумага, 300г/м2</span> 
+                </div>
+                <div class="pl-1 text-gray-800"> Размер:
+                  <span class="text-gray-700 font-bold">А6</span> 
+                </div>
+                <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
+              </div>
+              <!-- <div class="relative p-6 flex-auto"> -->
+              <div class="text-gray-700 text-lg leading-relaxed">
+                Описание истории про медведя или набор, как всё волшебно и хорошо
+                выходит не очень длинное но интересное
+              </div>
+              <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
+              <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
+                <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
+                <div>Предметов: 5 ?</div>
+                <p>Описание истории про медведЯ ?</p>
+                <div>Размер Материал покрытие ?</div>
+                <div>Вкладки ? увеличение ?</div>
+                <div>Цена /Количество / корзина</div>
+              </div> -->
+            </div>
+            <!--footer-->
+            <div class=" flex items-center justify-end p-5 border-t border-solid
+              border-gray-200 rounded-b "
+            >
+              <div class="text-2xl text-gray-900 mr-4">
+                Цена: <span class="font-bold">450р</span>
+              </div>
+              <button
+                class="bg-gray-600 text-white hover:bg-gray-700 font-bold
+                  px-4 py-2 rounded-lg mr-1 mb-1"
+                type="button" onclick="event.stopPropagation();"
+              >
+                Добавить в корзину
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+      <div
+        class="hidden opacity-25 fixed inset-0 z-40 bg-black"
+        id="modal-preview-backdrop"
+      ></div>
       <!-- content -->
       <!-- <section>
         Test
@@ -443,10 +501,10 @@
           4
         </div>
       </div> -->
+
     </main>
     <footer>
-      <!-- Инфо - О нас / История /Контакты / оплата и доставка / возврат / оферта -->
-      <!-- Продукты все -->
+      <!-- Инфо - Контакты, оплата и доставка, возврат-->
       <!-- insta /email /tel /write to us -->
     </footer>
     <!-- <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script> -->
@@ -458,6 +516,13 @@
         // });
         document.getElementById(dropdownID).classList.toggle("hidden");
         // document.getElementById(dropdownID).classList.toggle("flex");
+      }
+
+      function togglePreview(evt) {
+        document.getElementById('modal-preview').classList.toggle("hidden");
+        document.getElementById('modal-preview-backdrop').classList.toggle("hidden");
+        document.getElementById('modal-preview').classList.toggle("flex");
+        document.getElementById('modal-preview-backdrop').classList.toggle("flex");
       }
     </script>
   </body>
