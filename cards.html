@@ -25,7 +25,6 @@
       <div class="flex text-6xl text-center uppercase font-medium text-gray-900">
         <h1 class="flex-1">Shamanri</h1>
       </div>
-      <!-- <div class="flex flex-row justify-between"> -->
         <div class="flex relative items-start flex-col lg:flex-row lg:justify-center z-50">
           <button class="lg:hidden fixed top-3 left-3 font-semibold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
             type="button" onclick="openDropdown(event,'dropdown-menu')">
@@ -40,7 +39,7 @@
               <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Картины
               </a> -->
-              <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
+              <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Платки
               </a>
               <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
@@ -48,6 +47,12 @@
               </a>
               <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Иллюстрации
+              </a> -->
+              <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
+                Оплата
+              </a>
+              <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
+                Доставка
               </a>
               <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Контакты
@@ -59,11 +64,7 @@
             Корзина
           </button>
         </div>
-        <!-- <button class="font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-lg"
-            type="button">
-            Корзина
-          </button> -->
-      <!-- </div> -->
+        
       <!-- cards / scarf / prints / illustrations контакты доставка -->
       <!-- menu button for phone screens -->
       <!-- cart icon -->
@@ -86,12 +87,19 @@
             <div class="lg:w-1/3 w-1/2 p-2 cursor-pointer" onclick="togglePreview(event)">
               <!-- <div class="flex relative "> -->
               <div class="flex flex-col  bg-white rounded-lg border-4 border-gray-200 px-4 py-3 h-96">
-                <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
-                <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
-                <img alt="gallery" class=" flex-grow object-cover object-center rounded-lg mb-2"
-                  src="https://dummyimage.com/600x360">
-                <div class="flex justify-between items-center">
-                  <span class="text-lg font-bold">450р</span> 
+                <h2 data-prev="type" class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
+                <h1 data-prev="name" class="text-lg text-gray-900 mb-2">Новый год 5</h1>
+                <img data-prev="image" alt="gallery" class="h-32 flex-grow object-cover object-center rounded-lg mb-2"
+                  src="ng22_1c.jpg">
+                <div data-prev="descr" class="hidden" > 
+                  Описание истории про медведя или набор, как всё волшебно и хорошо
+                  выходит не очень длинное но интересное
+                </div>
+                <div data-prev="count" class="hidden" >5</div>
+                <div data-prev="source" class="hidden" >Матовая бумага 300г/м2</div>
+                <div data-prev="format" class="hidden" >A6</div>
+                <div class="flex justify-end items-center">
+                  <span data-prev="price" class="text-lg font-bold mr-2">450р</span> 
                   <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
                   <button class=" bg-gray-600 hover:bg-gray-700 text-white px-3
                     py-1.5 rounded-lg" onclick="event.stopPropagation();"
@@ -99,40 +107,32 @@
                     В корзину
                   </button>
                 </div>
-                <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
-                <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
-                  <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
-                  <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
-                  <div>Предметов: 5 ?</div>
-                  <p>Описание истории про медведЯ ?</p>
-                  <div>Размер Материал покрытие ?</div>
-                  <div>Вкладки ? увеличение ?</div>
-                  <div>Цена /Количество / корзина</div>
-                </div> -->
               </div>
             </div>
-            <div class="lg:w-1/3 w-1/2 p-2 ">
+            <div class="lg:w-1/3 w-1/2 p-2 cursor-pointer" onclick="togglePreview(event)">
               <!-- <div class="flex relative "> -->
               <div class="flex flex-col  bg-white rounded-lg border-4 border-gray-200 px-4 py-3 h-96">
-                <h2 class=" tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
-                <h1 class=" text-lg text-gray-900 mb-2">Новый год 5</h1>
-                <img alt="gallery" class=" flex-grow object-cover object-center rounded-lg mb-2"
-                  src="https://dummyimage.com/600x360">
-                <div class="flex justify-between items-center">
-                  <span class="text-lg font-bold">450р</span> 
-                  <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
-                  <button class=" bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg">В корзину</button>
+                <h2 data-prev="type" class="tracking-wider text-gray-800 mb-1">Открытка</h2>
+                <h1 data-prev="name" class="text-lg text-gray-900 mb-2">Миша</h1>
+                <!-- TODO: h-? -->
+                <img data-prev="image" alt="gallery" class="h-32 flex-grow object-cover object-center rounded-lg mb-2"
+                  src="ng22vod1.jpg">
+                <div data-prev="descr" class="hidden" > 
+                  Миша истории про медведя или гусь, как всё пурум и хорошо
+                  выходит не очень длинное но интересное
                 </div>
-                <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
-                <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
-                  <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
-                  <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
-                  <div>Предметов: 5 ?</div>
-                  <p>Описание истории про медведЯ ?</p>
-                  <div>Размер Материал покрытие ?</div>
-                  <div>Вкладки ? увеличение ?</div>
-                  <div>Цена /Количество / корзина</div>
-                </div> -->
+                <div data-prev="count" class="hidden" >1</div>
+                <div data-prev="source" class="hidden" >Матовая бумага 300г/м2</div>
+                <div data-prev="format" class="hidden" >A6</div>
+                <div class="flex justify-end items-center">
+                  <span data-prev="price" class="text-lg font-bold mr-2">100р</span> 
+                  <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
+                  <button class=" bg-gray-600 hover:bg-gray-700 text-white px-3
+                    py-1.5 rounded-lg" onclick="event.stopPropagation();"
+                  >
+                    В корзину
+                  </button>
+                </div>
               </div>
             </div>
             <div class="lg:w-1/3 w-1/2 p-2">
@@ -165,24 +165,15 @@
                 </div>
               </div>
             </div>
-            <div class="lg:w-1/3 w-1/2 p-2">
-              <div class="flex relative">
-                <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/605x365">
-                <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
-                  <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">THE SUBTITLE</h2>
-                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Holden Caulfield</h1>
-                  <p class="leading-relaxed">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+      <!-- Modal preview -->
       <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50
         outline-none focus:outline-none justify-center items-center"
         id="modal-preview"
       >
-        <div class="relative w-auto my-6 mx-auto h-5/6 max-w-3xl">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
           <!--content-->
           <div
             class="border-0 rounded-lg shadow-lg relative flex flex-col w-full
@@ -193,12 +184,12 @@
               class="flex items-start justify-between p-5 border-b border-solid
                 border-gray-300 rounded-t"
             >
-              <h3 class="text-3xl text-gray-800">Набор:</h3>
-              <h3 class="text-3xl text-gray-800 font-bold ml-1">Новый год 5</h3>
+              <h3 data-prev="type" class="text-3xl text-gray-800"></h3>
+              <h3 data-prev="name" class="text-3xl text-gray-800 font-bold ml-1"></h3>
               <button class=" p-1 ml-auto bg-transparent border-0 text-gray-400
                   float-right text-3xl leading-none font-semibold outline-none
                   focus:outline-none "
-                onclick="togglePreview('modal-preview')"
+                onclick="togglePreview()"
               >
                 <span class="bg-transparent h-6 w-6 text-2xl block"
                 >&#10006;</span>
@@ -206,44 +197,34 @@
             </div>
             <!--body-->
             <div class="flex flex-grow flex-col px-6 py-4 bg-white rounded-lg">
-              <img alt="Набор" class="max-h-96 flex-grow object-cover object-center rounded-lg mb-2"
-                src="https://dummyimage.com/600x360">
-              <div class="flex justify-start items-center">
-                <div class="pr-1 text-gray-800 border-r border-solid
-                border-gray-400"> Предметов:
-                  <span class="text-gray-700 font-bold">5</span> 
+              <a data-prev="link" class="flex" href="" target="_blank">
+                <img data-prev="image" alt="" class="cursor-pointer max-h-96 flex-grow
+                object-cover object-center rounded-lg mb-2" src="">
+                <!-- TODO: Fallback img -->
+              </a>
+              <div class="flex flex-wrap justify-between items-center text-gray-800">
+                <div class="pr-1 "> Предметов:
+                  <span data-prev="count" class="text-gray-700 font-bold"></span> 
                 </div>
-                <div class="pl-1 text-gray-800 pr-1 border-r border-solid
-                border-gray-400"> Материал:
-                  <span class="text-gray-700 font-bold">Матовая бумага, 300г/м2</span> 
+                <div class=" text-center pl-1 pr-1 "> Материал:
+                  <span data-prev="source" class="text-gray-700 font-bold"></span> 
                 </div>
-                <div class="pl-1 text-gray-800"> Размер:
-                  <span class="text-gray-700 font-bold">А6</span> 
+                <div class=" text-right pl-1 "> Формат:
+                  <span data-prev="format" class="text-gray-700 font-bold"></span> 
                 </div>
+                <!-- border-l border-solid border-gray-400 -->
                 <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
               </div>
               <!-- <div class="relative p-6 flex-auto"> -->
-              <div class="text-gray-700 text-lg leading-relaxed">
-                Описание истории про медведя или набор, как всё волшебно и хорошо
-                выходит не очень длинное но интересное
+              <div data-prev="descr" class="text-gray-700 text-lg mt-1 leading-relaxed">
               </div>
-              <!-- <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center rounded-lg" src="https://dummyimage.com/600x360">
-              <div class="px-5 py-4 h-80 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-95 rounded-lg">
-                <h2 class="tracking-wider text-gray-800 mb-1">Набор или открытка</h2>
-                <h1 class="text-lg text-gray-900 mb-2">Новый год 5</h1>
-                <div>Предметов: 5 ?</div>
-                <p>Описание истории про медведЯ ?</p>
-                <div>Размер Материал покрытие ?</div>
-                <div>Вкладки ? увеличение ?</div>
-                <div>Цена /Количество / корзина</div>
-              </div> -->
             </div>
             <!--footer-->
             <div class=" flex items-center justify-end p-5 border-t border-solid
               border-gray-200 rounded-b "
             >
               <div class="text-2xl text-gray-900 mr-4">
-                Цена: <span class="font-bold">450р</span>
+                Цена: <span data-prev="price" class="font-bold"></span>
               </div>
               <button
                 class="bg-gray-600 text-white hover:bg-gray-700 font-bold
@@ -256,273 +237,47 @@
           </div>
         </div>
       </div>
-      <div
-        class="hidden opacity-25 fixed inset-0 z-40 bg-black"
+      <div class="hidden opacity-25 fixed inset-0 z-40 bg-black"
         id="modal-preview-backdrop"
       ></div>
-      <!-- content -->
-      <!-- <section>
-        Test
-      </section> -->
-      <!-- cards -->
-      <!-- <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div> -->
-      <!-- cards -->
-      <!-- <div class="grid text-center grid-flow-col auto-cols-auto gap-4 ">
-        <div class="bg-yellow-200 min-w-max">
-          1
-        </div>
-        <div class="bg-yellow-300 min-w-full">
-          2
-        </div>
-        <div class="bg-yellow-400 ">
-          3
-        </div>
-        <div class="bg-yellow-500 ">
-          4
-        </div>
-      </div> -->
-
     </main>
     <footer>
       <!-- Инфо - Контакты, оплата и доставка, возврат-->
       <!-- insta /email /tel /write to us -->
     </footer>
-    <!-- <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script> -->
     <script>
       function openDropdown(event, dropdownID) {
         let element = event.target;
-        // var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
-        //   placement: 'bottom-start'
-        // });
         document.getElementById(dropdownID).classList.toggle("hidden");
-        // document.getElementById(dropdownID).classList.toggle("flex");
       }
 
       function togglePreview(evt) {
-        document.getElementById('modal-preview').classList.toggle("hidden");
-        document.getElementById('modal-preview-backdrop').classList.toggle("hidden");
-        document.getElementById('modal-preview').classList.toggle("flex");
-        document.getElementById('modal-preview-backdrop').classList.toggle("flex");
+        const elem = evt?.currentTarget;
+        const modal = document.getElementById('modal-preview');
+        const modalBack = document.getElementById('modal-preview-backdrop');
+        if(elem) {
+          setText("[data-prev='type']", elem, modal);
+          setText("[data-prev='name']", elem, modal);
+          setText("[data-prev='descr']", elem, modal);
+          setText("[data-prev='count']", elem, modal);
+          setText("[data-prev='format']", elem, modal);
+          setText("[data-prev='source']", elem, modal);
+          setText("[data-prev='price']", elem, modal);
+          
+          modal.querySelector("[data-prev='image']").setAttribute('src',
+            elem.querySelector("[data-prev='image']").getAttribute('src'));
+          
+          modal.querySelector("[data-prev='link']").setAttribute('href',
+            elem.querySelector("[data-prev='image']").getAttribute('src'));
+        }
+        modal.classList.toggle("hidden");
+        modalBack.classList.toggle("hidden");
+        modal.classList.toggle("flex");
+        modalBack.classList.toggle("flex");
+      }
+
+      function setText(selector, src, target) {
+        target.querySelector(selector).innerHTML = src.querySelector(selector).innerHTML;
       }
     </script>
   </body>
