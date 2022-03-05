@@ -157,6 +157,9 @@ function togglePreview(evt) {
     
     modal.querySelector("[data-prev='link']").setAttribute('href',
       elem.querySelector("[data-prev='preview']").getAttribute('src'));
+
+    modal.querySelector("[data-prev='add-button']").setAttribute('onclick',
+      elem.querySelector("button").getAttribute('onclick'));
   }
   modal.classList.toggle("hidden");
   modalBack.classList.toggle("hidden");
