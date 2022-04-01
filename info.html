@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Корзина - Художественная продукция Марии Матвеевой купить</title>
+    <title>Информация - Художественная продукция Марии Матвеевой купить</title>
     <!-- <title>Душевные открытки Марии Матвеевой</title> -->
     <!-- <title>Иллюстратор Мария Матвеева | Открытки, принты, платки, иллюстрации </title> - плохо-->
     <!-- <title>Купить открытки иллюстратоа Марии Матвеевой</title> -->
   <!-- application name ? -->
-    <meta name="description" content="Оформить заказ художественной продукции иллюстратора Марии Матвеевой в интернет-магазине Shamanri">
-    <meta name="keywords" content="корзина, художественная продукция, иллюстратор мария матвеева">
+    <meta name="description" content="Информация о художественной продукции иллюстратора Марии Матвеевой и интернет-магазине Shamanri">
+    <meta name="keywords" content="информация, контакты, оплата, доставка, возврат, художественная продукция, иллюстратор мария матвеева">
     <!-- <link rel="preload" href="Haymaker.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <link href="prod.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" /> -->
@@ -74,167 +74,81 @@
       <div class="flex-col flex-1 justify-center max-w-screen-lg mt-2">
         <!-- Галерея -->
         <!-- <div class="flex text-center uppercase  text-gray-900"> -->
-        <h2 class="flex-1 text-3xl text-center text-gray-800" >Корзина</h2>
+        <h2 class="flex-1 text-3xl text-center text-gray-800" >Информация</h2>
         <!-- </div> -->
         <div class="container px-4 py-4 mx-auto">
-          <div class="flex-col -m-2">
-            
-            <div id="empty-cart" class="px-10 py-5 text-xl text-center h-20">
-              Ваша корзина пуста
+          <div id="info-company" class="-m-2 ">
+            <div class=" py-2 px-4  m-1 text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 ">
+              <h3 class="pt-2 text-2xl  text-gray-800" >О компании</h2>
+              <div class="pt-2  ">SHaMAnRI. Интернет-магазин художественной продукции Марии Матвевой. </div>
+              <div>  Иллюстрация, открытки, принты, текстиль. </div>
+              <div> Основан в 2020 году.</div>
+              <div class=" ">ИНН: 123456789123. Самозанятая Матвеева Мария Владимировна.</div>
+              <div class=" "></div>
             </div>
-            <div id="clear-cart" class="hidden px-10 py-5 text-xl text-center h-20">
-              <button class = " bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg"
-                onclick="clearCart(event)">
-                Очистить
-              </button>
-            </div>
-            <div id="cart-elem" data-prev="container" class="hidden flex flex-row m-1 content-center bg-white rounded-lg border-4 border-gray-200 px-2 py-1 h-48">
-              <div class="hidden" data-prev="index"></div>
-              <div class="hidden" data-prev="prop"></div>
-              <img data-prev="preview" alt="gallery" class="w-36 mr-2 object-cover object-center rounded-lg "
-                src="">
-              <div data-prev="name" class="mr-2 flex flex-1 items-center justify-center text-lg text-gray-900"></div>
+          </div>
+          <div id="info-contacts" class="-m-2">
+            <div class="  m-1 text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-4 py-2 ">
+              <h3 class="pt-2 text-2xl text-gray-800" >Контакты</h2>
+              <div class="pt-2">&#10036; Адрес: 
+                <span class="text-red-700 font-bold">127495, г.Москва, Челобитьевское шоссе, д.12, к.6, а/я №1</span>
+              </div>
               <!-- <div class="flex flex-1 justify-end items-center"> -->
-              <div class="mr-2 flex flex-1  items-center justify-center text-lg ">
-                <span data-prev="price-item" class=" hidden"> </span> 
-                <span data-prev="price" class=" font-bold"> </span> 
-                <span  class="">&nbspRUB</span> 
+              <div >
+                <span >&#10036; Режим работы:</span> 
+                <span class="text-red-700 font-bold">будни с 11:00 до 19:00 мск</span> 
+                <!-- <span  class="">&nbspRUB</span>  -->
               </div>
-              <!-- <div class="mr-2 flex flex-1 flex-col  items-center justify-center text-lg ">
-                <div class="flex flex-1 items-end ">
-                  <span data-prev="price" class=" font-bold"> </span> 
-                  <span  class="">&nbspRUB</span> 
-                </div>
-                <div class="flex flex-1 items-center ">
-                  <span data-prev="item-total" class="text-base"> 3400 </span> 
-                  <span  class="text-base">&nbspRUB</span>
-                </div>
-              </div> -->
-              <!-- <input class="flex-1" type="number" min="1" max="99" step="1" /> -->
-              <div class="mr-2 flex flex-1 items-center justify-center">
-                <input type="number" data-prev='count' class="py-0.5 pl-1 border-2 border-gray-500 rounded-lg" min="1"
-                  max="10" onchange="countChange(event)">
+              <div >
+                <span >&#10036; Email:</span> 
+                <span class="text-red-700 font-bold">shamanri@ya.ru</span> 
+                <!-- <span  class="">&nbspRUB</span>  -->
               </div>
-              <div class="flex flex-none items-center justify-center">
-                <button class=" text-xl font-bold bg-gray-600 hover:bg-gray-700 text-white px-2
-                  py-1 rounded-lg" onclick="removeFromCart(event)"
-                >
-                  &#10006;
-                </button>
+              <div class=" text-lg ">
+                <span >&#10036; Телефон:</span> 
+                <span class="text-red-700 font-bold">+7 023 519 07 49</span> 
               </div>
-              <!-- </div> -->
+              <div class=" text-lg ">
+                <span >&#10036; Телеграм канал:</span> 
+                <a href="https://t.me/shamanri_tlg" type="button"  class="text-red-700 font-bold py-0.5 px-1 rounded-lg border bg-gray-200  border-gray-600  
+                  hover:bg-black hover:bg-opacity-20 focus:outline-none focus:ring-0 ">
+                  shamanri_tlg
+                </a>
+              </div>
             </div>
-
-            <div  class="flex flex-wrap m-1">
-              <div id="cart-info" class="hidden lg:w-1/2 w-full text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-2 py-1">
-                <label for="order-email" >Email*</label>
-                <input type="email" class="w-full px-1 py-0.5 mb-4 text-lg text-gray-800 border-2 border-gray-500 rounded-lg"
-                  id="order-email" placeholder="example@gmail.com">
-                <label for="order-fio" >ФИО</label>
-                <input type="text" class="w-full px-1 py-0.5 mb-4 text-lg text-gray-800 border-2 border-gray-500 rounded-lg"
-                  id="order-fio" placeholder="Иванов Иван Иванович">
-                <label for="order-phone" >Телефон*</label>
-                <input type="tel" class="w-full px-1 py-0.5 mb-4 text-lg text-gray-800 border-2 border-gray-500 rounded-lg"
-                  id="order-phone" placeholder="8 987 654 32 10">
-
-                <label for="order-address" >Адрес</label>
-                <textarea class="w-full px-1 py-0.5 mb-4 text-lg text-gray-800 border-2 border-gray-500 rounded-lg"
-                  id="order-address" placeholder="654321, г. Москва, ул. Художников, д. 5, кв. 3"></textarea>
-
-                <label for="order-comment" >Комментарий</label>
-                <textarea class="w-full px-1 py-0.5 mb-4 text-lg text-gray-800 border-2 border-gray-500 rounded-lg"
-                  id="order-comment" placeholder="Пожелания к заказу"></textarea>
-
-                <label for="order-pack" class="block ">Упаковка</label>
-                <input type="checkbox" class="mb-4 " id="order-pack-gift" name="gift" value="gift"
-                  onchange="packChange(event)">
-                <label for="order-pack-gift" >Фирменная коробка</label>
-
-                <label for="order-delivery" class="block ">Доставка (в данный момент только по РФ)</label>
-                <input type="radio" checked id="order-delivery-pochta" name="delivery" value="pochta"
-                  onchange="delivChange(event)">
-                <label for="order-delivery-pochta" class=" mr-4 ">Почта России</label>
-                <input type="radio" class="mb-4 " id="order-delivery-sdek" name="delivery" value="pochta"
-                  onchange="delivChange(event)">
-                <label for="order-delivery-sdek" >СДЭК</label>
-                <label class="text-sm">(оплата доставки при получении)</label>
-
-                
-
-                <div >
-                  <input type="checkbox" checked disabled class="mb-4" id="order-agreement" >
-                  <label for="order-pay-ukassa" >Согласие на обработку персональных данных</label>
-                </div>
-                * Обязательные поля
+          </div>
+          <div id="info-payment" class="-m-2">
+            <div class="  m-1 text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-4 py-2 ">
+              <h3 class="pt-2 text-2xl text-gray-800" >Оплата</h2>
+              <div class="pt-2  ">Для приема платежей используется сервис ЮКасса, предоставляющий такие варианты оплаты
+                как банковские карты, Apple Pay и Google Pay, электронные кошельки, терминалы и кассы, интернет банки и т.д. 
               </div>
-              <div id="cart-pay" class="hidden flex flex-col lg:w-1/2 w-full text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-2 py-1">
-                <div class="mb-4 pb-2 text-3xl text-gray-800  border-b border-gray-200"> 
-                  Заказ
-                </div>
-                <div class="flex justify-between"> 
-                  <div>
-                    Товары (<span id="goods-count"></span>)
-                  </div>
-                  <div>
-                    <span id="goods-price"></span> RUB
-                  </div>
-                </div>
-                <div class="flex justify-between"> 
-                  <div>
-                    Скидка
-                  </div>
-                  <div>
-                    <span id="goods-discount">-</span>
-                    <span id="goods-discount-text"></span>
-                  </div>
-                </div>
-                <div class="flex  justify-between "> 
-                  <div>
-                    Упаковка <span id="pack-method"></span>
-                  </div>
-                  <div>
-                    <span id="pack-price">-</span>
-                    <span id="pack-price-text"></span> 
-                  </div>
-                </div>
-                <div class="flex  justify-between border-b border-gray-200 mb-4 pb-2"> 
-                  <div>
-                    Доставка <span id="deliv-method">Почта</span>
-                  </div>
-                  <div>
-                    <span id="deliv-price">150</span>
-                    <span id="deliv-price-text">RUB</span> 
-                  </div>
-                </div>
-                <div class="flex  justify-between mb-4 pb-2 text-2xl text-gray-800  border-b border-gray-200"> 
-                  <div>
-                    Всего
-                  </div>
-                  <div>
-                    <span id="total-price"></span> RUB
-                  </div>
-                </div>
-                <div class="flex-1">
-                  <label for="order-pay" class="block ">Оплата</label>
-                  <input type="radio" class="mb-8 " checked disabled id="order-pay-ukassa" name="pay" value="pochta">
-                  <label for="order-pay-ukassa">Онлайн ЮКасса</label>
-                </div>
-                
-                <!-- <div class="mb-4 text-md">
-                  Перед оплатой проверьте правильность контактных данных.
-                </div> -->
-                <div class="flex flex-1 mb-8">
-                  <button class="flex-1 text-2xl bg-gray-600 hover:bg-gray-700 text-white px-4
-                    py-2 rounded-lg" onclick="event.stopPropagation();"
-                  >
-                    Оформить и оплатить**
-                  </button>
-                </div>
-                <div class="flex-1 mb-4">
-                  ** После оплаты Вам поступит звонок для подтверждения деталей заказа. Если мы не сможем с Вами связаться в течении 3-х дней,
-                  заказ будет отменен, а денежные средства возвращены.
-                </div>
+              <div class="">Если по какой-то причине платеж не проходит, свяжитесь с нами.</div>
+              <div class="pt-1 text-sm" >При оплате заказа банковской картой, обработка платежа
+                происходит на защищенной странице процессинговой системы, которая прошла
+                международную сертификацию. Ваши конфиденциальные данные не поступают в интернет-магазин, их обработка
+                полностью защищена и никто не может их получить. 
               </div>
+            </div>
+          </div>
+          <div id="info-delivery" class="-m-2">
+            <div class="  m-1 text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-4 py-2 ">
+              <h3 class="pt-2 text-2xl text-gray-800" >Доставка</h2>
+              <div class="pt-2  ">&#10036; Почтой России: от 150 RUB, от 2х дней. Точнее на сайте 
+                <a href="https://pochta.ru" target="_blank">Почты России</a>.</div>
+              <div class="pt-1">&#10036; СДЭК: оплата при получении, от 1го до 4х дней. Точнее на сайте 
+                <a href="https://cdek.ru" target="_blank">СДЭК</a>.</div>
+            </div>
+          </div>
+          <div id="info-return" class="-m-2">
+            <div class="  m-1 text-lg text-gray-700 bg-white rounded-lg border-4 border-gray-200 px-4 py-2 ">
+              <h3 class="pt-2 text-2xl text-gray-800" >Возврат</h2>
+              <div class="pt-2  ">&#10036; В течение 14 дней с момента получения товара.</div>
+              <div class="pt-1">&#10036; Вы оплачиваете обратную доставку и отвечаете за сохранность пересылки.</div>
+              <div class="pt-1">&#10036; Стоимость доставки до Вашего адреса не возвращается.</div>
+              <div class="pt-1">&#10036; Возврат происходит в течении 3-х дней с момента получения товара обратно.</div>
+              <div class="pt-1">&#10036; Денежные средства возвращаются туда, откуда была произведена оплата.</div>
+              
             </div>
           </div>
         </div>

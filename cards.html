@@ -3,16 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Авторские открытки Марии Матвеевой купить</title>
+    <title>Коллекционные открытки Марии Матвеевой купить</title>
     <!-- <title>Душевные открытки Марии Матвеевой</title> -->
     <!-- <title>Иллюстратор Мария Матвеева | Открытки, принты, платки, иллюстрации </title> - плохо-->
-    <!-- <title>(Купить) Авторская продукция иллюстратора Марии Матвеевой</title> -->
-    <!-- <title>Авторская продукция иллюстратоа Марии Матвеевой</title> -->
     <!-- <title>Купить открытки иллюстратоа Марии Матвеевой</title> -->
   <!-- application name ? -->
-    <meta name="description" content="Авторские открытки иллюстратора Марии Матвеевой купить в интернет-магазине Shamanri">
-    <meta name="keywords" content="открытки, авторская продукция, иллюстратор мария матвеева">
-    <!-- <link rel="preload" href="Beryozki.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
+    <meta name="description" content="Коллекционные открытки иллюстратора Марии Матвеевой купить в интернет-магазине Shamanri">
+    <meta name="keywords" content="открытки, коллекционные, художественная продукция, иллюстратор мария матвеева">
     <!-- <link rel="preload" href="Haymaker.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
     <link href="prod.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" /> -->
@@ -20,8 +17,18 @@
       
     </style>
   </head>
-  <body class="bg-gray-50">
+  <body class="flex flex-col min-h-screen bg-gray-50">
     <header> 
+      <div  class="m-1 flex justify-center">
+        <h2 id="header-banner-tmp" class="hidden text-2xl p-2 rounded-lg border border-red-600 bg-red-200"> 
+           
+        </h2> 
+      </div>
+      <div  class="m-1 flex justify-center">
+        <h2 id="header-banner-test" class="hidden text-2xl p-2 rounded-lg border border-red-600 bg-red-200"> 
+           <a href="https://shamanri.art" class="p-1 rounded-lg bg-red-300 hover:bg-red-400">Перейти на основной</a>
+        </h2>
+      </div>
       <div class="flex justify-center text-6xl uppercase font-medium text-gray-900">
         <h1 style="font-family: Haymaker, sans-serif;" class="cursor-pointer" onclick="window.location.assign('index.html')">Shamanri</h1>
       </div>
@@ -39,7 +46,7 @@
               <a href="scarfs.html" class="menu__item">
                 Платки
               </a>
-              <a href="#" class="menu__item">
+              <a href="prints.html" class="menu__item">
                 Принты
               </a>
               <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
@@ -54,10 +61,10 @@
               <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Иллюстрации
               </a> -->
-              <a href="#" class="menu__item">
+              <a href="packs.html" class="menu__item">
                 Упаковка
               </a>
-              <a href="#" class="menu__item">
+              <a href="info.html" class="menu__item">
                 Информация
               </a>
               <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
@@ -73,7 +80,7 @@
           </div>
           <button class="fixed top-3 right-3 font-bold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
             type="button" onclick="window.location.assign('cart.html')">
-            Корзина
+            Корзина<span id="cart-count"></span>
           </button>
         </div>
         
@@ -87,7 +94,7 @@
     <!-- <aside>
       sidebar
     </aside> -->
-    <main class="flex justify-center">
+    <main class="flex flex-1 justify-center">
       <!-- Открытки -->
       <div class="flex-col flex-1 justify-center max-w-screen-lg mt-2">
         <!-- Галерея -->
@@ -1569,16 +1576,19 @@
       
               <ul class="list-none mb-0">
                 <li>
-                  <a href="#!" class="">Контакты</a>
+                  <a href="info.html" class="">О компании</a>
                 </li>
                 <li>
-                  <a href="#!" class="">Оплата</a>
+                  <a href="info.html" class="">Контакты</a>
                 </li>
                 <li>
-                  <a href="#!" class="">Доставка</a>
+                  <a href="info.html" class="">Оплата</a>
                 </li>
                 <li>
-                  <a href="#!" class="">Возврат</a>
+                  <a href="info.html" class="">Доставка</a>
+                </li>
+                <li>
+                  <a href="info.html" class="">Возврат</a>
                 </li>
                 <!-- <li>
                   <a href="#!" class="">Соглашение</a>
@@ -1598,10 +1608,10 @@
                   <a href="cards.html" class="">Открытки</a>
                 </li>
                 <li>
-                  <a href="#!" class="">Платки</a>
+                  <a href="scarfs.html" class="">Платки</a>
                 </li>
                 <li>
-                  <a href="#!" class="">Принты</a>
+                  <a href="prints.html" class="">Принты</a>
                 </li>
                 <li>
                   <a href="#!" class="">Упаковка</a>
@@ -1611,9 +1621,11 @@
       
             <div class="lg:w-1/3 flex flex-col justify-end w-full">
               <div id="footer-copyright" class="pt-2 text-center"></div>
+              <div  class="pt-2 text-center text-sm"> Все материалы являются собственностью автора. Использование без согласования запрещено.</div>
+
               <div class="flex justify-center pt-1">          
       
-                <a href="https://www.instagram.com/shamanri_art/" type="button" class="rounded-full border-2
+                <!-- <a href="https://www.instagram.com/shamanri_art/" type="button" class="rounded-full border-2
                  border-gray-600  hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0  w-12 h-12 m-1"
                 >
                   <svg aria-hidden="true"
@@ -1630,7 +1642,7 @@
                       d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"
                     ></path>
                   </svg>
-                </a>
+                </a> -->
           
                 <a href="https://t.me/shamanri_tlg" type="button" class="rounded-full border-2  border-gray-600  
                   hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 w-12 h-12 m-1"
@@ -1655,12 +1667,10 @@
           <!-- </div> -->
         </div>
       </div>
-      <!-- <div>
-        c 2020-2022 Shamanri. Самозанятая Матвеева Мария Владимировна, инн 123456789123,
-        127495, г.Москва, Челобитьевское шоссе, д.12, к.6, а/я 11. Интернет-магазин авторских товаров.
-        Все материалы являются собственностью автора. Использование без согласования запрещено.
-      </div> -->
     </footer>
-    <script src="index.js"></script>
+    <script defer src="js/cards.js"></script>
+    <script defer src="js/scarfs.js"></script>
+    <script defer src="js/packs.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
