@@ -242,6 +242,8 @@ function showCount(cart) {
     document.getElementById('cart-count').textContent = `(${count})`;
     if(window.location.pathname.includes('cart')) {
       const pochtaDelivPrice = 150;
+      const pochtaBoxDelivPrice = 400;
+      let boxFlag = false;
       const sdekDelivPrice = 0;
       const giftPackPrice = 700;
       let singleCardsCount = 0;
@@ -254,9 +256,11 @@ function showCount(cart) {
       });
       cart.scarfs?.forEach((item) => {
         goodsPrice += scarfs[item.index].price * item.count;
+        boxFlag = true;
       });
       cart.packs?.forEach((item) => {
         goodsPrice += packs[item.index].price * item.count;
+        boxFlag = true;
       });
       document.getElementById('goods-count').textContent = count;
       document.getElementById('goods-price').textContent = goodsPrice;
@@ -289,29 +293,37 @@ function showCount(cart) {
 
       let totalPrice = goodsPrice - discount;
 
-      const delivEl = document.getElementById('order-delivery-pochta');
-      if(delivEl.checked) {
-        document.getElementById('deliv-method').textContent='Почта'
-        document.getElementById('deliv-price').textContent=pochtaDelivPrice;
-        document.getElementById('deliv-price-text').textContent='RUB';
-        totalPrice+=pochtaDelivPrice;
-      } else {
-        document.getElementById('deliv-method').textContent='СДЭК'
-        document.getElementById('deliv-price').textContent = '-';
-        document.getElementById('deliv-price-text').textContent='';
-      }
-
       const packEl = document.getElementById('order-pack-gift');
       if(packEl.checked) {
         document.getElementById('pack-method').textContent='Фирменная коробка'
         document.getElementById('pack-price').textContent=giftPackPrice;
         document.getElementById('pack-price-text').textContent='RUB';
         totalPrice+=giftPackPrice;
+        boxFlag = true;
       } else {
         document.getElementById('pack-method').textContent=''
         document.getElementById('pack-price').textContent = '-';
         document.getElementById('pack-price-text').textContent='';
       }
+
+      const delivEl = document.getElementById('order-delivery-pochta');
+      if(delivEl.checked) {
+        document.getElementById('deliv-method').textContent='Почта'
+        if(!boxFlag) {
+          document.getElementById('deliv-price').textContent=pochtaDelivPrice;
+          totalPrice+=pochtaDelivPrice;
+        } else {
+          document.getElementById('deliv-price').textContent=pochtaBoxDelivPrice;
+          totalPrice+=pochtaBoxDelivPrice;
+        }
+        document.getElementById('deliv-price-text').textContent='RUB';
+        // totalPrice+=pochtaDelivPrice;
+      } else {
+        document.getElementById('deliv-method').textContent='СДЭК'
+        document.getElementById('deliv-price').textContent = '-';
+        document.getElementById('deliv-price-text').textContent='';
+      }
+
       document.getElementById('total-price').textContent = totalPrice;
       // + разная доставка + всего
     }
@@ -335,6 +347,10 @@ function setText(selector, src, target) {
 function createBanner() {
   const tmpBannerEl = document.getElementById('header-banner-tmp');
   const testBannerEl = document.getElementById('header-banner-test');
+  const checkoutButtonEl = document.getElementById('checkout');
+  if(checkoutButtonEl && tmpFlag) {
+    checkoutButtonEl.disabled = true
+  } 
   if(!testBannerEl) {
     return;
   }

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://shamanri.art">
     <title>Корзина - Художественная продукция Марии Матвеевой купить</title>
     <!-- <title>Душевные открытки Марии Матвеевой</title> -->
     <!-- <title>Иллюстратор Мария Матвеева | Открытки, принты, платки, иллюстрации </title> - плохо-->
@@ -26,7 +27,7 @@
       </div>
       <div  class="m-1 flex justify-center">
         <h2 id="header-banner-test" class="hidden text-2xl p-2 rounded-lg border border-red-600 bg-red-200"> 
-           <a href="https://shamanri.art" class="p-1 rounded-lg bg-red-300 hover:bg-red-400">Перейти на основной</a>
+           <a href="https://shamanri.art" class="underline">Перейти на основной</a>
         </h2>
       </div>
       <div class="flex justify-center text-6xl uppercase font-medium text-gray-900">
@@ -154,11 +155,16 @@
                 <input type="radio" checked id="order-delivery-pochta" name="delivery" value="pochta"
                   onchange="delivChange(event)">
                 <label for="order-delivery-pochta" class=" mr-4 ">Почта России</label>
-                <input type="radio" class="mb-4 " id="order-delivery-sdek" name="delivery" value="pochta"
-                  onchange="delivChange(event)">
-                <label for="order-delivery-sdek" >СДЭК</label>
-                <label class="text-sm">(оплата доставки при получении)</label>
-
+                <div>
+                  <input type="radio" class=" mb-4 " id="order-delivery-sdek" name="delivery" value="pochta"
+                    onchange="delivChange(event)">
+                  <label for="order-delivery-sdek" >СДЭК</label>
+                  <label class="text-sm">(оплата доставки при получении,
+                    <a href="https://cdek.ru" class="underline" target="_blank">
+                      рассчитать</a>)
+                  </label>
+                </div>
+                
                 
 
                 <div >
@@ -224,14 +230,14 @@
                   Перед оплатой проверьте правильность контактных данных.
                 </div> -->
                 <div class="flex flex-1 mb-8">
-                  <button class="flex-1 text-2xl bg-gray-600 hover:bg-gray-700 text-white px-4
+                  <button id="checkout" class="flex-1 text-2xl bg-gray-600 hover:bg-gray-700 text-white px-4
                     py-2 rounded-lg" onclick="event.stopPropagation();"
                   >
                     Оформить и оплатить**
                   </button>
                 </div>
                 <div class="flex-1 mb-4">
-                  ** После оплаты Вам поступит звонок для подтверждения деталей заказа. Если мы не сможем с Вами связаться в течении 3-х дней,
+                  ** После оплаты Вам поступит звонок для уточнения деталей заказа. Если мы не сможем с Вами связаться в течении 3-х дней,
                   заказ будет отменен, а денежные средства возвращены.
                 </div>
               </div>
@@ -301,7 +307,7 @@
               <div id="footer-copyright" class="pt-2 text-center"></div>
               <div  class="pt-2 text-center text-sm"> Все материалы являются собственностью автора. Использование без согласования запрещено.</div>
 
-              <div class="flex justify-center pt-1">          
+              <div class="flex justify-center items-center pt-1">          
       
                 <!-- <a href="https://www.instagram.com/shamanri_art/" type="button" class="rounded-full border-2
                  border-gray-600  hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0  w-12 h-12 m-1"
@@ -340,6 +346,7 @@
                     ></path>
                   </svg>
                 </a>
+                <span class="px-1">shamanri@ya.ru</span>
               </div>   
             </div>
           <!-- </div> -->
@@ -350,5 +357,6 @@
     <script defer src="js/scarfs.js"></script>
     <script defer src="js/packs.js"></script>
     <script src="js/index.js"></script>
+    <script src="//code.jivo.ru/widget/jzqZBWoTLZ" async></script>
   </body>
 </html>
