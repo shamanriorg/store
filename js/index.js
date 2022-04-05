@@ -357,10 +357,10 @@ function createBanner() {
   const tmpBannerText = 'По техническим причинам в течении 2-х недель заказ и оптала товара временно недоступны.';
   const testBannerText = 'Вы находитесь на тестовой версии сайта.';
   
-  if(!window.location.pathname.includes('shamanri.art')) {
-    testBannerEl.insertAdjacentText('afterbegin', testBannerText);
-    testBannerEl.classList.toggle('hidden');
-  }
+  // if(!window.location.pathname.includes('shamanri.art')) {
+  //   testBannerEl.insertAdjacentText('afterbegin', testBannerText);
+  //   testBannerEl.classList.toggle('hidden');
+  // }
   if(!tmpBannerEl) {
     return;
   }
