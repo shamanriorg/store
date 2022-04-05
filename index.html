@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="preload" href="Beryozki.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
+    <link rel="canonical" href="https://shamanri.art">
+    <title>Открытки, платки, принты, бесшовные паттерны Марии Матвеевой купить</title>
+  <!-- application name  -->
+    <meta name="description" content="Коллекционные открытки, платки, авторские принты, бесшовные паттерны и иллюстрации Марии Матвеевой купить в интернет-магазине Shamanri">
+    <meta name="keywords" content="открытки, платки, принты, бесшовные паттерны, иллюстрации, художественная продукция, иллюстратор мария матвеева">
     <link href="prod.css" rel="stylesheet">
     <style>
       /* .picture {
@@ -13,53 +17,138 @@
         background-repeat: no-repeat;
         background-position: center;
       } */
+      /* fonts 900 - main headers, 800 - main controls, 700 - headers, controls ? , 600 - main text, 500 - help text, 400 - strike text */
+      .carousel-open:checked+.carousel-item {
+          position: static;
+          opacity: 100;
+        }
+      
+        .carousel-item {
+          -webkit-transition: opacity 0.3s ease-out;
+          transition: opacity 0.3s ease-out;
+        }
+      
+        #card-1:checked~.control-1,
+        #card-2:checked~.control-2,
+        #card-3:checked~.control-3,
+        #card-4:checked~.control-4,
+        #card-5:checked~.control-5,
+        #scarf-1:checked~.control-1,
+        #scarf-2:checked~.control-2,
+        #scarf-3:checked~.control-3,
+        #scarf-4:checked~.control-4,
+        #scarf-5:checked~.control-5,
+        #scarf-6:checked~.control-6,
+        #print-1:checked~.control-1,
+        #print-2:checked~.control-2,
+        #print-3:checked~.control-3,
+        #print-4:checked~.control-4,
+        #print-5:checked~.control-5,
+        #print-6:checked~.control-6,
+        #print-7:checked~.control-7 {
+          display: grid;
+          /* display: block; */
+        }
+      
+        .carousel-indicators {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 2%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 10;
+        }
+      
+        #card-1:checked~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #card-2:checked~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #card-3:checked~.carousel-indicators li:nth-child(3) .carousel-bullet,
+        #card-4:checked~.carousel-indicators li:nth-child(4) .carousel-bullet,
+        #card-5:checked~.carousel-indicators li:nth-child(5) .carousel-bullet,
+        #scarf-1:checked~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #scarf-2:checked~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #scarf-3:checked~.carousel-indicators li:nth-child(3) .carousel-bullet,
+        #scarf-4:checked~.carousel-indicators li:nth-child(4) .carousel-bullet,
+        #scarf-5:checked~.carousel-indicators li:nth-child(5) .carousel-bullet,
+        #scarf-6:checked~.carousel-indicators li:nth-child(6) .carousel-bullet,
+        #print-1:checked~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #print-2:checked~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #print-3:checked~.carousel-indicators li:nth-child(3) .carousel-bullet,
+        #print-4:checked~.carousel-indicators li:nth-child(4) .carousel-bullet,
+        #print-5:checked~.carousel-indicators li:nth-child(5) .carousel-bullet,
+        #print-6:checked~.carousel-indicators li:nth-child(6) .carousel-bullet,
+        #print-7:checked~.carousel-indicators li:nth-child(7) .carousel-bullet {
+          color: rgba(17, 24, 39, 1);
+          /*Set to match the Tailwind colour you want the active one to be */
+        }
     </style>
   </head>
-  <body class="bg-gray-50">
+  <body class="flex flex-col min-h-screen bg-gray-50">
     <header> 
-      <div class="flex text-6xl text-center uppercase font-medium text-gray-900">
-        <h1 class="flex-1" >
-          Shamanri
-        </h1>
+      <div  class="m-1 flex justify-center">
+        <h2 id="header-banner-tmp" class="hidden text-2xl p-2 rounded-lg border border-red-600 bg-red-200"> 
+           
+        </h2> 
       </div>
-      <!-- <div class="flex flex-row justify-between"> -->
-        <div class="flex relative items-start flex-col lg:flex-row lg:justify-center">
-          <button class="lg:hidden fixed top-3 left-3 font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
+      <div  class="m-1 flex justify-center">
+        <h2 id="header-banner-test" class="hidden text-2xl p-2 rounded-lg border border-red-600 bg-red-200"> 
+           <a href="https://shamanri.art" class="underline">Перейти на основной</a>
+        </h2>
+      </div>
+      <div class="flex justify-center text-6xl uppercase font-medium text-gray-900">
+        <h1 style="font-family: Haymaker, sans-serif;" class="cursor-pointer"
+          onclick="window.location.assign('index.html')">Shamanri</h1>
+      </div>
+        <div class="menu">
+          <button class="menu__button"
             type="button" onclick="openDropdown(event,'dropdown-menu')">
             Меню
           </button>
           <div class="fixed top-12 left-3 lg:relative lg:top-0 lg:left-0">
-            <div class="hidden absolute lg:static bg-white lg:flex lg:bg-transparent lg:shadow-none z-50 float-left py-2 lg:py-0 text-left rounded-sm shadow-md"
-              style="min-width:12rem" id="dropdown-menu">
-              <a href="#"
-                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+            <div class="hidden absolute lg:static bg-white lg:flex lg:bg-gray-200 lg:shadow-none float-left py-2 lg:py-0 text-left text-gray-800 font-semibold uppercase rounded-lg shadow-md" style="min-width:12rem" id="dropdown-menu">
+              <a href="cards.html" class="menu__item">
                 Открытки
               </a>
-              <a href="#"
-                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+              <a href="scarfs.html" class="menu__item">
                 Платки
               </a>
-              <a href="#"
-                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+              <a href="prints.html" class="menu__item">
                 Принты
               </a>
-              <a href="#"
-                class="text-sm font-semibold uppercase py-2 px-4 block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+              <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
+                Картины
+              </a> -->
+              <!-- 
+              <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Иллюстрации
+              </a> -->
+              <a href="packs.html" class="menu__item">
+                Упаковка
               </a>
+              <a href="info.html" class="menu__item">
+                Информация
+              </a>
+              <!-- <a href="#" class="menu__item">
+                Доставка
+              </a>
+              <a href="#" class="menu__item">
+                Контакты
+              </a> -->
             </div>
           </div>
-          <button class="fixed top-3 right-3 font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
-            type="button">
-            Корзина
+          <button class="fixed top-3 right-3 font-semibold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
+            type="button" onclick="window.location.assign('cart.html')">
+            Корзина<span id="cart-count"></span>
           </button>
         </div>
-        <!-- <button class="font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-sm"
+        <!-- <button class="font-semibold bg-gray-700 text-white uppercase text-sm px-4 py-2 rounded-lg"
             type="button">
             Корзина
           </button> -->
       <!-- </div> -->
-      <!-- cards / headscarf / prints / illustrations контакты доставка -->
+      <!-- cards / scarf / prints / illustrations контакты доставка -->
       <!-- menu button for phone screens -->
       <!-- cart icon -->
       <!-- lang button -->
@@ -69,262 +158,576 @@
     <!-- <aside>
       sidebar
     </aside> -->
-    <main>
-      <!-- content -->
-      <!-- <section>
-        Test
-      </section> -->
-      <!-- cards -->
-      <!-- <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
+    <main class="flex-1">
+      <!-- Открытки -->
+    <div class="flex  justify-center">
+      <div class="flex flex-1 max-w-screen-lg justify-center pt-4">
+        <!-- Карусель -->
+        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+          <div class="carousel-inner relative overflow-hidden w-full text-xl">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="card-1" name="cards" aria-hidden="true" hidden
+              checked="checked">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-cards-set-autumn.jpg)">
+            
+            </div>
+            <label for="card-5" class="bg-opacity-70 control-1 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black  rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto ">&#8249;</span> 
+            </label>
+            <label for="card-2" class="bg-opacity-70 control-1 w-10 h-10 mr-2 md:mr-10 
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto text-xl">&#8250;</span>
+            </label>
+            <!-- <a href="/cards.html" class="link-1 absolute uppercase text-xl
+              font-semibold bg-white bg-opacity-70 text-gray-800 hover:bg-opacity-100
+              inset-0 m-auto rounded-sm px-2" style="width: fit-content; height: fit-content;">
+              Открытки
+            </a> -->
+        
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="card-2" name="cards" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-cards-set-patterns.jpg)">
+            </div>
+            <label for="card-1" class="bg-opacity-70 control-2 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-3" class="bg-opacity-70 control-2 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="card-3" name="cards" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-cards-set-frog.jpg)">
+            </div>
+            <label for="card-2" class="bg-opacity-70 control-3 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-4" class="bg-opacity-70 control-3 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 4-->
+            <input class="carousel-open" type="radio" id="card-4" name="cards" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-cards-set-soviet.jpg)">
+            </div>
+            <label for="card-3" class="bg-opacity-70 control-4 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-5" class="bg-opacity-70 control-4 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 5-->
+            <input class="carousel-open" type="radio" id="card-5" name="cards" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-cards-set-ny2022.jpg)">
+            </div>
+            <label for="card-4" class="bg-opacity-70 control-5 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="card-1" class="bg-opacity-70 control-5 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!-- Add additional indicators for each slide-->
+            <ol class="carousel-indicators">
+              <li class="inline-block mr-3">
+                <label for="card-1"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-2"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-3"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-4"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="card-5"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+            </ol>
+        
+          </div>
         </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
+        <!-- Текст -->
+        <div class="w-1/4 h-full flex text-lg text-gray-700 text-center">
+          <a href="cards.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+            <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
+              <span class="text-gray-800 text-xl font-semibold">Коллекционные открытки</span>
+              со сказками для взрослых, чудесными узорами и нужными словами.
+              Поштучно и в наборах.
+              <span class="text-gray-800 font-semibold">Посмотреть все</span>
+            </span>
+          </a>
         </div>
       </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
+    </div>
+    <div class="flex  justify-center">
+      <!-- Платки -->
+      <div class="flex flex-1 max-w-screen-lg justify-center pt-4">
+        <!-- Текст -->
+        <div class="w-1/4 h-full flex text-xl text-gray-700 text-center">
+          <a href="scarfs.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+            <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
+              <span class="text-gray-800 text-2xl font-semibold">Платки</span>
+              с авторскими принтами. Шейные и большие.
+              <span class="text-gray-800 font-semibold">Посмотреть все</span>
+            </span>
+          </a>
         </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
+        <!-- Карусель -->
+        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+          <div class="carousel-inner relative overflow-hidden w-full text-xl">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="scarf-1" name="scarfs" aria-hidden="true" hidden
+              checked="checked">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-scarfs-img-1.jpg)">
+            
+            </div>
+            <label for="scarf-6" class="bg-opacity-70 control-1 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black  rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto ">&#8249;</span> 
+            </label>
+            <label for="scarf-2" class="bg-opacity-70 control-1 w-10 h-10 mr-2 md:mr-10 
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto text-xl">&#8250;</span>
+            </label>
+        
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="scarf-2" name="scarfs" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-scarfs-img-2.jpg)">
+            </div>
+            <label for="scarf-1" class="bg-opacity-70 control-2 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="scarf-3" class="bg-opacity-70 control-2 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="scarf-3" name="scarfs" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-scarfs-img-3.jpg)">
+            </div>
+            <label for="scarf-2" class="bg-opacity-70 control-3 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="scarf-4" class="bg-opacity-70 control-3 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 4-->
+            <input class="carousel-open" type="radio" id="scarf-4" name="scarfs" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-scarfs-img-4.jpg)">
+            </div>
+            <label for="scarf-3" class="bg-opacity-70 control-4 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="scarf-5" class="bg-opacity-70 control-4 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 5-->
+            <input class="carousel-open" type="radio" id="scarf-5" name="scarfs" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-scarfs-img-5.jpg)">
+            </div>
+            <label for="scarf-4" class="bg-opacity-70 control-5 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="scarf-6" class="bg-opacity-70 control-5 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 6-->
+            <input class="carousel-open" type="radio" id="scarf-6" name="scarfs" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-scarfs-img-6.jpg)">
+            </div>
+            <label for="scarf-5" class="bg-opacity-70 control-6 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="scarf-1" class="bg-opacity-70 control-6 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!-- Add additional indicators for each slide-->
+            <ol class="carousel-indicators">
+              <li class="inline-block mr-3">
+                <label for="scarf-1"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="scarf-2"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="scarf-3"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="scarf-4"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="scarf-5"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="scarf-6"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+            </ol>
+        
+          </div>
         </div>
       </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
+    </div>
+    <!-- принты -->
+    <div class="flex  justify-center">
+      <div class="flex flex-1 max-w-screen-lg justify-center py-4">
+        <!-- Карусель -->
+        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+          <div class="carousel-inner relative overflow-hidden w-full text-xl">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="print-1" name="prints" aria-hidden="true" hidden
+              checked="checked">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-patterns-img-1.jpg)">
+            
+            </div>
+            <label for="print-7" class="bg-opacity-70 control-1 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black  rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto ">&#8249;</span> 
+            </label>
+            <label for="print-2" class="bg-opacity-70 control-1 w-10 h-10 mr-2 md:mr-10 
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto text-xl">&#8250;</span>
+            </label>
+        
+            <!--Slide 2-->
+            <input class="carousel-open" type="radio" id="print-2" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-patterns-img-2.jpg)">
+            </div>
+            <label for="print-1" class="bg-opacity-70 control-2 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-3" class="bg-opacity-70 control-2 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!--Slide 3-->
+            <input class="carousel-open" type="radio" id="print-3" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-patterns-img-3.jpg)">
+            </div>
+            <label for="print-2" class="bg-opacity-70 control-3 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-4" class="bg-opacity-70 control-3 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 4-->
+            <input class="carousel-open" type="radio" id="print-4" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-patterns-img-4.jpg)">
+            </div>
+            <label for="print-3" class="bg-opacity-70 control-4 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-5" class="bg-opacity-70 control-4 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--Slide 5-->
+            <input class="carousel-open" type="radio" id="print-5" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-patterns-img-5.jpg)">
+            </div>
+            <label for="print-4" class="bg-opacity-70 control-5 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-6" class="bg-opacity-70 control-5 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--  slide 6-->
+            <input class="carousel-open" type="radio" id="print-6" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-patterns-img-6.jpg)">
+            </div>
+            <label for="print-5" class="bg-opacity-70 control-6 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-7" class="bg-opacity-70 control-6 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+
+            <!--  slide 7-->
+            <input class="carousel-open" type="radio" id="print-7" name="prints" aria-hidden="true" hidden="">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center" 
+              style="background-image: url(img/carousel-patterns-img-7.jpg)">
+            </div>
+            <label for="print-6" class="bg-opacity-70 control-7 w-10 h-10 ml-2 md:ml-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 left-0 my-auto">
+              <!-- <i class="fas fa-angle-left mt-3"></i> -->
+              <span class="my-auto">&#8249;</span>
+            </label>
+            <label for="print-1" class="bg-opacity-70 control-7 w-10 h-10 mr-2 md:mr-10
+              absolute cursor-pointer hidden font-bold text-black rounded-full bg-white
+              hover:bg-opacity-100 text-center inset-y-0 right-0 my-auto">
+              <span class="my-auto">&#8250;</span>
+            </label>
+        
+            <!-- Add additional indicators for each slide-->
+            <ol class="carousel-indicators">
+              <li class="inline-block mr-3">
+                <label for="print-1"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-2"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-3"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-4"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-5"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-6"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+              <li class="inline-block mr-3">
+                <label for="print-7"
+                  class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-gray-900">•</label>
+              </li>
+            </ol>
+        
+          </div>
         </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
+        <!-- Текст -->
+        <div class="w-1/4 h-full flex text-lg text-gray-700 text-center">
+          <a href="prints.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+            <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
+              <span class="text-gray-800 text-xl font-semibold">Авторские принты.</span>
+              Текстильные и интерьерные бесшовные паттерны. Для покупки и сотрудничества свяжитесь с нами любым способом из указанных в контактах
+              <span class="text-gray-800 font-semibold">Посмотреть все</span>
+            </span>
+          </a>
         </div>
       </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div>
-      <div class="flex  text-center gap-4 flex-row flex-wrap">
-        <div class="flex-1 break-words overflow-ellipsis  bg-yellow-200 ">
-          11111111111111111111111111
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-300">
-          22222222222222222222222222
-        </div>
-        <div class="flex-1 overflow-ellipsis bg-yellow-400">
-          33333333333333333333333 3333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-400">
-          333333333333333333333333333333333333333333333
-        </div>
-        <div class="flex-1 break-words overflow-ellipsis bg-yellow-500">
-          444444444444444444444
-        </div>
-      </div> -->
-      <!-- cards -->
-      <!-- <div class="grid text-center grid-flow-col auto-cols-auto gap-4 ">
-        <div class="bg-yellow-200 min-w-max">
-          1
-        </div>
-        <div class="bg-yellow-300 min-w-full">
-          2
-        </div>
-        <div class="bg-yellow-400 ">
-          3
-        </div>
-        <div class="bg-yellow-500 ">
-          4
-        </div>
-      </div> -->
+    </div>
+
     </main>
-    <footer>
+    <footer class="bg-gray-300 text-gray-600">
+      <!-- Инфо - О нас / История /Контакты / оплата и доставка / возврат / оферта -->
+      <!-- Продукты все -->
       <!-- insta /email /tel /write to us -->
+      <div class="flex  justify-center px-5 py-10">
+
+        <div class="flex flex-1 flex-wrap justify-center max-w-screen-lg">
+          
+          <!-- <div class="grid  md:grid-cols-3"> -->
+            <div class="lg:w-1/3 w-1/2">
+              <h5 class=" font-bold mb-2">Информация</h5>
+      
+              <ul class="list-none mb-0">
+                <li>
+                  <a href="info.html" class="">О компании</a>
+                </li>
+                <li>
+                  <a href="info.html" class="">Контакты</a>
+                </li>
+                <li>
+                  <a href="info.html" class="">Оплата</a>
+                </li>
+                <li>
+                  <a href="info.html" class="">Доставка</a>
+                </li>
+                <li>
+                  <a href="info.html" class="">Возврат</a>
+                </li>
+                <!-- <li>
+                  <a href="#!" class="">Соглашение</a>
+                </li>
+                <li>
+                  <a href="#!" class="">Оферта</a>
+                </li> -->
+                
+              </ul>
+            </div>
+      
+            <div class="lg:w-1/3 w-1/2">
+              <h5 class=" font-bold mb-2">Продукты</h5>
+      
+              <ul class="list-none mb-0">
+                <li>
+                  <a href="cards.html" class="">Открытки</a>
+                </li>
+                <li>
+                  <a href="scarfs.html" class="">Платки</a>
+                </li>
+                <li>
+                  <a href="prints.html" class="">Принты</a>
+                </li>
+                <li>
+                  <a href="#" class="">Упаковка</a>
+                </li>
+              </ul>
+            </div>
+      
+            <div class="lg:w-1/3 flex flex-col justify-end w-full">
+              <div id="footer-copyright" class="pt-2 text-center"></div>
+              <div  class="pt-2 text-center text-sm"> Все материалы являются собственностью автора. Использование без согласования запрещено.</div>
+              <div class="flex justify-center items-center pt-1">          
+      
+                <!-- <a href="https://www.instagram.com/shamanri_art/" type="button" class="rounded-full border-2
+                 border-gray-600  hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0  w-12 h-12 m-1"
+                >
+                  <svg aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="instagram"
+                    class="w-7 h-full mx-auto"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"
+                    ></path>
+                  </svg>
+                </a> -->
+          
+                <a href="https://t.me/shamanri_tlg" type="button" class="rounded-full border-2  border-gray-600  
+                  hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 w-12 h-12 m-1"
+                >
+                  <svg aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="github"
+                    class="w-7 h-full mx-auto"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M 44.376953 5.9863281 C 43.889905 6.0076957 43.415817 6.1432497 42.988281 6.3144531 C 42.565113 6.4845113 40.128883 7.5243408 36.53125 9.0625 C 32.933617 10.600659 28.256963 12.603668 23.621094 14.589844 C 14.349356 18.562196 5.2382813 22.470703 5.2382812 22.470703 L 5.3046875 22.445312 C 5.3046875 22.445312 4.7547875 22.629122 4.1972656 23.017578 C 3.9185047 23.211806 3.6186028 23.462555 3.3730469 23.828125 C 3.127491 24.193695 2.9479735 24.711788 3.015625 25.259766 C 3.2532479 27.184511 5.2480469 27.730469 5.2480469 27.730469 L 5.2558594 27.734375 L 14.158203 30.78125 C 14.385177 31.538434 16.858319 39.792923 17.402344 41.541016 C 17.702797 42.507484 17.984013 43.064995 18.277344 43.445312 C 18.424133 43.635633 18.577962 43.782915 18.748047 43.890625 C 18.815627 43.933415 18.8867 43.965525 18.957031 43.994141 C 18.958531 43.994806 18.959437 43.99348 18.960938 43.994141 C 18.969579 43.997952 18.977708 43.998295 18.986328 44.001953 L 18.962891 43.996094 C 18.979231 44.002694 18.995359 44.013801 19.011719 44.019531 C 19.043456 44.030655 19.062905 44.030268 19.103516 44.039062 C 20.123059 44.395042 20.966797 43.734375 20.966797 43.734375 L 21.001953 43.707031 L 26.470703 38.634766 L 35.345703 45.554688 L 35.457031 45.605469 C 37.010484 46.295216 38.415349 45.910403 39.193359 45.277344 C 39.97137 44.644284 40.277344 43.828125 40.277344 43.828125 L 40.310547 43.742188 L 46.832031 9.7519531 C 46.998903 8.9915162 47.022612 8.334202 46.865234 7.7402344 C 46.707857 7.1462668 46.325492 6.6299361 45.845703 6.34375 C 45.365914 6.0575639 44.864001 5.9649605 44.376953 5.9863281 z M 44.429688 8.0195312 C 44.627491 8.0103707 44.774102 8.032983 44.820312 8.0605469 C 44.866523 8.0881109 44.887272 8.0844829 44.931641 8.2519531 C 44.976011 8.419423 45.000036 8.7721605 44.878906 9.3242188 L 44.875 9.3359375 L 38.390625 43.128906 C 38.375275 43.162926 38.240151 43.475531 37.931641 43.726562 C 37.616914 43.982653 37.266874 44.182554 36.337891 43.792969 L 26.632812 36.224609 L 26.359375 36.009766 L 26.353516 36.015625 L 23.451172 33.837891 L 39.761719 14.648438 A 1.0001 1.0001 0 0 0 38.974609 13 A 1.0001 1.0001 0 0 0 38.445312 13.167969 L 14.84375 28.902344 L 5.9277344 25.849609 C 5.9277344 25.849609 5.0423771 25.356927 5 25.013672 C 4.99765 24.994652 4.9871961 25.011869 5.0332031 24.943359 C 5.0792101 24.874869 5.1948546 24.759225 5.3398438 24.658203 C 5.6298218 24.456159 5.9609375 24.333984 5.9609375 24.333984 L 5.9941406 24.322266 L 6.0273438 24.308594 C 6.0273438 24.308594 15.138894 20.399882 24.410156 16.427734 C 29.045787 14.44166 33.721617 12.440122 37.318359 10.902344 C 40.914175 9.3649615 43.512419 8.2583658 43.732422 8.1699219 C 43.982886 8.0696253 44.231884 8.0286918 44.429688 8.0195312 z M 33.613281 18.792969 L 21.244141 33.345703 L 21.238281 33.351562 A 1.0001 1.0001 0 0 0 21.183594 33.423828 A 1.0001 1.0001 0 0 0 21.128906 33.507812 A 1.0001 1.0001 0 0 0 20.998047 33.892578 A 1.0001 1.0001 0 0 0 20.998047 33.900391 L 19.386719 41.146484 C 19.35993 41.068197 19.341173 41.039555 19.3125 40.947266 L 19.3125 40.945312 C 18.800713 39.30085 16.467362 31.5161 16.144531 30.439453 L 33.613281 18.792969 z M 22.640625 35.730469 L 24.863281 37.398438 L 21.597656 40.425781 L 22.640625 35.730469 z"
+                    ></path>
+                  </svg>
+                </a>
+                <span class="px-1">shamanri@ya.ru</span>
+              </div>   
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
     </footer>
     <!-- <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script> -->
-    <script>
-      function openDropdown(event, dropdownID) {
-        let element = event.target;
-        // var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
-        //   placement: 'bottom-start'
-        // });
-        document.getElementById(dropdownID).classList.toggle("hidden");
-        // document.getElementById(dropdownID).classList.toggle("flex");
-      }
-    </script>
+    <script defer src="js/cards.js"></script>
+    <script defer src="js/scarfs.js"></script>
+    <script defer src="js/packs.js"></script>
+    <script src="js/index.js"></script>
+    <script src="//code.jivo.ru/widget/jzqZBWoTLZ" async></script>
   </body>
 </html>

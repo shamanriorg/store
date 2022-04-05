@@ -5,6 +5,7 @@
 @layer base {
   body {
     /* font-family: Beryozki, sans-serif; */
+    /* font-family: Haymaker, sans-serif; */
     font-family: sans-serif;
   }
 }
@@ -13,15 +14,28 @@
   .logo-cont {
     @apply flex text-6xl text-center uppercase font-medium text-gray-800;
   }
+
+  .menu {
+    @apply flex relative items-start flex-col lg:flex-row lg:justify-center z-50;
+  }
+  .menu__button {
+    @apply lg:hidden fixed top-3 left-3 font-semibold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg;
+  }
+  .menu__item-cont {
+    @apply hidden absolute lg:static bg-white lg:flex lg:bg-gray-200 lg:shadow-none float-left py-2 lg:py-0 text-left text-gray-800 font-semibold uppercase rounded-lg shadow-md;
+  }
+  .menu__item {
+    @apply py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300;
+  }
 }
 
-/* @font-face {
-  font-family: 'Beryozki';
-  src: url('Beryozki.woff2') format('woff2'),
-    url('Beryozki.woff') format('woff');
-  font-weight: bolder;
+@font-face {
+  font-family: 'Haymaker';
+  src: url('Haymaker.woff2') format('woff2'),
+    url('Haymaker.woff') format('woff');
+  /* font-weight: bolder; */
   font-style: normal;
-  letter-spacing: 0.1em;
-  ascent-override: 90%;
+  /* letter-spacing: 0.1em; */
+  /* ascent-override: 90%; */
   font-display: swap;
-} */
+}
