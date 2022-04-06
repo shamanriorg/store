@@ -35,7 +35,7 @@ function createCart() {
   if (!cartElem) {
     return;
   }
-  if(cart.cards.length !== 0 || cart.scarfs.length !== 0) {
+  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
     const cartInfoEl = document.getElementById('cart-info');
     const cartPayEl = document.getElementById('cart-pay');
     const cartEmptyEl = document.getElementById('empty-cart');
