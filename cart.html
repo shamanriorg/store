@@ -110,7 +110,7 @@
               <div class="hidden" data-prev="prop"></div>
               <img data-prev="preview" alt="gallery" class="w-36 mr-2 object-cover object-center rounded-lg "
                 src="">
-              <div data-prev="name" class="mr-2 flex flex-1 items-center justify-center text-lg text-gray-900"></div>
+              <div data-prev="name" class="mr-2 flex flex-1 items-center text-center justify-center text-lg text-gray-900"></div>
               <!-- <div class="flex flex-1 justify-end items-center"> -->
               <div class="mr-2 flex flex-1  items-center justify-center text-lg ">
                 <span data-prev="price-item" class=" hidden"> </span> 
@@ -247,7 +247,7 @@
                 </div> -->
                 <div class="flex flex-1 mb-8">
                   <button id="checkout" class="flex-1 text-2xl bg-gray-600 hover:bg-gray-700 text-white px-4
-                    py-2 rounded-lg" onclick="event.stopPropagation();"
+                    py-2 rounded-lg" onclick="checkout()"
                   >
                     Оформить и оплатить**
                   </button>
@@ -257,6 +257,29 @@
                   заказ будет отменен, а денежные средства возвращены.
                 </div>
               </div>
+              
+              <form id="checkout-form" class="hidden" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8" >
+                <div class="ym-products"></div>
+                <input value="" type="hidden" name="ym_merchant_receipt">
+                <div class="ym-customer-info">
+                  <div class="ym-block-title">О покупателе</div>
+                  <input name="cps_email" class="ym-input" placeholder="Email" type="text" value="dgf@ya.ru">
+                  <input name="cps_phone" class="ym-input" placeholder="Телефон" type="text" value="">
+                  <input name="custName" class="ym-input" placeholder="ФИО" type="text" value="">
+                  <input name="custAddr" class="ym-input" placeholder="Адрес" type="text" value="">
+                  <textarea class="ym-textarea" name="orderDetails" placeholder="Комментарий" value=""></textarea>
+                </div>
+                <div class="ym-hidden-inputs"></div>
+
+                <input name="customerNumber" type="hidden" value="Оплата заказа на сайте shamanri.art">
+                <div class="ym-payment-btn-block ym-before-line ym-align-space-between">
+                  <div class="ym-input-icon-rub ym-display-none">
+                    <input id="ym-total-sum" name="sum" placeholder="0.00" class="ym-input ym-sum-input ym-required-input" type="number" step="any" value="500">
+                  </div>
+                </div>
+                <input name="shopId" type="hidden" value="882770">
+              </form>    
+
             </div>
           </div>
         </div>

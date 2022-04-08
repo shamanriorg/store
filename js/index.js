@@ -2,6 +2,7 @@
 let dictionary = {};
 // Global not working flag
 const tmpFlag = false;
+const giftPackPrice = 700;
 
 window.addEventListener("load", () => init(), false);
 
@@ -54,7 +55,7 @@ function createCart() {
 function createCartList(baseElem, prop, dict, cart) {
   cart[prop].forEach((item, index) => {
     const clone = baseElem.cloneNode(true);
-    clone.querySelector("[data-prev='name']").textContent = dict[item.index].name;
+    clone.querySelector("[data-prev='name']").textContent = dict[item.index].itype +" " + dict[item.index].name;
     clone.querySelector("[data-prev='price-item']").textContent = dict[item.index].price;
     clone.querySelector("[data-prev='index']").textContent = index;
     clone.querySelector("[data-prev='prop']").textContent = prop;
@@ -245,7 +246,6 @@ function showCount(cart) {
       const pochtaBoxDelivPrice = 400;
       let boxFlag = false;
       const sdekDelivPrice = 0;
-      const giftPackPrice = 700;
       let singleCardsCount = 0;
       let goodsPrice = 0;
       cart.cards?.forEach((item) => {
@@ -325,6 +325,7 @@ function showCount(cart) {
       }
 
       document.getElementById('total-price').textContent = totalPrice;
+      document.getElementById('ym-total-sum').value = totalPrice;
       // + разная доставка + всего
     }
   }
@@ -368,5 +369,61 @@ function createBanner() {
   if(tmpFlag) {
     tmpBannerEl.textContent = tmpBannerText;
     tmpBannerEl.classList.toggle('hidden');
+  }
+}
+
+function checkout() {
+  if(tmpFlag) {
+    return;
+  }
+  const formEl = document.getElementById("checkout-form");
+  // const sampleProduct = document.getElementById("ym-sample-product");
+  if (!formEl) {
+    return;
+  }
+
+  const userEmail = document.getElementById('order-email');
+  const userPhone = document.getElementById('order-phone');
+  if(userEmail.value === '' || userPhone.value === '') {
+    return;
+  }
+  const userFio = document.getElementById('order-fio');
+  const userAddress = document.getElementById('order-address');
+  const userComment = document.getElementById('order-comment');
+  formEl.querySelector("[name='cps_email']").value = userEmail.value;
+  formEl.querySelector("[name='cps_phone']").value = userPhone.value;
+  formEl.querySelector("[name='custName']").value = userFio.value;
+  formEl.querySelector("[name='custAddr']").value = userAddress.value;
+  formEl.querySelector("[name='orderDetails']").value = userComment.value;
+
+  const detailsEl = formEl.querySelector("[name='orderDetails']");
+  cartItems = document.querySelectorAll("[data-prev='container']");
+  cartItems.forEach((el) => {
+    if(el.querySelector("[data-prev='name']").textContent === "") {
+      return;
+    }
+    detailsEl.value += '\n|' + el.querySelector("[data-prev='name']").textContent + ' '
+      + el.querySelector("[data-prev='price-item']").textContent + ' '
+      + el.querySelector("[data-prev='count']").value;
+  });
+
+  const userPack = document.getElementById('order-pack-gift');
+  if(userPack.checked) {
+    detailsEl.value += '\n|' + "Упаковка Фирменная коробка" + ' ' + giftPackPrice; 
+  }
+  const userDeliveryPochta = document.getElementById('order-delivery-pochta');
+  if(userDeliveryPochta.checked) {
+    detailsEl.value += '\n|' + "Доставка Поста России" + ' ' + document.getElementById('deliv-price').textContent;
+  } else {
+    detailsEl.value += '\n|' + "Доставка СДЭК";
+  }
+
+  const userDiscount = document.getElementById('goods-discount');
+  if(userDiscount.textContent !== '-') {
+    detailsEl.value += '\n|' + "Скидка" + ' ' + userDiscount.textContent;
+  }
+  
+  if(document.getElementById('total-price').textContent === document.getElementById('ym-total-sum').value) {
+    formEl.submit();
   }
 }

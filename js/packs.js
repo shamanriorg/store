@@ -12,7 +12,7 @@ const packs = [
   //   format: 'A6' // ? и это тоже,  можно не указывать пока.
   // }
   {
-    itype: 'Коробочка',
+    itype: 'Коробка квадратная',
     name: 'Shamanri',
     preview: 'gallery-box-img-1.jpg', 
     //images: ['',''],
