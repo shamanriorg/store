@@ -259,6 +259,10 @@
               </div>
               
               <form id="checkout-form" class="hidden" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8" >
+                <div class="ym-hidden-inputs">
+                  <input name="shopSuccessURL" type="hidden" value="https://shamanri.art/payok.html">
+                  <input name="shopFailURL" type="hidden" value="https://shamanri.art/payerr.html">
+               </div>
                 <div class="ym-products"></div>
                 <input value="" type="hidden" name="ym_merchant_receipt">
                 <div class="ym-customer-info">
