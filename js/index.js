@@ -31,11 +31,18 @@ function createCart() {
   dictionary.scarfs = scarfs;
   dictionary.packs = packs;
   const cart = getCart();
+  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
+    if(window.location.pathname.includes('payok')) {
+      clearCart();
+      return;
+    }
+  }
   showCount(cart);
   const cartElem = document.getElementById('cart-elem');
   if (!cartElem) {
     return;
   }
+  fillUserInfo();
   if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
     const cartInfoEl = document.getElementById('cart-info');
     const cartPayEl = document.getElementById('cart-pay');
@@ -426,4 +433,16 @@ function checkout() {
   if(document.getElementById('total-price').textContent === document.getElementById('ym-total-sum').value) {
     formEl.submit();
   }
+}
+
+function userInfoChange(event, key) {
+  localStorage.setItem(key, event.target.value);
+}
+
+function fillUserInfo() {
+  document.getElementById('order-email').value = localStorage.getItem('email') ?? '';
+  document.getElementById('order-fio').value = localStorage.getItem('fio') ?? '';
+  document.getElementById('order-phone').value = localStorage.getItem('phone') ?? '';
+  document.getElementById('order-address').value = localStorage.getItem('address') ?? '';
+  document.getElementById('order-comment').value = localStorage.getItem('comment') ?? '';
 }
