@@ -721,6 +721,10 @@ body {
   z-index: 50;
 }
 
+.order-last {
+  order: 9999;
+}
+
 .float-right {
   float: right;
 }
@@ -1612,6 +1616,10 @@ body {
 }
 
 @media (min-width: 640px) {
+  .sm\:order-first {
+    order: -9999;
+  }
+
   .sm\:h-full {
     height: 100%;
   }
