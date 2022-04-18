@@ -912,14 +912,6 @@ body {
   width: 50%;
 }
 
-.w-1\/4 {
-  width: 25%;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -1596,6 +1588,12 @@ body {
   transition-duration: 150ms;
 }
 
+.cart-icon {
+  background-image: url(cart.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 @font-face {
   font-family: 'Haymaker';
 
@@ -1614,6 +1612,26 @@ body {
 }
 
 @media (min-width: 640px) {
+  .sm\:h-full {
+    height: 100%;
+  }
+
+  .sm\:w-1\/4 {
+    width: 25%;
+  }
+
+  .sm\:w-3\/4 {
+    width: 75%;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 768px) {

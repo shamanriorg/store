@@ -122,7 +122,7 @@
            <a href="https://shamanri.art" class="underline">Перейти на основной</a>
         </h2>
       </div>
-      <div class="flex justify-center text-6xl uppercase font-medium text-gray-900">
+      <div class="flex justify-center sm:text-6xl text-4xl uppercase font-medium text-gray-900">
         <h1 style="font-family: Haymaker, sans-serif;" class="cursor-pointer"
           onclick="window.location.assign('index.html')">Shamanri</h1>
       </div>
@@ -163,6 +163,11 @@
               </a> -->
             </div>
           </div>
+          <!-- <button class="cart-icon fixed top-3 right-3 font-semibold text-white bg-gray-200 hover:bg-gray-300 uppercase
+            text-sm px-4 py-2 rounded-lg w-10 h-10"
+            type="button" onclick="window.location.assign('cart.html')" ">
+            <span id="cart-count"></span>
+          </button> -->
           <button class="fixed top-3 right-3 font-semibold bg-gray-700 hover:bg-gray-800 text-white uppercase text-sm px-4 py-2 rounded-lg"
             type="button" onclick="window.location.assign('cart.html')">
             Корзина<span id="cart-count"></span>
@@ -186,9 +191,9 @@
     <main class="flex-1">
       <!-- Открытки -->
     <div class="flex  justify-center">
-      <div class="flex flex-1 max-w-screen-lg justify-center pt-4">
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center pt-4">
         <!-- Карусель -->
-        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+        <div class="sm:w-3/4 w-full  relative rounded-lg overflow-hidden shadow-md">
           <div class="carousel-inner relative overflow-hidden w-full text-xl">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="card-1" name="cards" aria-hidden="true" hidden
@@ -307,8 +312,8 @@
           </div>
         </div>
         <!-- Текст -->
-        <div class="w-1/4 h-full flex text-lg text-gray-700 text-center">
-          <a href="cards.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+        <div class="sm:w-1/4 w-full sm:h-full flex text-lg text-gray-700 text-center">
+          <a href="cards.html" class="flex flex-1 flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
             <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
               <span class="text-gray-800 text-xl font-semibold">Коллекционные открытки</span>
               со сказками для взрослых, чудесными узорами и нужными словами.
@@ -321,10 +326,10 @@
     </div>
     <div class="flex  justify-center">
       <!-- Платки -->
-      <div class="flex flex-1 max-w-screen-lg justify-center pt-4">
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center pt-4">
         <!-- Текст -->
-        <div class="w-1/4 h-full flex text-lg text-gray-700 text-center">
-          <a href="scarfs.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+        <div class="sm:w-1/4 w-full sm:h-full flex text-lg text-gray-700 text-center">
+          <a href="scarfs.html" class="flex flex-1 flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
             <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
               <span class="text-gray-800 text-2xl font-semibold">Платки</span>
               с авторскими принтами. Шейные и большие.
@@ -333,7 +338,7 @@
           </a>
         </div>
         <!-- Карусель -->
-        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+        <div class="sm:w-3/4 w-full relative rounded-lg overflow-hidden shadow-md">
           <div class="carousel-inner relative overflow-hidden w-full text-xl">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="scarf-1" name="scarfs" aria-hidden="true" hidden
@@ -471,9 +476,9 @@
     </div>
     <!-- принты -->
     <div class="flex  justify-center">
-      <div class="flex flex-1 max-w-screen-lg justify-center py-4">
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center py-4">
         <!-- Карусель -->
-        <div class="w-3/4  relative rounded-lg overflow-hidden shadow-md">
+        <div class="sm:w-3/4 w-full relative rounded-lg overflow-hidden shadow-md">
           <div class="carousel-inner relative overflow-hidden w-full text-xl">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="print-1" name="prints" aria-hidden="true" hidden
@@ -629,8 +634,8 @@
           </div>
         </div>
         <!-- Текст -->
-        <div class="w-1/4 h-full flex text-lg text-gray-700 text-center">
-          <a href="prints.html" class="flex flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+        <div class="sm:w-1/4 w-full sm:h-full flex text-lg text-gray-700 text-center">
+          <a href="prints.html" class="flex flex-1 flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
             <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
               <span class="text-gray-800 text-xl font-semibold">Авторские принты.</span>
               Текстильные и интерьерные бесшовные паттерны. Для покупки и сотрудничества свяжитесь с нами любым способом из указанных в контактах
