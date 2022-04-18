@@ -14,7 +14,6 @@
   .logo-cont {
     @apply flex text-6xl text-center uppercase font-medium text-gray-800;
   }
-
   .menu {
     @apply flex relative items-start flex-col lg:flex-row lg:justify-center z-50;
   }
@@ -27,6 +26,12 @@
   .menu__item {
     @apply py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300;
   }
+}
+
+.cart-icon {
+  background-image: url(cart.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @font-face {
