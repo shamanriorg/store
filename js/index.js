@@ -247,7 +247,7 @@ function showCount(cart) {
     cart.packs?.forEach((item) => {
       count += item.count;
     });
-    document.getElementById('cart-count').textContent = `(${count})`;
+    document.getElementById('cart-count').textContent = `${count}`;
     if(window.location.pathname.includes('cart')) {
       const pochtaDelivPrice = 150;
       const pochtaBoxDelivPrice = 400;
