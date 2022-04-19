@@ -1451,11 +1451,6 @@ body {
   line-height: 2.5rem;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
 .font-medium {
   font-weight: 500;
 }
@@ -1622,6 +1617,10 @@ body {
 
   .sm\:h-full {
     height: 100%;
+  }
+
+  .sm\:w-1\/2 {
+    width: 50%;
   }
 
   .sm\:w-1\/4 {
