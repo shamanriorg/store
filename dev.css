@@ -40,6 +40,12 @@
   background-position: center;
 }
 
+.tg-icon {
+  background-image: url(tg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 @font-face {
   font-family: 'Haymaker';
   src: url('Haymaker.woff2') format('woff2'),
