@@ -112,7 +112,7 @@ function addToCart(event, i) {
 
 function removeFromCart(event) {
   event.stopPropagation();
-  const elem = event?.currentTarget.parentNode.parentNode;
+  const elem = event?.currentTarget.parentNode.parentNode.parentNode;
   const index = parseInt(elem.querySelector("[data-prev='index']").textContent);
   const propName = elem.querySelector("[data-prev='prop']").textContent;
   const cart = getCart();
