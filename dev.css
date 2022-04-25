@@ -7,6 +7,9 @@
     /* font-family: Beryozki, sans-serif; */
     /* font-family: Haymaker, sans-serif; */
     font-family: sans-serif;
+    background-image: url(background-pattern.png); /* Путь к фоновому рисунку */
+    background-position: left bottom; /* Положение фона */
+    background-repeat: repeat; /* Повторяем фон по горизонтали */
   }
 }
 
@@ -46,10 +49,25 @@
   background-position: center;
 }
 
+.slogan {
+  font-family: MarkScript, sans-serif;
+}
+
 @font-face {
   font-family: 'Haymaker';
   src: url('Haymaker.woff2') format('woff2'),
     url('Haymaker.woff') format('woff');
+  /* font-weight: bolder; */
+  font-style: normal;
+  /* letter-spacing: 0.1em; */
+  /* ascent-override: 90%; */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MarkScript';
+  src: url('MarckScript-Regular.ttf') format('truetype');
+    /* url('Haymaker.woff') format('woff'); */
   /* font-weight: bolder; */
   font-style: normal;
   /* letter-spacing: 0.1em; */
