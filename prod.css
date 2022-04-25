@@ -564,7 +564,7 @@ body {
   font-family: sans-serif;
   background-image: url(background-pattern.png);
   /* Путь к фоновому рисунку */
-  background-position: left bottom;
+  background-position: left top;
   /* Положение фона */
   background-repeat: repeat;
   /* Повторяем фон по горизонтали */
