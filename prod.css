@@ -562,6 +562,12 @@ body {
   /* font-family: Beryozki, sans-serif; */
   /* font-family: Haymaker, sans-serif; */
   font-family: sans-serif;
+  background-image: url(background-pattern.png);
+  /* Путь к фоновому рисунку */
+  background-position: left bottom;
+  /* Положение фона */
+  background-repeat: repeat;
+  /* Повторяем фон по горизонтали */
 }
 
 .container {
@@ -884,6 +890,10 @@ body {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -926,6 +936,10 @@ body {
 
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .max-w-3xl {
@@ -1480,6 +1494,10 @@ body {
   text-transform: uppercase;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-none {
   line-height: 1;
 }
@@ -1618,11 +1636,33 @@ body {
   background-position: center;
 }
 
+.slogan {
+  font-family: MarkScript, sans-serif;
+}
+
 @font-face {
   font-family: 'Haymaker';
 
   src: url('Haymaker.woff2') format('woff2'),
     url('Haymaker.woff') format('woff');
+
+  /* font-weight: bolder; */
+
+  font-style: normal;
+
+  /* letter-spacing: 0.1em; */
+
+  /* ascent-override: 90%; */
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MarkScript';
+
+  src: url('MarckScript-Regular.ttf') format('truetype');
+
+  /* url('Haymaker.woff') format('woff'); */
 
   /* font-weight: bolder; */
 
@@ -1666,6 +1706,11 @@ body {
 
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:text-6xl {
