@@ -464,4 +464,13 @@ const cards = [
     count: 1,
     price: '100',
   },
+  {
+    itype: 'Открытка',
+    name: 'Заколдованный клевер',
+    preview: 'gallery-cards-img-50-dream-clover.jpg', 
+    //images: [''],
+    descr: 'Коллекционная открытка по мотивам авторского принта "Заколдованный клевер"',
+    count: 1,
+    price: '100',
+  },
 ]
