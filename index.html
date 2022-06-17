@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://shamanri.art">
-    <title>Открытки, платки, принты, бесшовные паттерны Марии Матвеевой купить</title>
+    <title>Открытки, платки, принты, паттерны и ткани Марии Матвеевой купить</title>
   <!-- application name  -->
-    <meta name="description" content="Коллекционные открытки, платки, авторские принты, бесшовные паттерны и иллюстрации Марии Матвеевой купить в интернет-магазине Shamanri">
-    <meta name="keywords" content="открытки, платки, принты, бесшовные паттерны, иллюстрации, художественная продукция, шаманри, иллюстратор мария матвеева">
+    <meta name="description" content="Коллекционные открытки, платки, авторские принты, бесшовные паттерны, ткани и иллюстрации Марии Матвеевой купить в интернет-магазине Shamanri">
+    <meta name="keywords" content="открытки, платки, принты, бесшовные паттерны, ткани, иллюстрации, художественная продукция, шаманри, иллюстратор мария матвеева">
     <link href="prod.css" rel="stylesheet">
     <link href="favicon.svg" rel="icon">
     <style>
@@ -156,6 +156,9 @@
               <a href="prints.html" class="menu__item">
                 Принты
               </a>
+              <a href="fabrics.html" class="menu__item">
+                Ткани
+              </a>
               <!-- <a href="#" class="py-2 px-4 block whitespace-nowrap bg-transparent rounded-lg hover:bg-gray-300">
                 Картины
               </a> -->
@@ -206,7 +209,7 @@
     <main class="flex-1">
       <!-- Открытки -->
     <div class="flex  justify-center">
-      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center pt-4">
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center pt-4 " >
         <!-- Карусель -->
         <div class="sm:w-3/4 w-full  relative rounded-lg overflow-hidden shadow-md">
           <div class="carousel-inner relative overflow-hidden w-full text-xl">
@@ -491,7 +494,7 @@
     </div>
     <!-- принты -->
     <div class="flex  justify-center">
-      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center py-4">
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center pt-4">
         <!-- Карусель -->
         <div class="sm:w-3/4 w-full relative rounded-lg overflow-hidden shadow-md">
           <div class="carousel-inner relative overflow-hidden w-full text-xl">
@@ -661,6 +664,36 @@
       </div>
     </div>
 
+    <div class="flex  justify-center">
+      <!-- Ткани -->
+      <div class="flex sm:flex-row flex-col flex-1 max-w-screen-lg justify-center py-4">
+        <!-- Текст -->
+        <div class="sm:w-1/4 sm:order-first order-last w-full sm:h-full flex text-lg text-gray-700 text-center">
+          <a href="fabrics.html" class="flex flex-1 flex-col justify-center hover:bg-gray-200 rounded-lg px-2">
+            <span class="flex flex-col justify-center rounded-lg bg-gray-200 py-2">
+              <span class="text-gray-800 text-2xl font-semibold">Ткань 100% хлопок.</span>
+              Стойкая экологичная фабричная печать.
+              <span class="text-gray-800 font-semibold">Посмотреть все</span>
+            </span>
+          </a>
+        </div>
+        <!-- Карусель -->
+        <div class="sm:w-3/4 w-full cursor-pointer relative rounded-lg overflow-hidden shadow-md" onclick="window.location.assign('fabrics.html')">
+          <div class="carousel-inner relative overflow-hidden w-full text-xl">
+            <!--Slide 1-->
+            <input class="carousel-open" type="radio" id="fabric-1" name="fabrics"  hidden
+              checked="checked">
+            <div class="h-96 bg-cover carousel-item absolute opacity-0 bg-center"
+              style="background-image: url(img/carousel-fabrics-img-2.jpg)">
+            
+            </div>
+            
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
     </main>
     <footer class="bg-gray-300 text-gray-600">
       <!-- Инфо - О нас / История /Контакты / оплата и доставка / возврат / оферта -->
@@ -715,6 +748,9 @@
                 </li>
                 <li>
                   <a href="prints.html" class="">Принты</a>
+                </li>
+                <li>
+                  <a href="fabrics.html" class="">Ткани</a>
                 </li>
                 <li>
                   <a href="#" class="">Упаковка</a>
@@ -774,6 +810,7 @@
     <!-- <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script> -->
     <script defer src="js/cards.js"></script>
     <script defer src="js/scarfs.js"></script>
+    <script defer src="js/fabrics.js"></script>
     <script defer src="js/packs.js"></script>
     <script defer src="js/index.js"></script>
     <script async src="//code.jivo.ru/widget/jzqZBWoTLZ" ></script>

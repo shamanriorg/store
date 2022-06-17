@@ -29,9 +29,10 @@ function createCopyright() {
 function createCart() {
   dictionary.cards = cards;
   dictionary.scarfs = scarfs;
+  dictionary.fabrics = fabrics;
   dictionary.packs = packs;
   const cart = getCart();
-  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
+  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0 || cart.fabrics.length !== 0) {
     if(window.location.pathname.includes('payok')) {
       clearCart();
       return;
@@ -43,7 +44,7 @@ function createCart() {
     return;
   }
   fillUserInfo();
-  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
+  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0 || cart.fabrics.length !== 0) {
     const cartInfoEl = document.getElementById('cart-info');
     const cartPayEl = document.getElementById('cart-pay');
     const cartEmptyEl = document.getElementById('empty-cart');
@@ -55,6 +56,7 @@ function createCart() {
   }
   createCartList(cartElem, 'cards', cards, cart);
   createCartList(cartElem, 'scarfs', scarfs, cart);
+  createCartList(cartElem, 'fabrics', fabrics, cart);
   createCartList(cartElem, 'packs', packs, cart);
   showCount(cart);
 }
@@ -73,6 +75,15 @@ function createCartList(baseElem, prop, dict, cart) {
       clone.querySelector("[data-prev='count']").value =  1;
       clone.querySelector("[data-prev='count']").setAttribute('max',1);
       localStorage.setItem('cart', JSON.stringify(cart));
+    } else if(prop==='fabrics') {
+      if(item.count >= 1 && item.count <= 2) {
+        clone.querySelector("[data-prev='count']").value =  item.count;
+      } else {
+        item.count = 1;
+        clone.querySelector("[data-prev='count']").value =  1;
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+      clone.querySelector("[data-prev='count']").setAttribute('max',2);
     } else {
       if(item.count >= 1 && item.count <= 10) {
         clone.querySelector("[data-prev='count']").value =  item.count;
@@ -93,6 +104,9 @@ function addToCart(event, i) {
   let propName = 'cards';
   if(window.location.pathname.includes('scarfs')) {
     propName = 'scarfs';
+  }
+  if(window.location.pathname.includes('fabrics')) {
+    propName = 'fabrics';
   }
   if(window.location.pathname.includes('packs')) {
     propName = 'packs';
@@ -121,7 +135,7 @@ function removeFromCart(event) {
   localStorage.setItem('cart', JSON.stringify(cart));
   elem.remove();
   showCount(cart);
-  if(cart.cards.length === 0 && cart.scarfs.length === 0) {
+  if(cart.cards.length === 0 && cart.scarfs.length === 0 && cart.packs.length === 0 && cart.fabrics.length === 0) {
     const cartInfoEl = document.getElementById('cart-info');
     const cartPayEl = document.getElementById('cart-pay');
     const cartEmptyEl = document.getElementById('empty-cart');
@@ -151,15 +165,22 @@ function countChange(event) {
       cart[propName][index].count = 1;
       localStorage.setItem('cart', JSON.stringify(cart));
       elem.querySelector("[data-prev='count']").value = 1;
+    } else if(propName==='fabrics') {
+      if(count>=1 && count <=2) {
+        cart[propName][index].count = count;
+      } else {
+        cart[propName][index].count = 1;
+        elem.querySelector("[data-prev='count']").value = 1;
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
     } else {
       if(count>=1 && count <=10) {
         cart[propName][index].count = count;
-        localStorage.setItem('cart', JSON.stringify(cart));
       } else {
         cart[propName][index].count = 1;
-        localStorage.setItem('cart', JSON.stringify(cart));
         elem.querySelector("[data-prev='count']").value = 1;
       }
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
     elem.querySelector("[data-prev='price']").textContent = priceItem * cart[propName][index].count;
     showCount(cart);
@@ -180,6 +201,7 @@ function getCart() {
   }
   cart.cards = cart.cards || [];
   cart.scarfs = cart.scarfs || [];
+  cart.fabrics = cart.fabrics || [];
   cart.packs = cart.packs || [];
   return cart;
 }
@@ -236,12 +258,15 @@ function showEmail(event) {
 }
 
 function showCount(cart) {
-  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0) {
+  if(cart.cards.length !== 0 || cart.scarfs.length !== 0 || cart.packs.length !== 0 || cart.fabrics.length !== 0) {
     let count = 0;
     cart.cards?.forEach((item) => {
       count += item.count;
     });
     cart.scarfs?.forEach((item) => {
+      count += item.count;
+    });
+    cart.fabrics?.forEach((item) => {
       count += item.count;
     });
     cart.packs?.forEach((item) => {
@@ -264,6 +289,10 @@ function showCount(cart) {
       cart.scarfs?.forEach((item) => {
         goodsPrice += scarfs[item.index].price * item.count;
         boxFlag = true;
+      });
+      cart.fabrics?.forEach((item) => {
+        goodsPrice += fabrics[item.index].price * item.count;
+        // boxFlag = true;
       });
       cart.packs?.forEach((item) => {
         goodsPrice += packs[item.index].price * item.count;
@@ -317,17 +346,19 @@ function showCount(cart) {
       if(delivEl.checked) {
         document.getElementById('deliv-method').textContent='Почта'
         if(!boxFlag) {
-          document.getElementById('deliv-price').textContent=pochtaDelivPrice;
-          totalPrice+=pochtaDelivPrice;
+          // document.getElementById('deliv-price').textContent=pochtaDelivPrice;
+          // totalPrice+=pochtaDelivPrice;
         } else {
-          document.getElementById('deliv-price').textContent=pochtaBoxDelivPrice;
-          totalPrice+=pochtaBoxDelivPrice;
+          // document.getElementById('deliv-price').textContent=pochtaBoxDelivPrice;
+          // totalPrice+=pochtaBoxDelivPrice;
         }
-        document.getElementById('deliv-price-text').textContent='RUB';
+        document.getElementById('deliv-price').textContent='рассчет при подтверждении';
+        document.getElementById('deliv-price-text').textContent='';
+        // document.getElementById('deliv-price-text').textContent='RUB';
         // totalPrice+=pochtaDelivPrice;
       } else {
         document.getElementById('deliv-method').textContent='СДЭК'
-        document.getElementById('deliv-price').textContent = '-';
+        document.getElementById('deliv-price').textContent = 'оплата при получении';
         document.getElementById('deliv-price-text').textContent='';
       }
 
@@ -420,7 +451,7 @@ function checkout() {
   }
   const userDeliveryPochta = document.getElementById('order-delivery-pochta');
   if(userDeliveryPochta.checked) {
-    detailsEl.value += '\n|' + "Доставка Поста России" + ' ' + document.getElementById('deliv-price').textContent;
+    detailsEl.value += '\n|' + "Доставка Почта России" + ' ' + document.getElementById('deliv-price').textContent;
   } else {
     detailsEl.value += '\n|' + "Доставка СДЭК";
   }

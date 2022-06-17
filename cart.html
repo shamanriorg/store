@@ -81,7 +81,9 @@
               <a href="prints.html" class="menu__item">
                 Принты
               </a>
-              
+              <a href="fabrics.html" class="menu__item">
+                Ткани
+              </a>
               <a href="packs.html" class="menu__item">
                 Упаковка
               </a>
@@ -210,7 +212,11 @@
                 <label for="order-delivery" class="block ">Доставка (в данный момент только по РФ)</label>
                 <input type="radio" checked id="order-delivery-pochta" name="delivery" value="pochta"
                   onchange="delivChange(event)">
-                <label for="order-delivery-pochta" class=" mr-4 ">Почта России</label>
+                <label for="order-delivery-pochta" class=" ">Почта России</label>
+                <label class="text-sm">(оплата отдельно,
+                  <a href="https://www.pochta.ru/" class="underline" target="_blank">
+                    рассчитать</a>)
+                </label>
                 <div>
                   <input type="radio" class=" mb-4 " id="order-delivery-sdek" name="delivery" value="pochta"
                     onchange="delivChange(event)">
@@ -293,7 +299,7 @@
                   </button>
                 </div>
                 <div class="flex-1 mb-4">
-                  ** После оплаты Вам поступит звонок для уточнения деталей заказа. Если мы не сможем с Вами связаться в течении 3-х дней,
+                  ** После оплаты Вам поступит звонок для уточнения деталей заказа и стоимости доставки. Если мы не сможем с Вами связаться в течении 3-х дней,
                   заказ будет отменен, а денежные средства возвращены.
                 </div>
               </div>
@@ -384,6 +390,9 @@
                   <a href="prints.html" class="">Принты</a>
                 </li>
                 <li>
+                  <a href="fabrics.html" class="">Ткани</a>
+                </li>
+                <li>
                   <a href="#!" class="">Упаковка</a>
                 </li>
               </ul>
@@ -441,6 +450,7 @@
     </footer>
     <script defer src="js/cards.js"></script>
     <script defer src="js/scarfs.js"></script>
+    <script defer src="js/fabrics.js"></script>
     <script defer src="js/packs.js"></script>
     <script defer src="js/index.js"></script>
     <script src="//code.jivo.ru/widget/jzqZBWoTLZ" async></script>
