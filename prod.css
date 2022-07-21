@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.1.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -421,12 +421,12 @@ body {
   /* font-family: Beryozki, sans-serif; */
   /* font-family: Haymaker, sans-serif; */
   font-family: sans-serif;
-  background-image: url(background-pattern.png);
   /* Путь к фоновому рисунку */
-  background-position: left top;
-  /* Положение фона */
-  background-repeat: repeat;
-  /* Повторяем фон по горизонтали */
+  /* background-image: url(background-pattern.png);   */
+  /* Положение фона  */
+  /* background-position: left top;   */
+  /* Повторяем фон по горизонтали  */
+  /* background-repeat: repeat;   */
 }
 
 *, ::before, ::after {
