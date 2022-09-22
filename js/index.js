@@ -21,7 +21,7 @@ function openDropdown(event, dropdownID) {
 }
 
 function createCopyright() {
-  const txt = `© 2020-${new Date().getFullYear()} SHaMAnRI. Интернет-магазин художественной продукции Марии Матвевой.`
+  const txt = `© 2020-${new Date().getFullYear()} SHaMAnRI. Интернет-магазин художественной продукции Марии Матвеевой.`
   const copyRightEl = document.getElementById('footer-copyright');
   copyRightEl.textContent = txt;
 }
