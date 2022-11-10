@@ -286,12 +286,25 @@ function showCount(cart) {
           singleCardsCount += item.count;
         }
       });
+      let discount = 0;
+      let promo = document.getElementById('order-promo').value;
+      let isPromo = document.getElementById('order-promo').value?.toUpperCase() === 'BFSALE';
       cart.scarfs?.forEach((item) => {
-        goodsPrice += scarfs[item.index].price * item.count;
+        let curPrice = scarfs[item.index].price;
+        if(isPromo) {
+          curPrice = (scarfs[item.index].price * 0.85).toFixed(0);
+          discount += scarfs[item.index].price * item.count - curPrice * item.count
+        }
+        goodsPrice += curPrice * item.count;
         boxFlag = true;
       });
       cart.fabrics?.forEach((item) => {
-        goodsPrice += fabrics[item.index].price * item.count;
+        let curPrice = fabrics[item.index].price;
+        if(isPromo) {
+          curPrice = (fabrics[item.index].price * 0.85).toFixed(0);
+          discount += fabrics[item.index].price * item.count - curPrice * item.count
+        }
+        goodsPrice += curPrice * item.count;
         // boxFlag = true;
       });
       cart.packs?.forEach((item) => {
@@ -301,7 +314,6 @@ function showCount(cart) {
       document.getElementById('goods-count').textContent = count;
       document.getElementById('goods-price').textContent = goodsPrice;
 
-      let discount = 0;
       const multiplier = Math.trunc(singleCardsCount / 9 );
       if(multiplier === 0) {
         if(singleCardsCount >= 5 && singleCardsCount < 7) {
@@ -375,6 +387,11 @@ function delivChange(event){
 }
 
 function packChange(event){
+  const cart = getCart();
+  showCount(cart);
+}
+
+function promoChange(event){
   const cart = getCart();
   showCount(cart);
 }
