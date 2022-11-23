@@ -287,8 +287,9 @@ function showCount(cart) {
         }
       });
       let discount = 0;
-      let promo = document.getElementById('order-promo').value;
-      let isPromo = document.getElementById('order-promo').value?.toUpperCase() === 'BFSALE';
+      // let promo = document.getElementById('order-promo').value;
+      // let isPromo = document.getElementById('order-promo').value?.toUpperCase() === 'BFSALE';
+      let isPromo = false;
       cart.scarfs?.forEach((item) => {
         let curPrice = scarfs[item.index].price;
         if(isPromo) {
