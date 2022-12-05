@@ -4,12 +4,28 @@ let dictionary = {};
 const tmpFlag = false;
 const giftPackPrice = 700;
 
+var pixel;
+
+  // вызовется после загрузки openapi.js
+window.vkAsyncInit = function() {
+  pixel = new VK.Pixel('VK-RTRG-1580821-poBm');
+}
+
 window.addEventListener("load", () => init(), false);
 
 function init() {
   createCopyright();
   createCart();
   createBanner();
+}
+
+function clickOnCart() {
+  if (window.location.pathname.includes('cart')) {
+    window.location.reload();
+  } else {
+    pixel.Goal('initiate_checkout');
+    window.location.assign('cart.html');
+  }
 }
 
 function openDropdown(event, dropdownID) {
