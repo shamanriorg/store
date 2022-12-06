@@ -23,7 +23,10 @@ function clickOnCart() {
   if (window.location.pathname.includes('cart')) {
     window.location.reload();
   } else {
-    pixel.Goal('initiate_checkout');
+    try {
+      pixel.Goal('initiate_checkout');
+    }
+    catch(e) {}
     window.location.assign('cart.html');
   }
 }
