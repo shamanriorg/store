@@ -3,6 +3,7 @@ let dictionary = {};
 // Global not working flag
 const tmpFlag = false;
 const giftPackPrice = 700;
+const minOrderCost = 700;
 
 var pixel;
 
@@ -293,13 +294,25 @@ function showCount(cart) {
     });
     document.getElementById('cart-count').textContent = `${count}`;
     if(window.location.pathname.includes('cart')) {
+      let goodsWeight = 0;
+
+      const cardW = 6;
+      const scarfW = 20;
+      const fabricW = 250;
+      const packW = 300;
+      const mailW = 20;
+      const parcelW = 150;
+      const wrapW = 50;
+
       const pochtaDelivPrice = 150;
       const pochtaBoxDelivPrice = 400;
       let boxFlag = false;
+      let parcelFlag = false;
       const sdekDelivPrice = 0;
       let singleCardsCount = 0;
       let goodsPrice = 0;
       cart.cards?.forEach((item) => {
+        goodsWeight += item.count * cardW; // 1 card = 6g
         goodsPrice += cards[item.index].price * item.count;
         if(cards[item.index].count === 1) {
           singleCardsCount += item.count;
@@ -310,6 +323,7 @@ function showCount(cart) {
       // let isPromo = document.getElementById('order-promo').value?.toUpperCase() === 'BFSALE';
       let isPromo = false;
       cart.scarfs?.forEach((item) => {
+        goodsWeight += item.count * scarfW;
         let curPrice = scarfs[item.index].price;
         if(isPromo) {
           curPrice = (scarfs[item.index].price * 0.85).toFixed(0);
@@ -319,15 +333,17 @@ function showCount(cart) {
         boxFlag = true;
       });
       cart.fabrics?.forEach((item) => {
+        goodsWeight += item.count * fabricW;
         let curPrice = fabrics[item.index].price;
         if(isPromo) {
           curPrice = (fabrics[item.index].price * 0.85).toFixed(0);
           discount += fabrics[item.index].price * item.count - curPrice * item.count
         }
         goodsPrice += curPrice * item.count;
-        // boxFlag = true;
+        parcelFlag = true;
       });
       cart.packs?.forEach((item) => {
+        goodsWeight += item.count * packW;
         goodsPrice += packs[item.index].price * item.count;
         boxFlag = true;
       });
@@ -378,16 +394,38 @@ function showCount(cart) {
       if(delivEl.checked) {
         document.getElementById('deliv-method').textContent='Почта'
         if(!boxFlag) {
+          if (!parcelFlag && goodsWeight <= 170) {
+            goodsWeight += mailW;
+          } else {
+            goodsWeight += Math.trunc((wrapW + parcelW)/2);
+          }
           // document.getElementById('deliv-price').textContent=pochtaDelivPrice;
           // totalPrice+=pochtaDelivPrice;
         } else {
+          goodsWeight += wrapW + parcelW + packW;
           // document.getElementById('deliv-price').textContent=pochtaBoxDelivPrice;
           // totalPrice+=pochtaBoxDelivPrice;
         }
-        document.getElementById('deliv-price').textContent='рассчет при подтверждении';
-        document.getElementById('deliv-price-text').textContent='';
-        // document.getElementById('deliv-price-text').textContent='RUB';
+
+        let delivCost = 0;
+        if (goodsWeight <= 200) {
+          delivCost = 300;
+        } else if (goodsWeight > 200 && goodsWeight <= 500) {
+          delivCost = 400;
+        } else if (goodsWeight > 500 && goodsWeight <= 1100) {
+          delivCost = 500;
+        } else if (goodsWeight > 1100 && goodsWeight <= 3000) {
+          delivCost = 600;
+        } else if (goodsWeight > 3000 && goodsWeight <= 5000) {
+          delivCost = 700;
+        } else {
+          delivCost = 900;
+        }
+
+        document.getElementById('deliv-price').textContent=delivCost;
+        document.getElementById('deliv-price-text').textContent='RUB';
         // totalPrice+=pochtaDelivPrice;
+        totalPrice+=delivCost;
       } else {
         document.getElementById('deliv-method').textContent='СДЭК'
         document.getElementById('deliv-price').textContent = 'оплата при получении';
@@ -498,7 +536,9 @@ function checkout() {
     detailsEl.value += '\n|' + "Скидка" + ' ' + userDiscount.textContent;
   }
   
-  if(document.getElementById('total-price').textContent === document.getElementById('ym-total-sum').value) {
+  if(document.getElementById('total-price').textContent === document.getElementById('ym-total-sum').value
+    && +document.getElementById('goods-price').textContent >= minOrderCost)
+  {
     formEl.submit();
   }
 }

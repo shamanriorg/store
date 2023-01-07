@@ -217,10 +217,10 @@
                 <input type="radio" checked id="order-delivery-pochta" name="delivery" value="pochta"
                   onchange="delivChange(event)">
                 <label for="order-delivery-pochta" class=" ">Почта России</label>
-                <label class="text-sm">(оплата отдельно,
+                <!-- <label class="text-sm">(оплата отдельно,
                   <a href="https://www.pochta.ru/" class="underline" target="_blank">
                     рассчитать</a>)
-                </label>
+                </label> -->
                 <div>
                   <input type="radio" class=" mb-4 " id="order-delivery-sdek" name="delivery" value="pochta"
                     onchange="delivChange(event)">
@@ -298,6 +298,10 @@
                   <input type="radio" class="mb-8 " checked disabled id="order-pay-ukassa" name="pay" value="pochta">
                   <label for="order-pay-ukassa">Онлайн ЮКасса</label>
                 </div>
+
+                <div class="mb-4">
+                  <label for="order-pay" class="block text-center text-red-600 ">Минимальный заказ без учета доставки 700 RUB</label>
+                </div>
                 
                 <!-- <div class="mb-4 text-md">
                   Перед оплатой проверьте правильность контактных данных.
@@ -309,9 +313,8 @@
                     Оформить и оплатить**
                   </button>
                 </div>
-                <div class="flex-1 mb-4">
-                  ** После оплаты Вам поступит звонок для уточнения деталей заказа и стоимости доставки. Если мы не сможем с Вами связаться в течении 3-х дней,
-                  заказ будет отменен, а денежные средства возвращены.
+                <div class="flex-1 mb-4 text-base text-center">
+                  ** После оплаты Вам может поступить звонок для уточнения деталей заказа и доставки.
                 </div>
               </div>
               
