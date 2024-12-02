@@ -59,6 +59,7 @@
           <img src="img/header-logo-main.png" alt="Shamanri" style="width:1024px;" class="cursor-pointer">
         </a>
       </div>
+      
       <!-- <div class="flex justify-center sm:text-6xl text-4xl uppercase font-medium text-gray-900">
         <h1 style="font-family: Haymaker, sans-serif;" class="cursor-pointer" onclick="window.location.assign('index.html')">Shamanri</h1>
       </div>
@@ -108,7 +109,11 @@
               rounded-lg absolute top-0 right-0 text-xs"></span>
           </button>
         </div>
-        
+        <div class="flex justify-center mt-4 sm:text-6xl text-4xl uppercase font-medium text-gray-900">
+          <a href="https://www.wildberries.ru/brands/311648605-shamanri" target="_blank">
+            <img src="img/header-logo-wb.jpg" alt="Shamanri" style="width:1024px;" class="cursor-pointer">
+          </a>
+        </div>
     </header> 
     <!-- <aside>
       sidebar
@@ -294,28 +299,30 @@
                   </div>
                 </div>
                 <div class="flex-1">
-                  <label for="order-pay" class="block ">Оплата</label>
+                  <!-- <label for="order-pay" class="block ">Оплата</label>
                   <input type="radio" class="mb-8 " checked disabled id="order-pay-ukassa" name="pay" value="pochta">
-                  <label for="order-pay-ukassa">Онлайн ЮКасса</label>
+                  <label for="order-pay-ukassa">Онлайн ЮКасса</label> -->
                 </div>
 
-                <div class="mb-4">
+                <!-- <div class="mb-4">
                   <label for="order-pay" class="block text-center text-red-600 ">Минимальный заказ без учета доставки 700 RUB</label>
-                </div>
+                </div> -->
                 
                 <!-- <div class="mb-4 text-md">
                   Перед оплатой проверьте правильность контактных данных.
                 </div> -->
                 <div class="flex flex-1 mb-8">
-                  <button id="checkout" class="flex-1 text-2xl bg-gray-600 hover:bg-gray-700 text-white px-4
+                  <!-- hover:bg-gray-700 -->
+                  <button disabled id="checkout" class="flex-1 text-2xl bg-gray-600  text-white px-4
                     py-2 rounded-lg" onclick="checkout()"
                   >
-                    Оформить и оплатить**
+                    <!-- Оформить и оплатить** -->
+                    На данный момент оплата через сайт приостановлена. Для заказа свяжитесь с нами.
                   </button>
                 </div>
-                <div class="flex-1 mb-4 text-base text-center">
+                <!-- <div class="flex-1 mb-4 text-base text-center">
                   ** После оплаты Вам может поступить звонок для уточнения деталей заказа и доставки.
-                </div>
+                </div> -->
               </div>
               
               <form id="checkout-form" class="hidden" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8" >
