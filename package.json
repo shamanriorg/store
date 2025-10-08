@@ -1,16 +1,44 @@
 {
-  "name": "store",
-  "version": "0.0.1",
-  "description": "store",
+  "name": "shamanri-store",
+  "version": "2.0.0",
+  "description": "Shamanri Art Store - Nuxt.js SSG version",
+  "private": true,
   "scripts": {
-    "dev": "SET NODE_ENV=development&&npx tailwindcss -i dev.css -o prod.css",
-    "prod": "SET NODE_ENV=production&&npx tailwindcss -i dev.css -o prod.css"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/eslint-config": "^0.3.0",
+    "@nuxtjs/eslint-module": "^3.1.0",
+    "@nuxtjs/tailwindcss": "^6.10.0",
+    "@quasar/extras": "^1.16.9",
+    "eslint": "^8.57.0",
+    "nuxt": "^3.11.0",
+    "quasar": "^2.14.2",
+    "sass": "^1.70.0",
+    "vue": "^3.5.17",
+    "vue-router": "^4.4.0"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
+    "nuxt-quasar-ui": "^2.1.13",
+    "pinia": "^2.1.7"
   },
   "keywords": [
-    "postcard",
-    "card"
+    "nuxt",
+    "ssg",
+    "quasar",
+    "ecommerce",
+    "art-store",
+    "shamanri"
   ],
   "author": "Igor Matveev @itveev",
   "license": "MIT",
-  "homepage": "https://shamanriorg.github.io/store/"
+  "homepage": "https://shamanri.art"
 }
