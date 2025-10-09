@@ -1,5 +1,5 @@
 import { Quasar, Notify, Dialog, Loading } from 'quasar'
-import '@quasar/extras/material-icons/material-icons.css'
+// import '@quasar/extras/material-icons/material-icons.css' // Временно отключен
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Quasar, {

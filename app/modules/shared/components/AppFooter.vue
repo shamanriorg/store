@@ -4,7 +4,7 @@
       <!-- Левый контейнер с информацией -->
       <div class="footer-left">
         <!-- Навигация -->
-        <nav class="footer-nav">
+        <nav class="footer-nav container-adaptive">
           <NuxtLink to="/">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Главная</Button>
           </NuxtLink>
@@ -26,35 +26,61 @@
         </nav>
         
         <!-- Мессенджеры -->
-        <div class="footer-messengers">
+        <div class="footer-messengers container-adaptive">
           <a href="https://t.me/shamanri" target="_blank" rel="noopener noreferrer">
-            <Button variant="transparent" size="xs" no-padding :font-weight="400" left-icon="telegram" />
+            <img 
+              src="~/assets/images/tg-footer.svg" 
+              alt="Telegram" 
+              class="messenger-icon"
+            />
           </a>
-          <a href="https://wa.me/shamanri" target="_blank" rel="noopener noreferrer">
-            <Button variant="transparent" size="xs" no-padding :font-weight="400" left-icon="whatsapp" />
+          <a href="https://vk.com/shamanri" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="~/assets/images/vk-footer.svg" 
+              alt="VK" 
+              class="messenger-icon"
+            />
           </a>
-          <a href="mailto:info@shamanri.art">
-            <Button variant="transparent" size="xs" no-padding :font-weight="400" left-icon="email" />
+          <a href="https://instagram.com/shamanri" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="~/assets/images/instagram-footer.svg" 
+              alt="Instagram" 
+              class="messenger-icon"
+            />
           </a>
         </div>
         
         <!-- Логотип и копирайт -->
-        <div class="footer-logo">
-          <img 
-            src="~/assets/images/shamanri-logo.svg" 
-            alt="Shamanri" 
-            class="logo-image"
-          />
-          <p class="copyright">
-            © {{ currentYear }}. Все материалы являются собственностью автора. Использование без согласования запрещено.
-          </p>
+        <div class="footer-logo container-adaptive">
+          <div class="logo-container">
+            <img 
+              src="~/assets/images/star-logo.svg" 
+              alt="Star" 
+              class="star-logo"
+            />
+            <div class="logo-with-copyright">
+              <img 
+                src="~/assets/images/shamanri-logo.svg" 
+                alt="Shamanri" 
+                class="logo-image"
+              />
+              <p class="copyright">
+                © {{ currentYear }}. Все материалы являются собственностью автора. Использование без согласования запрещено.
+              </p>
+            </div>
+            <img 
+              src="~/assets/images/star-logo.svg" 
+              alt="Star" 
+              class="star-logo"
+            />
+          </div>
         </div>
       </div>
       
       <!-- Правый контейнер с изображением -->
       <div class="footer-right">
         <img 
-          src="~/assets/images/sun.svg" 
+          src="~/assets/images/sun-footer.svg" 
           alt="Sun" 
           class="sun-image"
         />
@@ -75,21 +101,21 @@ const currentYear = new Date().getFullYear()
 .app-footer {
   width: 100%;
   background-color: var(--bg-primary);
-  padding: 40px 0;
+  padding: 80px 0 0 0;
 }
 
 .footer-container {
   width: 100%;
-  padding: 0 24px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 40px;
 }
 
 .footer-left {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 24px;
 }
 
@@ -107,24 +133,57 @@ const currentYear = new Date().getFullYear()
 .footer-messengers {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 24px;
   
   a {
     text-decoration: none;
     color: inherit;
+    display: inline-block;
+  }
+  
+  .messenger-icon {
+    width: 124px;
+    height: 124px;
+    object-fit: contain;
   }
 }
 
 .footer-logo {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
+  width: min-content;
+  
+  .logo-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    
+    @media (max-width: 550px) {
+      gap: 0;
+    }
+  }
+  
+  .logo-with-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
   
   .logo-image {
-    height: 24px;
+    height: 60px;
+    width: 455px;
     width: auto;
     object-fit: contain;
+  }
+  
+  .star-logo {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin-top: 22px;
   }
   
   .copyright {
@@ -133,7 +192,8 @@ const currentYear = new Date().getFullYear()
     font-weight: 400;
     color: var(--text-tertiary);
     line-height: 1.5;
-    max-width: 400px;
+    max-width: 100%;
+    padding: 0 0 32px 0;
   }
 }
 
@@ -141,13 +201,13 @@ const currentYear = new Date().getFullYear()
   flex-shrink: 0;
   
   .sun-image {
-    width: 200px;
-    height: auto;
+    height: 500px;
+    width: auto;
   }
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .footer-container {
     flex-direction: column;
     align-items: center;
@@ -168,6 +228,10 @@ const currentYear = new Date().getFullYear()
   .footer-logo {
     align-items: center;
     gap: 12px;
+
+    .copyright {
+      padding: 0;
+    }
   }
   
   .sun-image {

@@ -14,15 +14,12 @@ export default defineNuxtConfig({
 
   // Модули
   modules: [
-    '@nuxtjs/tailwindcss',
-    '@pinia/nuxt',
-    'nuxt-quasar-ui'
+    '@pinia/nuxt'
+    // 'nuxt-quasar-ui' // Временно отключен
   ],
 
   // Стили
   css: [
-    '@quasar/extras/material-icons/material-icons.css',
-    '@quasar/extras/roboto-font/roboto-font.css',
     '~/assets/styles/main.scss'
   ],
 
@@ -59,42 +56,6 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Cormorant+Infant:wght@400;500;600;700&display=swap' }
       ]
-    }
-  },
-
-  // Tailwind CSS настройки
-  tailwindcss: {
-    config: {
-      content: [
-        './app/components/**/*.{js,vue,ts}',
-        './app/layouts/**/*.vue',
-        './app/pages/**/*.vue',
-        './app/plugins/**/*.{js,ts}',
-        './nuxt.config.{js,ts}',
-        './app/app.vue'
-      ],
-      theme: {
-        extend: {
-          fontFamily: {
-            'rubik': ['Rubik', 'sans-serif'],
-            'cormorant': ['Cormorant Infant', 'serif'],
-          },
-          colors: {
-            'shamanri': {
-              50: '#fef7f0',
-              100: '#fdecd8',
-              200: '#fbd5b0',
-              300: '#f8b87d',
-              400: '#f59347',
-              500: '#f2751f',
-              600: '#e35d15',
-              700: '#bc4514',
-              800: '#963817',
-              900: '#7a3016',
-            }
-          }
-        }
-      }
     }
   },
 

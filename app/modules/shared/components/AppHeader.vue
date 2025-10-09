@@ -1,6 +1,6 @@
 <template>
   <header class="app-header">
-    <div class="header-container">
+    <div class="header-container container-adaptive">
       <!-- Логотип -->
       <NuxtLink to="/" class="header-logo">
         <img 
@@ -56,7 +56,8 @@ import Button from '~/modules/shared/kit/Button.vue'
 
 .header-container {
   width: 100%;
-  padding: 20px 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   height: 64px;
   display: flex;
   align-items: center;
