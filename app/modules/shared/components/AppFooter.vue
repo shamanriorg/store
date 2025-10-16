@@ -27,27 +27,7 @@
         
         <!-- Мессенджеры -->
         <div class="footer-messengers container-adaptive">
-          <a href="https://t.me/shamanri" target="_blank" rel="noopener noreferrer">
-            <img 
-              src="~/assets/images/tg-footer.svg" 
-              alt="Telegram" 
-              class="messenger-icon"
-            />
-          </a>
-          <a href="https://vk.com/shamanri" target="_blank" rel="noopener noreferrer">
-            <img 
-              src="~/assets/images/vk-footer.svg" 
-              alt="VK" 
-              class="messenger-icon"
-            />
-          </a>
-          <a href="https://instagram.com/shamanri" target="_blank" rel="noopener noreferrer">
-            <img 
-              src="~/assets/images/instagram-footer.svg" 
-              alt="Instagram" 
-              class="messenger-icon"
-            />
-          </a>
+          <MessengerLinks />
         </div>
         
         <!-- Логотип и копирайт -->
@@ -90,8 +70,9 @@
 </template>
 
 <script setup lang="ts">
-// Импортируем кнопку из kit
+// Импортируем компоненты
 import Button from '~/modules/shared/kit/Button.vue'
+import MessengerLinks from '~/modules/shared/components/MessengerLinks.vue'
 
 // Получаем текущий год
 const currentYear = new Date().getFullYear()
@@ -102,6 +83,7 @@ const currentYear = new Date().getFullYear()
   width: 100%;
   background-color: var(--bg-primary);
   padding: 80px 0 0 0;
+  overflow: hidden;
 }
 
 .footer-container {
@@ -133,19 +115,6 @@ const currentYear = new Date().getFullYear()
 .footer-messengers {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
-  }
-  
-  .messenger-icon {
-    width: 124px;
-    height: 124px;
-    object-fit: contain;
-  }
 }
 
 .footer-logo {
