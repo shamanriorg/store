@@ -12,41 +12,114 @@
     </div>
 
     <!-- Список статей -->
-    <div class="articles-grid">
-      <!-- Статья 1 -->
-      <NuxtLink to="/blog/article-1" class="article-card">
-        <div class="article-image"></div>
-        <h3 class="article-title">Секреты рисования растений</h3>
-        <p class="article-date">Позавчера</p>
-      </NuxtLink>
-
-      <!-- Статья 2 -->
-      <NuxtLink to="/blog/article-2" class="article-card">
-        <div class="article-image"></div>
-        <h3 class="article-title">Секреты рисования растений</h3>
-        <p class="article-date">3 дня назад</p>
-      </NuxtLink>
-
-      <!-- Статья 3 -->
-      <NuxtLink to="/blog/article-3" class="article-card">
-        <div class="article-image"></div>
-        <h3 class="article-title">Секреты рисования растений</h3>
-        <p class="article-date">2 недели назад</p>
-      </NuxtLink>
-
-      <!-- Статья 4 -->
-      <NuxtLink to="/blog/article-4" class="article-card">
-        <div class="article-image"></div>
-        <h3 class="article-title">Секреты рисования растений</h3>
-        <p class="article-date">3 месяца назад</p>
+    <div class="articles-grid" v-if="articles.length > 0">
+      <NuxtLink 
+        v-for="article in articles" 
+        :key="article.id"
+        :to="`/blog/${article.id}`" 
+        class="article-card"
+      >
+        <div class="article-image">
+          <img 
+            v-if="article.coverImage && !article.imageError"
+            :src="article.coverImage.src" 
+            :alt="article.coverImage.alt"
+            @error="article.imageError = true"
+          />
+        </div>
+        <h3 class="article-title">{{ article.title }}</h3>
+        <p class="article-date">{{ formatDate(article.date) }}</p>
       </NuxtLink>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// Компонент последних статей для главной страницы
-// TODO: Добавить логику фильтрации закрепленной статьи
+import { ref, onMounted } from 'vue'
+import { formatRelativeDate } from '~/modules/shared/utils/dateUtils'
+
+interface ContentItem {
+  type: 'text' | 'heading' | 'image' | 'video' | 'video-embed'
+  text?: string
+  src?: string
+  alt?: string
+  url?: string
+  poster?: string
+  isPreview?: boolean
+}
+
+interface Article {
+  id: string
+  title: string
+  date: string
+  isPinned: boolean
+  isNew?: boolean
+  annotation?: string
+  content: Array<ContentItem>
+  coverImage?: ContentItem
+  previewText: Array<ContentItem>
+  imageError?: boolean
+}
+
+const articles = ref<Article[]>([])
+
+// Загрузка последних 4 статей (исключая закрепленную)
+const loadLatestArticles = async () => {
+  try {
+    const response = await fetch('/articles/articles-list.json')
+    if (!response.ok) return
+    
+    const data = await response.json()
+    const articleFolders = data.articles || []
+    
+    const loadedArticles: Article[] = []
+    
+    for (const folder of articleFolders) {
+      try {
+        const articleResponse = await fetch(`/articles/${folder}/article.json`)
+        if (!articleResponse.ok) continue
+        
+        const articleData = await articleResponse.json()
+        
+        // Исключаем закрепленные статьи
+        if (articleData.isPinned) {
+          continue
+        }
+        
+        // Получаем обложку (первое изображение)
+        const coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
+        
+        // Получаем превью текст
+        const previewText = articleData.content.filter((item: ContentItem) => 
+          item.type === 'text' && item.isPreview
+        )
+        
+        loadedArticles.push({
+          ...articleData,
+          coverImage,
+          previewText,
+          imageError: false
+        })
+      } catch (err) {
+        console.warn(`Не удалось загрузить статью из ${folder}:`, err)
+        continue
+      }
+    }
+    
+    // Сортируем по дате (новые сначала) и берем первые 4
+    loadedArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    articles.value = loadedArticles.slice(0, 4)
+  } catch (error) {
+    console.error('Ошибка загрузки статей:', error)
+  }
+}
+
+// Используем утилиту для форматирования даты
+const formatDate = formatRelativeDate
+
+onMounted(() => {
+  loadLatestArticles()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -122,6 +195,13 @@
   height: 265px;
   background-color: #000000;
   border-radius: 8px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .article-title {

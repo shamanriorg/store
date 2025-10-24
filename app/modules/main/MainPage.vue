@@ -36,8 +36,8 @@
 <script setup lang="ts">
 // Импортируем компоненты
 import AboutHero from '~/modules/shared/components/AboutHero.vue'
-import CategoryButtons from '~/modules/shared/components/CategoryButtons.vue'
-import ArticlePreview from '~/modules/shared/components/ArticlePreview.vue'
+import CategoryButtons from '~/modules/main/CategoryButtons.vue'
+import ArticlePreview from '~/modules/main/ArticlePreview.vue'
 import LatestArticles from '~/modules/shared/components/LatestArticles.vue'
 </script>
 

@@ -10,6 +10,9 @@
     
   <!-- Футер -->
   <AppFooter />
+  
+  <!-- Кнопка Telegram -->
+  <TelegramButton />
   </div>
 </template>
 
@@ -17,6 +20,7 @@
 // Импортируем хедер и футер
 import AppHeader from '~/modules/shared/components/AppHeader.vue'
 import AppFooter from '~/modules/shared/components/AppFooter.vue'
+import TelegramButton from '~/modules/shared/components/TelegramButton.vue'
 </script>
 
 <style lang="scss" scoped>

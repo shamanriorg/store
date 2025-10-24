@@ -3,9 +3,15 @@ export default defineNuxtConfig({
   // Директория с исходным кодом
   srcDir: 'app',
   
+  // Директория для статических файлов
+  dir: {
+    public: '../public'
+  },
+  
   // SSG настройки
   ssr: false,
   nitro: {
+    compatibilityDate: '2025-10-23',
     prerender: {
       routes: ['/'],
       crawlLinks: true,
