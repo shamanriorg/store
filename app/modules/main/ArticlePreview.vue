@@ -186,7 +186,7 @@ const previewTextBlocks = computed(() => {
     font-family: var(--font-secondary);
     font-weight: var(--font-secondary-weight);
     font-size: 40px;
-    line-height: normal;
+    line-height: 1.2;
     color: var(--text-secondary);
     margin-bottom: 24px;
     display: flex;
@@ -222,7 +222,7 @@ const previewTextBlocks = computed(() => {
   p {
     font-family: var(--font-primary);
     font-size: 24px;
-    line-height: normal;
+    line-height: 1.2;
     color: var(--text-primary);
   }
 }

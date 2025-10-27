@@ -240,7 +240,7 @@ onMounted(() => {
   font-family: var(--font-secondary);
   font-weight: 700;
   font-size: 40px;
-  line-height: 1;
+  line-height: 1.2;
   color: var(--text-secondary);
   margin: 0;
   white-space: nowrap;
@@ -254,7 +254,7 @@ onMounted(() => {
   font-family: var(--font-primary);
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
 }
@@ -273,7 +273,7 @@ onMounted(() => {
   font-family: var(--font-primary);
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.2;
   color: var(--text-tertiary);
   margin: 0;
 }

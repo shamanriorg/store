@@ -181,7 +181,7 @@ const copyToClipboard = async (text: string) => {
     p {
       font-family: var(--font-primary);
       font-size: 24px;
-      line-height: normal;
+      line-height: 1.2;
       color: var(--text-primary);
     }
     
@@ -214,7 +214,7 @@ const copyToClipboard = async (text: string) => {
 .contact-text {
   font-family: var(--font-primary);
   font-size: 24px;
-  line-height: normal;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
   

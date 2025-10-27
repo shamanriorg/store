@@ -155,7 +155,7 @@ onMounted(() => {
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1.2;
   margin: 0 0 12px 0;
 }
 
@@ -165,7 +165,7 @@ onMounted(() => {
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.2;
   margin: 0 0 32px 0;
 }
 
