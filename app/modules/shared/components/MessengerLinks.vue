@@ -57,4 +57,25 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .messenger-links {
+    .messenger-icon {
+      width: 96px;
+      height: 96px;
+
+      &--disabled {
+        .messenger-icon__image {
+          width: 96px;
+          height: 96px;
+        }
+      }
+    }
+
+    .messenger-icon__image {
+      width: 96px;
+      height: 96px;
+    }
+  }
+}
 </style>

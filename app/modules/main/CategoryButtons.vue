@@ -201,6 +201,7 @@
 @media (max-width: 1020px) {
   .category-buttons {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .category-button {
@@ -232,10 +233,16 @@
 
 @media (max-width: 768px) {
   .category-buttons {
-    gap: 8px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
   }
 
   .category-button {
+    width: 100%;
+    max-width: 360px;
+    flex: 0 0 auto;
+
     .category-overlay {
       height: 40px;
     }

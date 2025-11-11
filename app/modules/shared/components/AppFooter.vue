@@ -216,4 +216,13 @@ const currentYear = new Date().getFullYear()
     width: 150px;
   }
 }
+
+@media (max-width: 767px) {
+  .footer-logo {
+    .logo-image {
+      width: 350px;
+      height: auto;
+    }
+  }
+}
 </style>
