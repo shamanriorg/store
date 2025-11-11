@@ -1,0 +1,62 @@
+:root {
+  /* Цвета кнопки из макета Figma */
+  --bg-primary-active: #8E402F;    /* Активный фон */
+  --bg-primary-default: #A54E3B;   /* Дефолтный фон */
+  --bg-transparent: transparent;    /* Прозрачный фон */
+         --bg-primary: #F9F5EF;           /* Основной фон */
+         --bg-color-ornament: #FFF2DE;    /* Фон орнаментального блока */
+  
+  /* Цвета текста */
+  --text-primary: #361406;          /* Основной текст (для прозрачной кнопки) */
+  --text-secondary: #62322D;        /* Вторичный текст (для hover прозрачной кнопки) */
+  --text-tertiary: #6F615B;         /* Третичный текст (для кнопок xs в футере) */
+  --text-white: #ffffff;            /* Белый текст (для кнопок с фоном) */
+  
+  /* Шрифты */
+  --font-primary: 'Rubik', sans-serif;      /* Основной шрифт */
+  --font-primary-weight: 400;               /* Основной вес */
+  --font-primary-weight-medium: 500;        /* Средний вес */
+  --font-secondary: 'Cormorant Infant', serif; /* Дополнительный шрифт */
+  --font-secondary-weight: 700;             /* Дополнительный вес */
+  
+  /* Размеры кнопки */
+  --btn-height: 48px;
+  --btn-padding-y: 12px;
+  --btn-padding-x: 16px;
+  --btn-border-radius: 8px;
+  --btn-font-size: 20px;
+  --btn-font-weight: 500;
+  
+  /* Переходы */
+  --btn-transition: all 0.3s ease;
+  
+  /* Тени */
+  --btn-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Базовые стили для шрифтов */
+body {
+  font-family: var(--font-primary);
+  font-weight: var(--font-primary-weight);
+  line-height: 1.6;
+  background-color: var(--bg-primary);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: var(--font-secondary-weight);
+}
+
+/* Адаптивный контейнер */
+.container-adaptive {
+  padding-left: 24px;
+  padding-right: 24px;
+  
+  @media (max-width: 1024px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

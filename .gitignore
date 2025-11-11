@@ -1,17 +1,43 @@
 .DS_Store
 node_modules
 
+# Nuxt
+.nuxt
+.output
+dist
+
 # Log files
 npm-debug.log*
-package-lock.json
+yarn-debug.log*
+yarn-error.log*
 
 # Editor directories and files
 .idea
 .vscode
+.cursor
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache
+.temp
+.tmp
+
+# Old version
+v1
+
+# Fonts (uncomment if needed)
 # *.woff
 # *.woff2
