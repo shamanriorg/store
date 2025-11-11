@@ -26,7 +26,7 @@
         <div v-if="item.type === 'image'" class="image-container">
           <img 
             v-if="item.src && !item.imageError"
-            :src="item.src" 
+            :src="`/articles/${article.id}/${item.src}`" 
             :alt="item.alt"
             class="content-image"
             @error="item.imageError = true"
@@ -39,8 +39,8 @@
         <!-- Видео (локальное) -->
         <video 
           v-else-if="item.type === 'video'"
-          :src="item.src"
-          :poster="item.poster"
+          :src="item.src ? `/articles/${article.id}/${item.src}` : undefined"
+          :poster="item.poster ? `/articles/${article.id}/${item.poster}` : undefined"
           controls
           class="content-video"
         >
@@ -71,6 +71,31 @@
         >
           {{ item.text }}
         </p>
+
+        <!-- Ссылка -->
+        <p 
+          v-else-if="item.type === 'link' && item.href"
+          class="content-link"
+        >
+          <a
+            v-if="item.external"
+            :href="item.href"
+            class="link-inline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ item.text }}
+          </a>
+          <NuxtLink
+            v-else
+            :to="item.href"
+            class="link-inline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ item.text }}
+          </NuxtLink>
+        </p>
       </div>
     </div>
     </div>
@@ -80,18 +105,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { formatRelativeDate } from '~/modules/shared/utils/dateUtils'
 import Button from '~/modules/shared/kit/Button.vue'
 import NotFoundPlaceholder from '~/modules/shared/components/NotFoundPlaceholder.vue'
+import { useSeoMeta } from '#imports'
 
 interface ContentItem {
-  type: 'text' | 'heading' | 'image' | 'video' | 'video-embed'
+  type: 'text' | 'heading' | 'image' | 'video' | 'video-embed' | 'link'
   text?: string
   src?: string
   alt?: string
   url?: string
   poster?: string
+  href?: string
+  external?: boolean
   isPreview?: boolean
 }
 
@@ -110,6 +138,42 @@ const props = defineProps<{
 }>()
 
 const article = ref<Article | null>(null)
+const DEFAULT_DESCRIPTION =
+  'Статья Shamanri о творчестве, природе, паттернах и вдохновении.'
+
+const articleTitle = computed(() => article.value?.title ?? 'Статья Shamanri')
+
+const articleDescription = computed(() => {
+  if (!article.value) return DEFAULT_DESCRIPTION
+
+  if (article.value.annotation) {
+    return truncateText(article.value.annotation)
+  }
+
+  const previewBlock = article.value.content.find(
+    (item) => item.type === 'text' && item.isPreview && item.text
+  )
+  if (previewBlock?.text) {
+    return truncateText(previewBlock.text)
+  }
+
+  const firstTextBlock = article.value.content.find(
+    (item) => item.type === 'text' && item.text
+  )
+  if (firstTextBlock?.text) {
+    return truncateText(firstTextBlock.text)
+  }
+
+  return DEFAULT_DESCRIPTION
+})
+
+useSeoMeta({
+  title: articleTitle,
+  description: articleDescription,
+  ogTitle: articleTitle,
+  ogDescription: articleDescription,
+  twitterCard: 'summary_large_image'
+})
 
 // Загрузка статьи
 const loadArticle = async () => {
@@ -135,6 +199,11 @@ const formatDate = formatRelativeDate
 onMounted(() => {
   loadArticle()
 })
+
+function truncateText(text: string, maxLength = 160) {
+  if (text.length <= maxLength) return text
+  return `${text.slice(0, maxLength - 1).trim()}…`
+}
 </script>
 
 <style lang="scss" scoped>
@@ -262,6 +331,25 @@ onMounted(() => {
   line-height: 1.6;
   color: var(--text-primary);
   margin: 0;
+}
+
+.content-link {
+  font-family: var(--font-primary);
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.link-inline {
+  color: inherit;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  &:hover {
+    color: var(--text-secondary);
+  }
 }
 
 .content-heading {

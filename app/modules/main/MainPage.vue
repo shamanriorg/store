@@ -1,16 +1,16 @@
 <template>
   <div class="main-page">
-    <!-- Видео-блок -->
-    <div class="video-section">
-      <!-- Заглушка для видео -->
-    </div>
+    <!-- Видео-блок Заглушка для видео -->
+    <!-- <div class="video-section">
+      
+    </div>-->
 
     <!-- Основной контент -->
     <div class="main-content">
       <div class="container container-adaptive">
         <!-- Компонент "Обо мне" -->
         <div class="about-section">
-          <AboutHero title="Обо мне" />
+          <MainAboutHero />
         </div>
 
         <!-- Кнопки категорий -->
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 // Импортируем компоненты
-import AboutHero from '~/modules/shared/components/AboutHero.vue'
+import MainAboutHero from '~/modules/main/MainAboutHero.vue'
 import CategoryButtons from '~/modules/main/CategoryButtons.vue'
 import ArticlePreview from '~/modules/main/ArticlePreview.vue'
 import LatestArticles from '~/modules/shared/components/LatestArticles.vue'

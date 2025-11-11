@@ -12,9 +12,10 @@
       
       <!-- Навигация -->
       <nav class="header-nav">
-        <NuxtLink to="/catalog">
+        <!-- NOTE: <NuxtLink to="/catalog"> temporarily disabled until Catalog is ready -->
+        <div class="nav-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Каталог</Button>
-        </NuxtLink>
+        </div>
         <NuxtLink to="/blog">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Блог</Button>
         </NuxtLink>
@@ -22,14 +23,14 @@
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">О нас</Button>
         </NuxtLink>
         
-        <!-- Разделитель -->
-        <div class="nav-divider"></div>
+        <!-- Разделитель и корзина показываются только если есть товары в корзине -->
+        <div class="nav-divider" v-if="cartCount > 0"></div>
         
         <!-- Корзина -->
-        <NuxtLink to="/cart">
+        <NuxtLink to="/cart" v-if="cartCount > 0">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn cart-btn">
             <span class="material-icons cart-icon">shopping_cart</span>
-            <span class="cart-count">0</span>
+            <span class="cart-count">{{ cartCount }}</span>
             <span class="material-icons currency-icon">currency_ruble</span>
           </Button>
         </NuxtLink>
@@ -42,6 +43,10 @@
 <script setup lang="ts">
 // Импортируем кнопку из kit
 import Button from '~/modules/shared/kit/Button.vue'
+
+// Временная заглушка для количества товаров в корзине.
+// Когда добавим механику корзины, заменим на реальный источник данных (store/api).
+const cartCount = 0
 </script>
 
 <style lang="scss" scoped>
@@ -88,6 +93,15 @@ import Button from '~/modules/shared/kit/Button.vue'
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  .is-disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+    
+    * {
+      cursor: not-allowed;
+    }
   }
 }
 

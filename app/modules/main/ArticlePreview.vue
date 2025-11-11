@@ -2,9 +2,32 @@
   <div class="article-preview" v-if="article">
     <div class="article-preview-content">
       <div class="article-preview-media">
+        <!-- Показываем видео, если есть previewVideo и файл существует -->
+        <video 
+          v-if="article.previewVideo && videoExists && !videoError"
+          ref="videoElement"
+          :src="`/articles/${article.id}/${article.previewVideo}`"
+          class="media-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          @error="videoError = true"
+          @loadedmetadata="onVideoLoaded"
+        ></video>
+        <!-- Иначе показываем previewImage, если есть -->
         <img 
-          v-if="coverImage && !imageError"
-          :src="coverImage.src" 
+          v-else-if="previewImageSrc && !imageError"
+          :src="previewImageSrc" 
+          :alt="article.title" 
+          class="media-image"
+          @error="imageError = true"
+        />
+        <!-- Fallback на первую картинку из content, если нет previewImage -->
+        <img 
+          v-else-if="coverImage && coverImage.src && !imageError"
+          :src="`/articles/${article.id}/${coverImage.src}`" 
           :alt="coverImage.alt" 
           class="media-image"
           @error="imageError = true"
@@ -44,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 
 interface Article {
   id: string
@@ -52,6 +75,8 @@ interface Article {
   date: string
   isPinned: boolean
   isNew: boolean
+  previewVideo?: string
+  previewImage?: string
   content: Array<{
     type: string
     text?: string
@@ -63,6 +88,9 @@ interface Article {
 
 const article = ref<Article | null>(null)
 const imageError = ref(false)
+const videoError = ref(false)
+const videoExists = ref(false)
+const videoElement = ref<HTMLVideoElement | null>(null)
 
 // Функция для получения списка папок статей
 const getArticleFolders = async (): Promise<string[]> => {
@@ -92,6 +120,18 @@ onMounted(async () => {
         
         if (data.isPinned) {
           article.value = data
+          
+          // Проверяем существование видео файла
+          if (data.previewVideo) {
+            const videoPath = `/articles/${data.id}/${data.previewVideo}`
+            try {
+              const videoCheck = await fetch(videoPath, { method: 'HEAD' })
+              videoExists.value = videoCheck.ok
+            } catch {
+              videoExists.value = false
+            }
+          }
+          
           break // Нашли закрепленную, прекращаем поиск
         }
       } catch (err) {
@@ -108,7 +148,13 @@ onMounted(async () => {
   }
 })
 
-// Получаем обложку (первое изображение)
+// Получаем previewImage путь
+const previewImageSrc = computed(() => {
+  if (!article.value || !article.value.previewImage) return null
+  return `/articles/${article.value.id}/${article.value.previewImage}`
+})
+
+// Получаем обложку (первое изображение) как fallback
 const coverImage = computed(() => {
   if (!article.value) return null
   return article.value.content.find(item => item.type === 'image')
@@ -121,6 +167,18 @@ const previewTextBlocks = computed(() => {
     item.type === 'text' && item.isPreview === true
   )
 })
+
+// Обработчик загрузки метаданных видео - запускаем воспроизведение
+const onVideoLoaded = async () => {
+  await nextTick()
+  if (videoElement.value) {
+    try {
+      await videoElement.value.play()
+    } catch (error) {
+      console.warn('Не удалось автоматически запустить видео:', error)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -154,6 +212,7 @@ const previewTextBlocks = computed(() => {
   order: 2;
   
   .media-image,
+  .media-video,
   .media-placeholder {
     width: 688px;
     height: 688px;
@@ -168,6 +227,12 @@ const previewTextBlocks = computed(() => {
       max-width: 100%;
       aspect-ratio: 1;
     }
+  }
+  
+  .media-video {
+    display: block;
+    object-fit: cover;
+    background-color: #000000;
   }
   
   .media-placeholder {

@@ -55,6 +55,9 @@ interface Article {
   isPinned: boolean
   isNew?: boolean
   annotation?: string
+  previewVideo?: string
+  previewImage?: string
+  homeOrder?: number
   content: Array<ContentItem>
   coverImage?: ContentItem
   previewText: Array<ContentItem>
@@ -86,16 +89,40 @@ const loadLatestArticles = async () => {
           continue
         }
         
-        // Получаем обложку (первое изображение)
-        const coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
+        // Получаем превью изображение (из previewImage или первую картинку из content)
+        let coverImage: ContentItem | undefined
+        if (articleData.previewImage) {
+          coverImage = {
+            type: 'image',
+            src: articleData.previewImage,
+            alt: articleData.title
+          }
+        } else {
+          coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
+        }
+        
+        // Формируем полный путь для изображения
+        if (coverImage && coverImage.src) {
+          coverImage = {
+            ...coverImage,
+            src: `/articles/${articleData.id}/${coverImage.src}`
+          }
+        }
         
         // Получаем превью текст
         const previewText = articleData.content.filter((item: ContentItem) => 
           item.type === 'text' && item.isPreview
         )
         
+        const homeOrderValue = typeof articleData.homeOrder === 'number'
+          ? articleData.homeOrder
+          : articleData.homeOrder !== undefined
+            ? Number(articleData.homeOrder)
+            : undefined
+
         loadedArticles.push({
           ...articleData,
+          homeOrder: Number.isFinite(homeOrderValue) ? homeOrderValue : undefined,
           coverImage,
           previewText,
           imageError: false
@@ -106,9 +133,22 @@ const loadLatestArticles = async () => {
       }
     }
     
-    // Сортируем по дате (новые сначала) и берем первые 4
-    loadedArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    articles.value = loadedArticles.slice(0, 4)
+    const orderedArticles = loadedArticles
+      .filter(article => typeof article.homeOrder === 'number' && !Number.isNaN(article.homeOrder))
+      .sort((a, b) => (a.homeOrder ?? 0) - (b.homeOrder ?? 0))
+    
+    if (orderedArticles.length > 0) {
+      articles.value = orderedArticles.slice(0, 4)
+    } else {
+      // Функция для парсинга даты в формате DD-MM-YYYY
+      const parseDate = (dateStr: string): number => {
+        const [day, month, year] = dateStr.split('-').map(Number)
+        return new Date(year, month - 1, day).getTime()
+      }
+
+      loadedArticles.sort((a, b) => parseDate(b.date) - parseDate(a.date))
+      articles.value = loadedArticles.slice(0, 4)
+    }
   } catch (error) {
     console.error('Ошибка загрузки статей:', error)
   }
@@ -201,6 +241,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 }
 

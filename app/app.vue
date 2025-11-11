@@ -9,9 +9,42 @@
 <script setup lang="ts">
 // Глобальные настройки приложения
 useHead({
-  title: 'Shamanri - Авторские платки и открытки',
+  titleTemplate: (chunk?: string) =>
+    chunk ? `${chunk} | Shamanri` : 'Shamanri — иллюстрации, паттерны и новогодние сказки',
   meta: [
-    { name: 'description', content: 'Авторские платки, открытки и художественная продукция иллюстратора Марии Матвеевой' }
+    {
+      key: 'description',
+      name: 'description',
+      content:
+        'Shamanri — авторские иллюстрации, паттерны и волшебные истории художницы Марии Матвеевой.'
+    },
+    {
+      key: 'keywords',
+      name: 'keywords',
+      content:
+        'Shamanri, Мария Матвеева, иллюстратор, авторские паттерны, новогодние открытки, акварель, сказки'
+    },
+    {
+      key: 'og:site_name',
+      property: 'og:site_name',
+      content: 'Shamanri'
+    },
+    {
+      key: 'og:type',
+      property: 'og:type',
+      content: 'website'
+    },
+    {
+      key: 'og:title',
+      property: 'og:title',
+      content: 'Shamanri — иллюстрации, паттерны и новогодние сказки'
+    },
+    {
+      key: 'og:description',
+      property: 'og:description',
+      content:
+        'Магия природы в иллюстрациях и паттернах. Узнайте о творчестве студии Shamanri и вдохновитесь уютными историями.'
+    }
   ]
 })
 </script>

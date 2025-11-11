@@ -8,9 +8,10 @@
           <NuxtLink to="/">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Главная</Button>
           </NuxtLink>
-          <NuxtLink to="/catalog">
+          <!-- NOTE: <NuxtLink to="/catalog"> temporarily disabled until Catalog is ready -->
+          <div class="footer-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Каталог</Button>
-          </NuxtLink>
+          </div>
           <NuxtLink to="/blog">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Блог</Button>
           </NuxtLink>
@@ -20,9 +21,10 @@
           <NuxtLink to="/company">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">О компании</Button>
           </NuxtLink>
-          <NuxtLink to="/contact">
+          <!-- NOTE: <NuxtLink to="/contact"> temporarily disabled until contact form logic finalised -->
+          <div class="footer-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Заполнить форму</Button>
-          </NuxtLink>
+          </div>
         </nav>
         
         <!-- Мессенджеры -->
@@ -74,7 +76,6 @@
 import Button from '~/modules/shared/kit/Button.vue'
 import MessengerLinks from '~/modules/shared/components/MessengerLinks.vue'
 
-// Получаем текущий год
 const currentYear = new Date().getFullYear()
 </script>
 
@@ -109,6 +110,14 @@ const currentYear = new Date().getFullYear()
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  .is-disabled {
+    cursor: not-allowed;
+    
+    * {
+      cursor: not-allowed;
+    }
   }
 }
 

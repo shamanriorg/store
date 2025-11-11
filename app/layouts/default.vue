@@ -11,6 +11,9 @@
   <!-- Футер -->
   <AppFooter />
   
+  <!-- Форма обратной связи -->
+  <ContactFormDrawer />
+  
   <!-- Кнопка Telegram -->
   <TelegramButton />
   </div>
@@ -21,6 +24,7 @@
 import AppHeader from '~/modules/shared/components/AppHeader.vue'
 import AppFooter from '~/modules/shared/components/AppFooter.vue'
 import TelegramButton from '~/modules/shared/components/TelegramButton.vue'
+import ContactFormDrawer from '~/modules/shared/components/ContactFormDrawer.vue'
 </script>
 
 <style lang="scss" scoped>

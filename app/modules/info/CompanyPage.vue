@@ -117,12 +117,23 @@
 
 <script setup lang="ts">
 // SEO
+useSeoMeta({
+  title: 'О компании Shamanri — контакты и юридические данные',
+  description:
+    'Контакты, реквизиты и условия сотрудничества с брендом Shamanri. Узнайте, как заказать авторские иллюстрации и продукцию Марии Матвеевой.',
+  ogTitle: 'Shamanri — контакты и информация о компании',
+  ogDescription:
+    'Официальная информация о бренде Shamanri: контакты для связи, юридические реквизиты и способы оплаты.',
+  twitterCard: 'summary_large_image'
+})
+
 useHead({
-  title: 'О компании - Shamanri',
   meta: [
     {
-      name: 'description',
-      content: 'Shamanri - бренд авторских платков и художественной продукции иллюстратора Марии Матвеевой'
+      key: 'company-keywords',
+      name: 'keywords',
+      content:
+        'Shamanri контакты, Shamanri реквизиты, как заказать Shamanri, оплата Shamanri, художник Мария Матвеева'
     }
   ]
 })

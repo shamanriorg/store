@@ -75,6 +75,8 @@ interface Article {
   isPinned: boolean
   isNew?: boolean
   annotation?: string
+  previewVideo?: string
+  previewImage?: string
   content: Array<ContentItem>
   coverImage?: ContentItem
   previewText: Array<ContentItem>
@@ -103,8 +105,25 @@ const loadArticles = async () => {
         
         // Загружаем все статьи для страницы блога
         
-        // Получаем обложку (первое изображение)
-        const coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
+        // Получаем превью изображение (из previewImage или первую картинку из content)
+        let coverImage: ContentItem | undefined
+        if (articleData.previewImage) {
+          coverImage = {
+            type: 'image',
+            src: articleData.previewImage,
+            alt: articleData.title
+          }
+        } else {
+          coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
+        }
+        
+        // Формируем полный путь для изображения
+        if (coverImage && coverImage.src) {
+          coverImage = {
+            ...coverImage,
+            src: `/articles/${articleData.id}/${coverImage.src}`
+          }
+        }
         
         // Получаем превью текст
         const previewText = articleData.content.filter((item: ContentItem) => 
@@ -123,10 +142,29 @@ const loadArticles = async () => {
       }
     }
     
-    // Сортируем по дате (новые сначала)
-    loadedArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    // Функция для парсинга даты в формате DD-MM-YYYY
+    const parseDate = (dateStr: string): number => {
+      const [day, month, year] = dateStr.split('-').map(Number)
+      return new Date(year, month - 1, day).getTime()
+    }
     
-    articles.value = loadedArticles
+    // Разделяем на закрепленные и обычные статьи
+    const pinnedArticles: Article[] = []
+    const regularArticles: Article[] = []
+    
+    for (const article of loadedArticles) {
+      if (article.isPinned) {
+        pinnedArticles.push(article)
+      } else {
+        regularArticles.push(article)
+      }
+    }
+    
+    // Сортируем обычные статьи по дате (новые сначала)
+    regularArticles.sort((a, b) => parseDate(b.date) - parseDate(a.date))
+    
+    // Сначала закрепленные, затем остальные отсортированные
+    articles.value = [...pinnedArticles, ...regularArticles]
   } catch (error) {
     console.error('Ошибка загрузки статей:', error)
   }
@@ -207,6 +245,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
   
   .image-placeholder {
