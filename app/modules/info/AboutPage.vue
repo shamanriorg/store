@@ -258,5 +258,39 @@ useHead({
     font-size: 20px;
   }
 }
+
+@media (max-width: 549px) {
+  .ach-row {
+    grid-template-columns: 120px 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 16px;
+    row-gap: 12px;
+  }
+
+  .ach-date {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: flex-start;
+  }
+
+  .ach-title {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: flex-start;
+  }
+
+  .ach-link {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    justify-self: flex-start;
+  }
+
+  .ach-result {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    justify-self: flex-start;
+    text-align: left;
+  }
+}
 </style>
 

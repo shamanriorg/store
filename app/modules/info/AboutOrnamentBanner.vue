@@ -73,7 +73,7 @@
 .ornament-text {
   font-family: var(--font-secondary);
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
