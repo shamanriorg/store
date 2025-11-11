@@ -280,13 +280,13 @@ useHead({
   }
 
   .ach-link {
-    grid-column: 1 / 3;
+    grid-column: 2;
     grid-row: 2;
     justify-self: flex-start;
   }
 
   .ach-result {
-    grid-column: 1 / 3;
+    grid-column: 2;
     grid-row: 3;
     justify-self: flex-start;
     text-align: left;
