@@ -60,7 +60,7 @@
 }
 
 .ornament-text {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
@@ -69,6 +69,12 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 767px) {
+  .ornament-text {
+    font-size: 24px;
+  }
 }
 
 .ornament-bottom {

@@ -318,4 +318,14 @@ const onVideoLoaded = async () => {
     }
   }
 }
+
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
 </style>

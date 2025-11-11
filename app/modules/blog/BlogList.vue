@@ -345,7 +345,7 @@ onMounted(() => {
   }
   
   .page-title {
-    font-size: 36px;
+    font-size: 44px;
     margin-bottom: 24px;
   }
   
@@ -386,7 +386,7 @@ onMounted(() => {
   }
   
   .article-title {
-    font-size: 28px;
+    font-size: 36px;
     margin-bottom: 8px;
     white-space: normal;
     overflow: visible;

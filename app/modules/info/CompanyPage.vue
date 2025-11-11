@@ -284,5 +284,27 @@ const copyToClipboard = async (text: string) => {
     text-decoration: none !important;
   }
 }
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 44px;
+  }
+
+  .info-section {
+    .info-title {
+      font-size: 36px;
+    }
+
+    .info-content {
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .contact-text {
+    font-size: 20px;
+  }
+}
 </style>
 

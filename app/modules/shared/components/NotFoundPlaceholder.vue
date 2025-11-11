@@ -77,11 +77,7 @@
   }
   
   .placeholder-title {
-    font-size: 36px;
-  }
-  
-  .content-text {
-    font-size: 18px;
+    font-size: 44px;
   }
 }
 </style>

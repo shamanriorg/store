@@ -368,20 +368,22 @@ function truncateText(text: string, maxLength = 160) {
     padding: 16px 0 0 0;
   }
   
-  .article-title {
-    font-size: 36px;
+  .content-embed {
+    height: 250px;
   }
-  
+}
+
+@media (max-width: 767px) {
+  .article-title {
+    font-size: 44px;
+  }
+
   .content-heading {
     font-size: 28px;
   }
-  
-  .content-text {
-    font-size: 18px;
-  }
-  
-  .content-embed {
-    height: 250px;
+
+  .article-content .content-text {
+    font-size: 20px;
   }
 }
 </style>

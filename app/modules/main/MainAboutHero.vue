@@ -153,5 +153,21 @@ import MainOrnamentBanner from '~/modules/main/MainOrnamentBanner.vue'
 .ornament-section {
   margin-bottom: 64px;
 }
+
+@media (max-width: 767px) {
+  .about-section {
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .hero-list {
+    font-size: 20px;
+  }
+}
 </style>
 

@@ -307,6 +307,21 @@ watch(isOpen, (value) => {
   display: flex;
   gap: 12px;
   margin-top: auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+  .form-title {
+    font-size: 44px;
+  }
+
+  .form-field {
+    input,
+    textarea {
+      font-size: 20px;
+    }
+  }
 }
 
 .drawer-footer {

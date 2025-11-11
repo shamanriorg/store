@@ -262,5 +262,15 @@ onMounted(() => {
   color: var(--text-tertiary);
   margin: 0;
 }
+
+@media (max-width: 767px) {
+  .articles-title {
+    font-size: 36px;
+  }
+
+  .article-title {
+    font-size: 24px;
+  }
+}
 </style>
 

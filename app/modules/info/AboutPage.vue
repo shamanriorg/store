@@ -235,5 +235,28 @@ useHead({
   }
 }
 
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 44px;
+  }
+
+  .about-section {
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .ach-year,
+  .ach-date,
+  .ach-title,
+  .ach-link,
+  .ach-result {
+    font-size: 20px;
+  }
+}
 </style>
 
