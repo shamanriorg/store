@@ -35,6 +35,10 @@
   --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 /* Базовые стили для шрифтов */
 body {
   font-family: var(--font-primary);

@@ -111,12 +111,13 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .app-header {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 64px;
   background-color: var(--bg-primary);
-  position: sticky;
-  top: 0;
   z-index: 100;
+  // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
 .header-container {
@@ -138,7 +139,7 @@ onBeforeUnmount(() => {
   color: inherit;
   
   .logo-image {
-    height: 100%;
+    display: block;
     max-height: 24px;
     width: auto;
     object-fit: contain;
@@ -250,7 +251,7 @@ onBeforeUnmount(() => {
 
 .mobile-menu {
   position: fixed;
-  top: calc(64px + 32px);
+  top: calc(64px);
   left: 0;
   right: 0;
   background: var(--bg-secondary-page, #F9F5EF);

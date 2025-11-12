@@ -30,12 +30,10 @@ import ContactFormDrawer from '~/modules/shared/components/ContactFormDrawer.vue
 <style lang="scss" scoped>
 .layout-default {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 .main {
-  flex: 1;
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
