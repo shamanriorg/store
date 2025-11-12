@@ -43,14 +43,20 @@
     </div>
 
     <div class="ornament-section">
-      <MainOrnamentBanner />
+      <OrnamentBanner
+        :texts="[
+          'Адепт неспешной жизни и гармонии во всем, чего мы касаемся, я стараюсь сохранить ощущение единства с миром и целостности в том, что делаю. Это очень важно - видеть красивое в травинках и собачьих носах, радужных переливах на спинке жука, разросшемся лишайнике, осенних грибах и куполах старых церквей. Во всем вокруг.'
+        ]"
+        max-width="980px"
+        gap="0px"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import MessengerLinks from '~/modules/shared/components/MessengerLinks.vue'
-import MainOrnamentBanner from '~/modules/main/MainOrnamentBanner.vue'
+import OrnamentBanner from '~/modules/shared/components/OrnamentBanner.vue'
 </script>
 
 <style scoped lang="scss">

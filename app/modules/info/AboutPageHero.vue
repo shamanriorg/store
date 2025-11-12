@@ -36,13 +36,21 @@
     </div>
 
     <div class="ornament-section">
-      <AboutOrnamentBanner />
+      <OrnamentBanner
+        :texts="[
+          'Наша философия — гармония вместо идеальности.',
+          'Я не стремлюсь к стерильной точности линий и выверенным композициям. Моя цель — передать настроение, поймать и сохранить красоту старого дерева, утреннего тумана, узора на крыле бабочки.',
+          'Мне кажется очень важным вглядываться пристальнее в окружающий нас невероятный мир. Я любуюсь и восхищаюсь его разнообразием и рациональностью, и верю, что мы можем научиться у природы и животных гармонии и балансу, чтобы перенести их во всё, что мы делаем, в каждый миг жизни.'
+        ]"
+        max-width="980px"
+        gap="16px"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import AboutOrnamentBanner from '~/modules/info/AboutOrnamentBanner.vue'
+import OrnamentBanner from '~/modules/shared/components/OrnamentBanner.vue'
 </script>
 
 <style scoped lang="scss">

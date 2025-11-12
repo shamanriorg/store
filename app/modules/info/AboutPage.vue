@@ -26,6 +26,7 @@
             <div class="ach-result">Тадам!</div>
           </div>
 
+          <div class="ach-divider"></div>
           <div class="ach-year">2024</div>
           <div class="ach-row">
             <div class="ach-date">5 ноября</div>
@@ -40,8 +41,6 @@
             </div>
             <div class="ach-result">Вжух!</div>
           </div>
-
-          <div class="ach-divider"></div>
 
           <div class="ach-row">
             <div class="ach-date">11 марта</div>
