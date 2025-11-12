@@ -21,10 +21,16 @@
           <NuxtLink to="/company">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">О компании</Button>
           </NuxtLink>
-          <!-- NOTE: <NuxtLink to="/contact"> temporarily disabled until contact form logic finalised -->
-          <div class="footer-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
-            <Button variant="transparent" size="xs" no-padding :font-weight="400">Заполнить форму</Button>
-          </div>
+          <!--Button
+            variant="transparent"
+            size="xs"
+            no-padding
+            :font-weight="400"
+            type="button"
+            @click="openContactForm"
+          >
+            Заполнить форму
+          </Button-->
         </nav>
         
         <!-- Мессенджеры -->
@@ -75,6 +81,12 @@
 // Импортируем компоненты
 import Button from '~/modules/shared/kit/Button.vue'
 import MessengerLinks from '~/modules/shared/components/MessengerLinks.vue'
+
+const contactFormOpen = useState('contactFormOpen', () => false)
+
+const openContactForm = () => {
+  contactFormOpen.value = true
+}
 
 const currentYear = new Date().getFullYear()
 </script>

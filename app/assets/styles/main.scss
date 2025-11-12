@@ -45,6 +45,14 @@ body {
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+}
+
+main {
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary);
   font-weight: var(--font-secondary-weight);
