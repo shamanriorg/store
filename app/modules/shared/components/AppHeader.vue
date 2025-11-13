@@ -12,10 +12,9 @@
       
       <!-- Навигация -->
       <nav class="header-nav">
-        <!-- NOTE: <NuxtLink to="/catalog"> temporarily disabled until Catalog is ready -->
-        <div class="nav-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
+        <NuxtLink to="/catalog" @click="closeMenu">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Каталог</Button>
-        </div>
+        </NuxtLink>
         <NuxtLink to="/blog">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Блог</Button>
         </NuxtLink>
@@ -60,9 +59,9 @@
         aria-modal="true"
       >
         <nav class="mobile-nav">
-          <div class="mobile-item is-disabled" role="button" aria-disabled="true" tabindex="-1">
+          <NuxtLink to="/catalog" @click="closeMenu">
             <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Каталог</Button>
-          </div>
+          </NuxtLink>
           <NuxtLink to="/blog" @click="closeMenu">
             <Button variant="transparent" no-padding :font-weight="400" class="nav-btn">Блог</Button>
           </NuxtLink>

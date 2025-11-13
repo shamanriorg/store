@@ -8,10 +8,9 @@
           <NuxtLink to="/">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Главная</Button>
           </NuxtLink>
-          <!-- NOTE: <NuxtLink to="/catalog"> temporarily disabled until Catalog is ready -->
-          <div class="footer-disabled is-disabled" role="button" aria-disabled="true" tabindex="-1">
+          <NuxtLink to="/catalog">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Каталог</Button>
-          </div>
+          </NuxtLink>
           <NuxtLink to="/blog">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">Блог</Button>
           </NuxtLink>
