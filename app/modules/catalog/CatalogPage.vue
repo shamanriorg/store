@@ -5,38 +5,16 @@
       <p class="catalog-note">Тут можно что-нибудь купить или просто посмотреть.</p>
 
       <div class="catalog-grid">
-        <div
+        <CategoryButton
           v-for="category in categories"
           :key="category.id"
-          :class="[
-            'catalog-card',
-            category.modifier && `catalog-card--${category.modifier}`,
-            { 'catalog-card--active': category.id === selectedCategory }
-          ]"
+          :label="category.label"
+          :hover-background="category.hoverBackground"
+          :active-background="category.activeBackground"
+          :fan-images="category.fanImages"
+          :is-active="category.id === selectedCategory"
           @click="handleCardClick(category.id)"
-        >
-          <span class="catalog-card__label">{{ category.label }}</span>
-          <div
-            v-if="category.id === 'patterns'"
-            class="catalog-card__fan"
-          >
-            <img
-              src="~/assets/images/button-pattern-1.png"
-              alt="Паттерн"
-              class="catalog-card__fan-image"
-            />
-            <img
-              src="~/assets/images/button-pattern-2.png"
-              alt="Паттерн"
-              class="catalog-card__fan-image"
-            />
-            <img
-              src="~/assets/images/button-pattern-3.png"
-              alt="Паттерн"
-              class="catalog-card__fan-image"
-            />
-          </div>
-        </div>
+        />
       </div>
 
       <div class="catalog-placeholder">
@@ -49,6 +27,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from '#imports'
+import CategoryButton from '~/modules/catalog/CategoryButton.vue'
+
+// Импортируем изображения для паттернов
+import pattern1 from '~/assets/images/button-pattern-1.png'
+import pattern2 from '~/assets/images/button-pattern-2.png'
+import pattern3 from '~/assets/images/button-pattern-3.png'
 
 useSeoMeta({
   title: 'Каталог Shamanri — паттерны, плитка и открытки',
@@ -64,10 +48,31 @@ const route = useRoute()
 const router = useRouter()
 
 const categories = [
-  { id: 'patterns', label: 'Паттерны', modifier: 'patterns' },
-  { id: 'postcards', label: 'Открытки', modifier: 'postcards' },
-  { id: 'tiles', label: 'Плитка', modifier: 'tiles' },
-  { id: 'other', label: 'Разное', modifier: 'other' }
+  {
+    id: 'patterns',
+    label: 'Паттерны',
+    hoverBackground: '#A79D83',
+    activeBackground: '#5C5034',
+    fanImages: [pattern1, pattern2, pattern3]
+  },
+  {
+    id: 'postcards',
+    label: 'Открытки',
+    hoverBackground: '#A37F7F',
+    activeBackground: '#5C3434'
+  },
+  {
+    id: 'tiles',
+    label: 'Плитка',
+    hoverBackground: '#909875',
+    activeBackground: '#535C34'
+  },
+  {
+    id: 'other',
+    label: 'Разное',
+    hoverBackground: '#76819B',
+    activeBackground: '#34405C'
+  }
 ]
 
 const selectedCategory = ref<string>(categories[0].id)
@@ -134,112 +139,10 @@ const handleCardClick = async (id: string) => {
   width: 100%;
 }
 
-.catalog-card {
-  flex: 1 1 0;
-  height: 236px;
-  border-radius: 8px;
-  border: 1px solid var(--border-rest, #DDD7CF);
-  background: var(--bg-secondary-default, #EEE7DE);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0 16px 40px;
-  font-family: var(--font-secondary);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.catalog-card:hover {
-  background: #A79D83;
-}
-
-.catalog-card__label {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.catalog-card:hover .catalog-card__label {
-  transform: translateY(-20px);
-}
-
-.catalog-card.catalog-card--active .catalog-card__label {
-  transform: translateY(-100px);
-}
-
-.catalog-card__fan {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  display: flex;
-  align-items: flex-end;
-  transform: translate(-50%, 100%);
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.catalog-card__fan-image {
-  width: 112px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-}
-
-.catalog-card__fan-image:first-child,
-.catalog-card__fan-image:last-child {
-  width: 122px;
-}
-
-.catalog-card__fan-image + .catalog-card__fan-image {
-  margin-left: -48px;
-}
-
-.catalog-card:hover .catalog-card__fan {
-  transform: translate(-50%, 80%);
-}
-
-.catalog-card.catalog-card--active .catalog-card__fan {
-  transform: translate(-50%, 0%);
-}
-
-.catalog-card--patterns:hover {
-  background: #A79D83;
-}
-
-.catalog-card--patterns.catalog-card--active {
-  background: #5C5034;
-  color: var(--text-white);
-}
-
-.catalog-card--postcards:hover {
-  background: #A37F7F;
-}
-
-.catalog-card--postcards.catalog-card--active {
-  background: #5C3434;
-  color: var(--text-white);
-}
-
-.catalog-card--tiles:hover {
-  background: #909875;
-}
-
-.catalog-card--tiles.catalog-card--active {
-  background: #535C34;
-  color: var(--text-white);
-}
-
-.catalog-card--other:hover {
-  background: #76819B;
-}
-
-.catalog-card--other.catalog-card--active {
-  background: #34405C;
-  color: var(--text-white);
+@media (max-width: 1019px) {
+  .catalog-grid {
+    gap: 8px;
+  }
 }
 
 .catalog-subtitle {
@@ -278,20 +181,9 @@ const handleCardClick = async (id: string) => {
   }
 
   .catalog-grid {
-    flex-direction: column;
-  }
-
-  .catalog-card {
-    height: 200px;
-    font-size: 28px;
-    padding-bottom: 32px;
-  }
-
-  .catalog-card__fan-image {
-    width: 96px;
-  }
-  .catalog-card__fan-image + .catalog-card__fan-image {
-    margin-left: -36px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
   .catalog-subtitle {
