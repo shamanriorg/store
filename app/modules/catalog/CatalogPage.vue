@@ -163,9 +163,12 @@ const handleCardClick = async (id: string) => {
   transition: transform 0.3s ease;
 }
 
-.catalog-card:hover .catalog-card__label,
-.catalog-card.catalog-card--active .catalog-card__label {
+.catalog-card:hover .catalog-card__label {
   transform: translateY(-20px);
+}
+
+.catalog-card.catalog-card--active .catalog-card__label {
+  transform: translateY(-100px);
 }
 
 .catalog-card__fan {
@@ -186,13 +189,21 @@ const handleCardClick = async (id: string) => {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
+.catalog-card__fan-image:first-child,
+.catalog-card__fan-image:last-child {
+  width: 122px;
+}
+
 .catalog-card__fan-image + .catalog-card__fan-image {
   margin-left: -48px;
 }
 
-.catalog-card:hover .catalog-card__fan,
+.catalog-card:hover .catalog-card__fan {
+  transform: translate(-50%, 80%);
+}
+
 .catalog-card.catalog-card--active .catalog-card__fan {
-  transform: translate(-50%, 70%);
+  transform: translate(-50%, 0%);
 }
 
 .catalog-card--patterns:hover {
