@@ -17,6 +17,22 @@
         />
       </div>
 
+      <div class="catalog-filters">
+        <Filter
+          v-model="selectedCategories"
+          text="Категория"
+          type="checkbox"
+          :options="categoryFilterOptions"
+        />
+        <Filter
+          v-model="selectedSort"
+          text="Сортировка"
+          type="radio"
+          :options="sortOptions"
+          align="left"
+        />
+      </div>
+
       <div class="catalog-placeholder">
         <span>Раздел в разработке. Следите за обновлениями!</span>
       </div>
@@ -28,6 +44,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from '#imports'
 import CategoryButton from '~/modules/catalog/CategoryButton.vue'
+import Filter from '~/modules/shared/kit/Filter.vue'
 
 // Импортируем изображения для паттернов
 import pattern1 from '~/assets/images/button-pattern-1.png'
@@ -76,6 +93,24 @@ const categories = [
 ]
 
 const selectedCategory = ref<string>(categories[0].id)
+
+// Данные для фильтров
+const categoryFilterOptions = [
+  { id: 'patterns', text: 'Паттерны' },
+  { id: 'postcards', text: 'Открытки' },
+  { id: 'tiles', text: 'Плитка' },
+  { id: 'other', text: 'Разное' }
+]
+
+const sortOptions = [
+  { id: 'new-to-old', text: 'От нового к старому' },
+  { id: 'old-to-new', text: 'От старого к новому' },
+  { id: 'cheaper', text: 'Дешевле' },
+  { id: 'expensive', text: 'Дороже' }
+]
+
+const selectedCategories = ref<typeof categoryFilterOptions>([])
+const selectedSort = ref<typeof sortOptions[0] | null>(sortOptions[0])
 
 const applyCategoryFromQuery = (value?: string | string[]) => {
   const candidate = Array.isArray(value) ? value[0] : value
@@ -135,6 +170,14 @@ const handleCardClick = async (id: string) => {
 .catalog-grid {
   display: flex;
   gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.catalog-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 48px;
   width: 100%;
 }
@@ -184,6 +227,12 @@ const handleCardClick = async (id: string) => {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+  }
+
+  .catalog-filters {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
   }
 
   .catalog-subtitle {
