@@ -33,18 +33,48 @@
         />
       </div>
 
-      <div class="catalog-placeholder">
-        <span>Раздел в разработке. Следите за обновлениями!</span>
+      <div v-if="products.length > 0" class="catalog-grid-products">
+        <ProductCard
+          v-for="product in filteredAndSortedProducts"
+          :key="product.id"
+          :id="product.id"
+          :title="product.title"
+          :price="product.price"
+          :image="product.image"
+          :category="product.category"
+          :double="product.double"
+          :is-new="product.isNew"
+        />
+      </div>
+
+      <div v-else-if="!isLoading" class="catalog-placeholder">
+        <span>В этой категории пока нет товаров. Следите за обновлениями!</span>
+      </div>
+
+      <div v-else class="catalog-placeholder">
+        <span>Загрузка...</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from '#imports'
 import CategoryButton from '~/modules/catalog/CategoryButton.vue'
+import ProductCard from '~/modules/catalog/ProductCard.vue'
 import Filter from '~/modules/shared/kit/Filter.vue'
+
+interface Product {
+  id: string
+  title?: string
+  price?: number
+  image?: string
+  category?: string
+  date?: string
+  double?: boolean
+  [key: string]: any
+}
 
 // Импортируем изображения для паттернов
 import pattern1 from '~/assets/images/button-pattern-1.png'
@@ -112,6 +142,111 @@ const sortOptions = [
 const selectedCategories = ref<typeof categoryFilterOptions>([])
 const selectedSort = ref<typeof sortOptions[0] | null>(sortOptions[0])
 
+// Товары
+const products = ref<Product[]>([])
+const isLoading = ref(false)
+
+// Маппинг категорий на имена файлов
+const categoryToFileName: Record<string, string> = {
+  patterns: 'patterns',
+  postcards: 'cards',
+  tiles: 'tiles',
+  other: 'others'
+}
+
+// Загрузка списка товаров из JSON
+const loadProductsList = async (category: string): Promise<string[]> => {
+  try {
+    const fileName = categoryToFileName[category] || 'patterns'
+    const response = await fetch(`/catalog/${fileName}/${fileName}-list.json`)
+    if (!response.ok) return []
+    const data = await response.json()
+    return data[fileName] || []
+  } catch (error) {
+    console.error(`Ошибка загрузки списка товаров для категории ${category}:`, error)
+    return []
+  }
+}
+
+// Загрузка данных товара
+const loadProductData = async (category: string, productId: string): Promise<Product | null> => {
+  try {
+    const fileName = categoryToFileName[category] || 'patterns'
+    const response = await fetch(`/catalog/${fileName}/${productId}/product.json`)
+    if (!response.ok) return null
+    const data = await response.json()
+    
+    // Преобразуем previewImage в полный путь к изображению
+    const image = data.previewImage 
+      ? `/catalog/${fileName}/${productId}/${data.previewImage}`
+      : undefined
+    
+    return { 
+      ...data, 
+      id: productId, 
+      category,
+      image 
+    }
+  } catch (error) {
+    console.error(`Ошибка загрузки товара ${productId}:`, error)
+    return null
+  }
+}
+
+// Загрузка всех товаров категории
+const loadCategoryProducts = async (category: string) => {
+  isLoading.value = true
+  products.value = []
+
+  try {
+    const productIds = await loadProductsList(category)
+    const productsData = await Promise.all(
+      productIds.map(id => loadProductData(category, id))
+    )
+    products.value = productsData.filter((p): p is Product => p !== null)
+  } catch (error) {
+    console.error(`Ошибка загрузки товаров категории ${category}:`, error)
+    products.value = []
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Фильтрация и сортировка товаров
+const filteredAndSortedProducts = computed(() => {
+  let result = [...products.value]
+
+  // Фильтрация по выбранным категориям (если выбраны)
+  if (selectedCategories.value.length > 0) {
+    const selectedIds = selectedCategories.value.map(c => c.id)
+    result = result.filter(p => {
+      const productCategory = p.category || selectedCategory.value
+      return selectedIds.includes(productCategory)
+    })
+  }
+
+  // Сортировка
+  if (selectedSort.value) {
+    const sortId = selectedSort.value.id
+    result.sort((a, b) => {
+      switch (sortId) {
+        case 'new-to-old':
+          return (new Date(b.date || 0).getTime()) - (new Date(a.date || 0).getTime())
+        case 'old-to-new':
+          return (new Date(a.date || 0).getTime()) - (new Date(b.date || 0).getTime())
+        case 'cheaper':
+          return (a.price || 0) - (b.price || 0)
+        case 'expensive':
+          return (b.price || 0) - (a.price || 0)
+        default:
+          return 0
+      }
+    })
+  }
+
+  return result
+})
+
 const applyCategoryFromQuery = (value?: string | string[]) => {
   const candidate = Array.isArray(value) ? value[0] : value
   if (candidate && categories.some(category => category.id === candidate)) {
@@ -128,6 +263,15 @@ if (!hasValidInitialCategory) {
   router.replace({ query: { ...route.query, category: selectedCategory.value } })
 }
 
+// Загрузка товаров при изменении категории
+watch(
+  () => selectedCategory.value,
+  (newCategory) => {
+    loadCategoryProducts(newCategory)
+  },
+  { immediate: true }
+)
+
 watch(
   () => route.query.category,
   (value) => {
@@ -142,6 +286,8 @@ const handleCardClick = async (id: string) => {
   const newQuery = { ...route.query, category: id }
   await router.replace({ query: newQuery })
 }
+
+// Первоначальная загрузка уже происходит через watch с immediate: true
 </script>
 
 <style scoped lang="scss">
@@ -178,8 +324,23 @@ const handleCardClick = async (id: string) => {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   width: 100%;
+}
+
+.catalog-grid-products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  row-gap: 24px;
+  column-gap: 16px;
+  width: 100%;
+}
+
+/* На маленьких экранах переключаемся на адаптивный режим */
+@media (max-width: 1020px) {
+  .catalog-grid-products {
+    grid-template-columns: repeat(auto-fit, minmax(336px, 1fr));
+  }
 }
 
 @media (max-width: 1019px) {
