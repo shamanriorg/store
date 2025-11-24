@@ -20,7 +20,7 @@
           <NuxtLink to="/company">
             <Button variant="transparent" size="xs" no-padding :font-weight="400">О компании</Button>
           </NuxtLink>
-          <!--Button
+          <Button
             variant="transparent"
             size="xs"
             no-padding
@@ -29,7 +29,7 @@
             @click="openContactForm"
           >
             Заполнить форму
-          </Button-->
+          </Button>
         </nav>
         
         <!-- Мессенджеры -->

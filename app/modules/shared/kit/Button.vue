@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 interface Props {
-  variant?: 'default' | 'active' | 'transparent'
+  variant?: 'default' | 'active' | 'transparent' | 'inCart' | 'wb'
   size?: 'xs' | 'small' | 'medium'
   disabled?: boolean
   type?: 'button' | 'submit' | 'reset'
@@ -128,6 +128,26 @@ const buttonClasses = computed(() => {
     &:hover:not(:disabled) {
       background-color: var(--bg-transparent); /* Фон остается прозрачным */
       color: var(--text-secondary); /* Только цвет текста меняется */
+    }
+  }
+  
+  &--inCart {
+    background-color: #F8DFDA;
+    color: var(--bg-primary-default, #A54E3B);
+    
+    &:hover:not(:disabled) {
+      background-color: #F8DFDA;
+      color: var(--bg-primary-default, #A54E3B);
+    }
+  }
+  
+  &--wb {
+    background: linear-gradient(90deg, #EC3CCA 0%, #B31DE5 50.48%, #7D1AF8 100%);
+    color: var(--text-white);
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(90deg, #EC3CCA 0%, #B31DE5 50.48%, #7D1AF8 100%);
+      opacity: 0.9;
     }
   }
   

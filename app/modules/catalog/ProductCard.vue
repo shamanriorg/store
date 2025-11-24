@@ -30,12 +30,25 @@
     >
       {{ title }}
     </NuxtLink>
+    <NuxtLink
+      v-if="price && isInCart"
+      to="/cart"
+      class="product-card__price-button-link"
+    >
+      <Button
+        variant="inCart"
+        class="product-card__price-button"
+      >
+        В корзине
+      </Button>
+    </NuxtLink>
     <Button
-      v-if="price"
+      v-else-if="price"
       variant="default"
       left-icon="shopping_cart"
       right-icon="currency_ruble"
       class="product-card__price-button"
+      @click.stop="handleCartClick"
     >
       {{ formatPriceNumber(price) }}
     </Button>
@@ -43,8 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Button from '~/modules/shared/kit/Button.vue'
+import { useCartStore } from '~/stores/cart'
+import type { Product } from '~/types'
 
 interface Props {
   id: string
@@ -58,11 +73,32 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const cartStore = useCartStore()
 
 const imageError = ref(false)
 
 const handleImageError = () => {
   imageError.value = true
+}
+
+const isInCart = computed(() => {
+  return cartStore.items.some(item => item.product.id === props.id)
+})
+
+const handleCartClick = () => {
+  if (!isInCart.value && props.price) {
+    // Преобразуем данные продукта в формат Product для store
+    const product: Product = {
+      id: props.id,
+      name: props.title || props.id,
+      type: props.category || 'other',
+      price: props.price,
+      image: props.image || '',
+      category: props.category || 'other',
+      inStock: true
+    }
+    cartStore.addToCart(product, 1)
+  }
 }
 
 const formatPriceNumber = (price: number): string => {
@@ -169,6 +205,12 @@ const formatPriceNumber = (price: number): string => {
   :deep(.btn__icon--right) {
     font-weight: 700;
   }
+}
+
+.product-card__price-button-link {
+  align-self: flex-start;
+  text-decoration: none;
+  display: inline-block;
 }
 
 @media (max-width: 767px) {

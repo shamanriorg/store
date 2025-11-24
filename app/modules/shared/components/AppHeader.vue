@@ -23,13 +23,13 @@
         </NuxtLink>
         
         <!-- Разделитель и корзина показываются только если есть товары в корзине -->
-        <div class="nav-divider" v-if="cartCount > 0"></div>
+        <div class="nav-divider" v-if="cartTotal > 0"></div>
         
         <!-- Корзина -->
-        <NuxtLink to="/cart" v-if="cartCount > 0">
+        <NuxtLink to="/cart" v-if="cartTotal > 0">
           <Button variant="transparent" no-padding :font-weight="400" class="nav-btn cart-btn">
             <span class="material-icons cart-icon">shopping_cart</span>
-            <span class="cart-count">{{ cartCount }}</span>
+            <span class="cart-total">{{ formatPrice(cartTotal) }}</span>
             <span class="material-icons currency-icon">currency_ruble</span>
           </Button>
         </NuxtLink>
@@ -77,11 +77,18 @@
 <script setup lang="ts">
 // Импортируем кнопку из kit
 import Button from '~/modules/shared/kit/Button.vue'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useCartStore } from '~/stores/cart'
 
-// Временная заглушка для количества товаров в корзине.
-// Когда добавим механику корзины, заменим на реальный источник данных (store/api).
-const cartCount = 0
+const cartStore = useCartStore()
+const cartTotal = computed(() => cartStore.totalPrice)
+
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('ru-RU', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price)
+}
 
 const isMenuOpen = ref(false)
 
@@ -181,21 +188,32 @@ onBeforeUnmount(() => {
 }
 
 .cart-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  :deep(button) {
+    gap: 8px;
+  }
   
-  .cart-icon,
-  .currency-icon {
+  :deep(.btn__content) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .cart-icon {
     font-size: 20px;
     color: var(--text-primary);
   }
   
-  .cart-count {
-    font-weight: var(--font-primary-weight);
+  .cart-total {
+    font-weight: 500;
     color: var(--text-primary);
     min-width: 16px;
     text-align: center;
+  }
+  
+  .currency-icon {
+    font-size: 20px;
+    color: var(--text-primary);
+    font-weight: 700;
   }
 }
 

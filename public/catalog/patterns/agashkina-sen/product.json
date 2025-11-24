@@ -4,5 +4,13 @@
   "isNew": true,
   "previewImage": "2.jpg",
   "price": 2000,
-  "description": "Наши открытки и стикеры вышли на Wildberries"
+  "kind": "digital",
+  "description": "Наши открытки и стикеры вышли на Wildberries",
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg",
+    "5.jpg"
+  ]
 }
