@@ -15,6 +15,17 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/'],
       crawlLinks: true,
+    },
+    routeRules: {
+      // Редиректы со старых HTML страниц на новые
+      '/index.html': { redirect: '/' },
+      '/cards.html': { redirect: '/catalog' },
+      '/fabrics.html': { redirect: '/catalog' },
+      '/prints.html': { redirect: '/catalog' },
+      '/packs.html': { redirect: '/catalog' },
+      '/scarfs.html': { redirect: '/catalog' },
+      '/cart.html': { redirect: '/cart' },
+      '/info.html': { redirect: '/about' },
     }
   },
 
