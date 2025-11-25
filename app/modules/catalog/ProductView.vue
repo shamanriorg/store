@@ -1,5 +1,73 @@
 <template>
   <div class="product-view" v-if="product">
+    <!-- Модальное окно для просмотра изображений -->
+    <div v-if="isImageModalOpen" class="image-modal" @click.self="closeImageModal">
+      <div class="image-modal__content">
+        <!-- Левая часть с каруселью и большой картинкой -->
+        <div class="image-modal__left">
+          <!-- Вертикальная карусель маленьких картинок -->
+          <div class="product-images-carousel-wrapper">
+            <!-- Кнопка прокрутки вверх -->
+            <button
+              v-if="canScrollUp"
+              class="product-images-carousel__scroll-btn product-images-carousel__scroll-btn--up"
+              @click="scrollCarousel('up')"
+            >
+              <span class="material-icons">arrow_upward</span>
+            </button>
+            
+            <!-- Контейнер карусели с прокруткой -->
+            <div class="product-images-carousel" ref="carouselRef" @wheel.prevent="handleWheel">
+              <div
+                v-for="(imagePath, index) in productImages"
+                :key="index"
+                class="product-images-carousel__item"
+                :class="{ 'product-images-carousel__item--active': selectedImageIndex === index }"
+                @click="selectedImageIndex = index"
+              >
+                <img
+                  :src="imagePath"
+                  :alt="`${product?.title || 'Product'} - изображение ${index + 1}`"
+                />
+              </div>
+              <!-- Пустые контейнеры для отображения фона, если нет изображений -->
+              <template v-if="productImages.length === 0">
+                <div class="product-images-carousel__item product-images-carousel__item--empty"></div>
+                <div class="product-images-carousel__item product-images-carousel__item--empty"></div>
+                <div class="product-images-carousel__item product-images-carousel__item--empty"></div>
+              </template>
+            </div>
+            
+            <!-- Кнопка прокрутки вниз -->
+            <button
+              v-if="canScrollDown"
+              class="product-images-carousel__scroll-btn product-images-carousel__scroll-btn--down"
+              @click="scrollCarousel('down')"
+            >
+              <span class="material-icons">arrow_downward</span>
+            </button>
+          </div>
+          
+          <!-- Большая текущая картинка -->
+          <div class="product-main-image product-main-image--modal">
+            <img
+              v-if="currentMainImage"
+              :src="currentMainImage"
+              :alt="product?.title || 'Product'"
+            />
+          </div>
+        </div>
+        
+        <!-- Кнопка закрыть -->
+        <button
+          class="image-modal__close-btn"
+          @click="closeImageModal"
+        >
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    </div>
+
     <div class="container container-adaptive">
       <!-- Кнопка "В каталог" -->
       <div class="back-to-catalog">
@@ -57,12 +125,18 @@
           </div>
           
           <!-- Большая текущая картинка -->
-          <div class="product-main-image" @click="handleMainImageClick">
+          <div class="product-main-image" @click="openImageModal">
             <img
               v-if="currentMainImage"
               :src="currentMainImage"
               :alt="product?.title || 'Product'"
             />
+            <button
+              class="product-main-image__fullscreen-btn"
+              @click.stop="openImageModal"
+            >
+              <span class="material-icons">open_in_full</span>
+            </button>
           </div>
         </div>
         <div class="product-card-container__right">
@@ -266,10 +340,19 @@ const wbLink = computed(() => {
   return ''
 })
 
-// Обработчик клика на большую картинку (для развертывания)
-const handleMainImageClick = () => {
-  // Логика развертывания будет добавлена позже
-  console.log('Клик на большую картинку')
+// Состояние модального окна для просмотра изображений
+const isImageModalOpen = ref(false)
+
+// Открытие модального окна
+const openImageModal = () => {
+  isImageModalOpen.value = true
+  document.body.style.overflow = 'hidden' // Блокируем прокрутку фона
+}
+
+// Закрытие модального окна
+const closeImageModal = () => {
+  isImageModalOpen.value = false
+  document.body.style.overflow = '' // Восстанавливаем прокрутку
 }
 
 // Форматирование цены
@@ -457,6 +540,11 @@ onMounted(() => {
   scroll-behavior: smooth;
   flex-shrink: 0;
   
+  .image-modal & {
+    height: 100%;
+    gap: calc(8px * (100vh - 64px) / 684);
+  }
+  
   // Скрываем стандартный скроллбар
   scrollbar-width: none; // Firefox
   -ms-overflow-style: none; // IE и Edge
@@ -481,6 +569,7 @@ onMounted(() => {
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.2s ease;
+  
   
   &:hover {
     border-color: var(--bg-primary-active, #8B3E2F);
@@ -535,6 +624,7 @@ onMounted(() => {
     bottom: 4px;
   }
   
+  
   &:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.45);
   }
@@ -551,11 +641,127 @@ onMounted(() => {
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
   
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+  }
+  
+  .image-modal & {
+    width: 552px;
+    height: 684px;
+  }
+  
+  &--modal {
+    border: none;
+    background: transparent;
+    cursor: default;
+  }
+}
+
+.product-main-image__fullscreen-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: none;
+  border-radius: var(--8, 8px);
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  color: var(--bg-primary-default, #A54E3B);
+  
+  .image-modal & {
+    width: calc(40px * (100vh - 64px) / 684);
+    height: calc(40px * (100vh - 64px) / 684);
+    padding: calc(8px * (100vh - 64px) / 684);
+  }
+  
+  .material-icons {
+    font-size: 24px;
+  }
+  
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.45);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Модальное окно для просмотра изображений
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 0;
+  overflow-y: auto;
+}
+
+.image-modal__content {
+  position: relative;
+  width: 100%;
+  max-width: calc(552px + 128px + 8px + 24px + 40px); // ширина контента + отступы
+  max-height: calc(100vh - 64px); // высота экрана минус отступы сверху и снизу
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 32px 0; // Отступы сверху и снизу
+}
+
+.image-modal__left {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  background: transparent;
+}
+
+.image-modal__close-btn {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: none;
+  border-radius: var(--8, 8px);
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  color: var(--bg-primary-default, #A54E3B);
+  flex-shrink: 0;
+  
+  .material-icons {
+    font-size: 24px;
+  }
+  
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.45);
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 }
 
