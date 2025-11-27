@@ -1,7 +1,7 @@
 <template>
   <div :class="['product-card', { 'product-card--double': double }]">
     <NuxtLink 
-      :to="`/product/${id}`"
+      :to="`/product/${category || 'patterns'}/${id}`"
       class="product-card__image-container"
     >
       <div class="product-card__image">
@@ -25,7 +25,7 @@
     </NuxtLink>
     <NuxtLink 
       v-if="title" 
-      :to="`/product/${id}`"
+      :to="`/product/${category || 'patterns'}/${id}`"
       class="product-card__title"
     >
       {{ title }}
@@ -40,6 +40,18 @@
         class="product-card__price-button"
       >
         В корзине
+      </Button>
+    </NuxtLink>
+    <NuxtLink
+      v-else-if="category === 'patterns'"
+      :to="`/product/${category || 'patterns'}/${id}`"
+      class="product-card__price-button-link"
+    >
+      <Button
+        variant="default"
+        class="product-card__price-button"
+      >
+        Подробнее
       </Button>
     </NuxtLink>
     <Button

@@ -1,12 +1,16 @@
 <template>
-  <ProductView :product-id="productId" />
+  <div></div>
 </template>
 
 <script setup lang="ts">
-import ProductView from '~/modules/catalog/ProductView.vue'
-
-// Получаем ID продукта из параметров маршрута
+// Редирект на новую структуру с категорией (по умолчанию patterns)
 const route = useRoute()
 const productId = route.params.id as string
+const router = useRouter()
+
+// Редиректим на новую структуру
+onMounted(() => {
+  router.replace(`/product/patterns/${productId}`)
+})
 </script>
 
