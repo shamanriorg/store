@@ -296,7 +296,7 @@ const openContactForm = () => {
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  margin: 0;
+  margin: 8px 0 0 0;
   line-height: 1.5;
 }
 

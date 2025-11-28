@@ -93,9 +93,11 @@ const currentYear = new Date().getFullYear()
 <style lang="scss" scoped>
 .app-footer {
   width: 100%;
+  max-width: 100%;
   background-color: var(--bg-primary);
   padding: 80px 0 0 0;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .footer-container {

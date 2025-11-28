@@ -10,7 +10,7 @@
       @update:selected="selectedImageIndex = $event"
     />
 
-    <div class="container container-adaptive">
+    <div class="container container-adaptive product-view__container">
       <!-- Кнопка "В каталог" -->
       <div class="back-to-catalog">
         <NuxtLink to="/catalog">
@@ -156,6 +156,23 @@ onMounted(() => {
 .product-view {
   min-height: 60vh;
   padding: 32px 0 0 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.product-view__container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  
+  // Убеждаемся, что все дочерние элементы не выходят за границы
+  > * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .back-to-catalog {
@@ -163,23 +180,45 @@ onMounted(() => {
 }
 
 .product-card-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 16px;
   min-height: 684px;
   align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 // Адаптивность
+@media (max-width: 1220px) {
+  .product-card-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
 @media (max-width: 768px) {
   .product-view {
     padding: 16px 0 0 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .product-view__container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .product-card-container {
-    flex-direction: column;
-    min-height: auto;
-    height: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }
 </style>

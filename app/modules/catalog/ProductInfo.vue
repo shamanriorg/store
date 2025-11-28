@@ -90,7 +90,20 @@ const formatPriceNumber = (price: number): string => {
   flex-direction: column;
   justify-content: space-between;
   min-height: 684px;
-  flex: 1;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  // На адаптивных экранах убираем растягивание
+  @media (max-width: 1220px) {
+    min-height: auto;
+    height: auto;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .product-card-container__right-top {
@@ -102,6 +115,11 @@ const formatPriceNumber = (price: number): string => {
 
 .product-card-container__right-bottom {
   margin-top: auto;
+  
+  // На адаптивных экранах добавляем отступ сверху вместо margin-top: auto
+  @media (max-width: 1220px) {
+    margin-top: 8px;
+  }
 }
 
 .product-title {
@@ -112,6 +130,18 @@ const formatPriceNumber = (price: number): string => {
   font-weight: 700;
   line-height: 1.2;
   margin: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 44px;
+  }
+  
+  @media (max-width: 440px) {
+    font-size: 40px;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 36px;
+  }
 }
 
 .product-prices {
@@ -130,20 +160,68 @@ const formatPriceNumber = (price: number): string => {
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 440px) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 24px;
+  }
 }
 
 .product-price__label {
   color: var(--text-primary, #361406);
   font-weight: 400;
   font-size: 36px;
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 440px) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 24px;
+  }
 }
 
 .product-price__value {
   font-size: 36px;
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 440px) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 24px;
+  }
 }
 
 .product-price__icon {
   font-size: 36px;
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 440px) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 24px;
+  }
 }
 
 .product-description {

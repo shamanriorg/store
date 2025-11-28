@@ -18,16 +18,15 @@
             :src="currentImage"
             :alt="productTitle || 'Product'"
           />
+          <!-- Кнопка закрыть -->
+          <button
+            class="image-modal__close-btn"
+            @click="handleClose"
+          >
+            <span class="material-icons">close</span>
+          </button>
         </div>
       </div>
-      
-      <!-- Кнопка закрыть -->
-      <button
-        class="image-modal__close-btn"
-        @click="handleClose"
-      >
-        <span class="material-icons">close</span>
-      </button>
     </div>
   </div>
 </template>
@@ -112,6 +111,11 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   justify-content: center;
   
+  @media (max-width: 1024px) {
+    width: calc((100vh - 64px) * 552 / 684 / 1.5);
+    height: calc((100vh - 64px) / 1.5);
+  }
+  
   img {
     width: 100%;
     height: 100%;
@@ -122,8 +126,8 @@ watch(() => props.isOpen, (isOpen) => {
 
 .image-modal__close-btn {
   position: absolute;
-  left: calc(100% + 24px);
-  top: 0;
+  top: 24px;
+  right: 24px;
   width: 40px;
   height: 40px;
   display: flex;

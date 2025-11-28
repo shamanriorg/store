@@ -1,5 +1,11 @@
 <template>
-  <div class="product-images-carousel-wrapper" :class="{ 'product-images-carousel-wrapper--modal': modal }">
+  <div 
+    class="product-images-carousel-wrapper" 
+    :class="{ 
+      'product-images-carousel-wrapper--modal': modal,
+      'product-images-carousel-wrapper--no-scroll': !needsScrolling && !modal
+    }"
+  >
     <!-- Кнопка прокрутки вверх -->
     <button
       v-if="canScrollUp"
@@ -12,7 +18,10 @@
     <!-- Контейнер карусели с прокруткой -->
     <div 
       class="product-images-carousel" 
-      :class="{ 'product-images-carousel--modal': modal }"
+      :class="{ 
+        'product-images-carousel--modal': modal,
+        'product-images-carousel--no-scroll': !needsScrolling && !modal
+      }"
       ref="carouselRef" 
       @wheel.prevent="handleWheel"
     >
@@ -65,18 +74,36 @@ const emit = defineEmits<{
 const carouselRef = ref<HTMLDivElement | null>(null)
 const canScrollUp = ref(false)
 const canScrollDown = ref(false)
+const needsScrolling = ref(false)
 
 // Проверка возможности прокрутки
 const checkScrollability = () => {
   if (!carouselRef.value) {
     canScrollUp.value = false
     canScrollDown.value = false
+    needsScrolling.value = false
     return
   }
   
   const { scrollTop, scrollHeight, clientHeight } = carouselRef.value
   canScrollUp.value = scrollTop > 0
   canScrollDown.value = scrollTop < scrollHeight - clientHeight - 1
+  
+  // Для обычного режима проверяем, нужна ли прокрутка
+  // Вычисляем общую высоту контента и сравниваем с максимальной высотой 684px
+  if (!props.modal) {
+    const itemHeight = 135 // высота одного элемента
+    const gap = 8 // gap между элементами
+    const totalContentHeight = props.images.length * (itemHeight + gap) - gap + 8 // общая высота контента + padding-bottom
+    const maxCarouselHeight = 684 // максимальная высота карусели
+    
+    // Прокрутка нужна, если контент больше максимальной высоты карусели
+    // ИЛИ если реальная высота контента больше видимой области
+    needsScrolling.value = totalContentHeight > maxCarouselHeight || scrollHeight > clientHeight + 1
+  } else {
+    // В модальном режиме используем стандартную проверку
+    needsScrolling.value = scrollHeight > clientHeight + 1
+  }
 }
 
 // Прокрутка карусели
@@ -108,6 +135,9 @@ defineExpose({
   carouselRef
 })
 
+let resizeObserver: ResizeObserver | null = null
+let handleResize: (() => void) | null = null
+
 onMounted(() => {
   // Проверяем прокрутку после загрузки и при изменении изображений
   watch([() => props.images, carouselRef], () => {
@@ -118,11 +148,36 @@ onMounted(() => {
       }
     })
   }, { immediate: true })
+  
+  // Проверяем при изменении размера окна
+  resizeObserver = new ResizeObserver(() => {
+    nextTick(() => {
+      checkScrollability()
+    })
+  })
+  
+  if (carouselRef.value) {
+    resizeObserver.observe(carouselRef.value)
+  }
+  
+  // Также слушаем изменения размера окна
+  handleResize = () => {
+    nextTick(() => {
+      checkScrollability()
+    })
+  }
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   if (carouselRef.value) {
     carouselRef.value.removeEventListener('scroll', checkScrollability)
+  }
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+  if (handleResize) {
+    window.removeEventListener('resize', handleResize)
   }
 })
 </script>
@@ -133,12 +188,24 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 684px;
+  max-height: 684px;
   height: 684px;
   flex-shrink: 0;
   overflow: hidden;
+  align-self: stretch;
+  
+  @media (max-width: 1220px) {
+    // Без изменений - фиксированные размеры
+  }
+  
+  @media (max-width: 736px) {
+    display: none;
+  }
   
   &--modal {
     height: auto;
+    max-height: none;
     overflow: visible;
   }
 }
@@ -149,17 +216,29 @@ onUnmounted(() => {
   gap: 8px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 684px;
   height: 100%;
+  max-height: 100%;
   scroll-behavior: smooth;
   flex-shrink: 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
   box-sizing: border-box;
+  padding-bottom: 8px;
+  
+  @media (max-width: 1220px) {
+    height: 100%;
+    max-height: 100%;
+  }
   
   &--modal {
     max-height: calc(100vh - 64px);
     height: calc(100vh - 64px);
+  }
+  
+  &--no-scroll {
+    overflow-y: visible;
+    overflow-x: visible;
+    padding-bottom: 0;
   }
   
   // Скрываем стандартный скроллбар
@@ -183,6 +262,10 @@ onUnmounted(() => {
   cursor: pointer;
   box-sizing: border-box;
   transition: border-color 0.2s ease;
+  
+  @media (max-width: 1220px) {
+    // Без изменений - фиксированные размеры
+  }
   
   img {
     max-width: 100%;

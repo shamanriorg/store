@@ -89,11 +89,19 @@
 <style scoped lang="scss">
 .product-complex-details {
   margin-top: 32px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .product-complex-info {
-  padding-top: 32px;
-  border-top: 1px solid var(--border-rest, #DDD7CF);
+  padding-top: 24px;
 }
 
 .product-complex-info__text {

@@ -47,11 +47,17 @@ body {
 
 html, body {
   width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary);
   font-weight: var(--font-secondary-weight);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Адаптивный контейнер */
@@ -60,6 +66,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 24px;
   
   @media (max-width: 1024px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  @media (max-width: 375px) {
     padding-left: 16px;
     padding-right: 16px;
   }

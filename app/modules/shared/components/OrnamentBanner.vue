@@ -51,6 +51,12 @@ const containerStyle = computed(() => ({
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   background-color: var(--bg-color-ornament);
+  
+  @media (max-width: 375px) {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .ornament-top,

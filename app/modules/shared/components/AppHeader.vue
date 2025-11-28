@@ -331,6 +331,29 @@ onBeforeUnmount(() => {
   }
 }
 
+@media (max-width: 375px) {
+  .header-container {
+    gap: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .header-logo {
+    flex-shrink: 1;
+    min-width: 0;
+    
+    .logo-image {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
+  .burger-button {
+    flex-shrink: 0;
+    min-width: 40px;
+  }
+}
+
 @media (min-width: 768px) {
   .mobile-menu {
     display: none;
