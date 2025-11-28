@@ -124,6 +124,7 @@ const formatPriceNumber = (price: number): string => {
 <style scoped lang="scss">
 .product-card {
   width: 100%;
+  min-width: 0;
   height: 586px;
   background: transparent;
   border: none;
@@ -131,6 +132,7 @@ const formatPriceNumber = (price: number): string => {
   flex-direction: column;
   gap: 8px;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .product-card--double {
@@ -139,6 +141,7 @@ const formatPriceNumber = (price: number): string => {
 
 .product-card__image-container {
   width: 100%;
+  min-width: 0;
   height: 474px;
   padding: 12px;
   background: #FFF;
@@ -149,6 +152,7 @@ const formatPriceNumber = (price: number): string => {
   color: inherit;
   overflow: hidden;
   position: relative;
+  box-sizing: border-box;
 }
 
 .product-card__image {
@@ -225,21 +229,49 @@ const formatPriceNumber = (price: number): string => {
   display: inline-block;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 549px) {
   .product-card {
     width: 100%;
-    max-width: 336px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .product-card--double {
     width: 100%;
-    max-width: 336px;
+    min-width: 0;
+    max-width: 100%;
     grid-column: span 1;
   }
 
   .product-card__image-container {
     width: 100%;
-    max-width: 336px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .product-card__title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 600px) {
+  .product-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .product-card--double {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    grid-column: span 1;
+  }
+
+  .product-card__image-container {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .product-card__title {

@@ -24,9 +24,12 @@
         {{ selectedCount }}
       </span>
       
-      <span class="filter-button__icon">
+      <span 
+        v-if="type === 'checkbox' && hasSelection"
+        class="filter-button__icon"
+        @click.stop="handleBadgeClick"
+      >
         <svg
-          v-if="type === 'checkbox' && hasSelection"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -41,8 +44,12 @@
             stroke-linejoin="round"
           />
         </svg>
+      </span>
+      <span 
+        v-else
+        class="filter-button__icon"
+      >
         <svg
-          v-else
           :class="{ 'filter-button__icon--rotated': isOpen }"
           width="24"
           height="24"
@@ -142,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 interface FilterOption {
   id: string | number
@@ -167,6 +174,7 @@ const emit = defineEmits<{
 
 const isOpen = ref(false)
 const hoverTimeout = ref<NodeJS.Timeout | null>(null)
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
 
 const selectedOptions = computed(() => {
   if (props.type === 'radio') {
@@ -196,6 +204,15 @@ const isSelected = (option: FilterOption): boolean => {
 }
 
 const dropdownStyle = computed(() => {
+  // На маленьких экранах при align="left" открываем вправо
+  if (windowWidth.value <= 767 && props.align === 'left') {
+    return {
+      left: '0',
+      right: 'auto'
+    }
+  }
+  
+  // На больших экранах используем обычную логику
   if (props.align === 'left') {
     return {
       left: 'auto',
@@ -205,6 +222,23 @@ const dropdownStyle = computed(() => {
   return {
     left: '0',
     right: 'auto'
+  }
+})
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', handleResize)
+    windowWidth.value = window.innerWidth
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', handleResize)
   }
 })
 
@@ -230,8 +264,15 @@ const keepOpen = () => {
 }
 
 const handleButtonClick = () => {
+  // При клике на кнопку просто открываем/закрываем выпадающий список
+  // Сброс опций происходит только при клике на крестик (badge)
+}
+
+const handleBadgeClick = (event: MouseEvent) => {
+  // Сброс опций при клике на крестик (только если есть выбранные опции)
+  event.stopPropagation()
+  event.preventDefault()
   if (props.type === 'checkbox' && hasSelection.value) {
-    // Сброс при клике на крестик
     emit('update:modelValue', [])
     isOpen.value = false
   }
@@ -378,6 +419,12 @@ const handleOptionClick = (option: FilterOption) => {
 .filter-dropdown-bridge--align-left {
   left: auto;
   right: 0;
+  
+  /* На маленьких экранах открываем вправо */
+  @media (max-width: 767px) {
+    left: 0;
+    right: auto;
+  }
 }
 
 .filter-dropdown {
@@ -403,6 +450,12 @@ const handleOptionClick = (option: FilterOption) => {
 .filter-dropdown--align-left {
   left: auto;
   right: 0;
+  
+  /* На маленьких экранах открываем вправо */
+  @media (max-width: 767px) {
+    left: 0;
+    right: auto;
+  }
 }
 
 .filter-option {

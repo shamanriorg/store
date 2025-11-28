@@ -337,9 +337,25 @@ const handleCardClick = async (id: string) => {
 }
 
 /* На маленьких экранах переключаемся на адаптивный режим */
-@media (max-width: 1020px) {
+@media (max-width: 1020px) and (min-width: 769px) {
   .catalog-grid-products {
     grid-template-columns: repeat(auto-fit, minmax(336px, 1fr));
+  }
+}
+
+/* На экранах около 736px фиксируем 2 колонки с возможностью сжатия */
+@media (max-width: 768px) and (min-width: 550px) {
+  .catalog-grid-products {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 8px;
+  }
+}
+
+/* На экранах меньше 550px показываем по 1 карточке в ряд */
+@media (max-width: 549px) {
+  .catalog-grid-products {
+    grid-template-columns: 1fr;
+    column-gap: 16px;
   }
 }
 
