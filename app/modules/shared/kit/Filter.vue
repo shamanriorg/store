@@ -343,6 +343,10 @@ const handleOptionClick = (option: FilterOption) => {
   font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease;
+  
+  @media (max-width: 1020px) {
+    font-size: 20px;
+  }
 }
 
 .filter-button:hover {
@@ -375,6 +379,10 @@ const handleOptionClick = (option: FilterOption) => {
 
 .filter-button__text {
   white-space: nowrap;
+  
+  @media (max-width: 1020px) {
+    font-size: 20px;
+  }
 }
 
 .filter-button__badge {
@@ -525,6 +533,10 @@ const handleOptionClick = (option: FilterOption) => {
   line-height: 1.2;
   color: var(--text-primary, #361406);
   flex: 1;
+  
+  @media (max-width: 1020px) {
+    font-size: 20px;
+  }
 }
 
 .filter-option--radio .filter-option__text {
