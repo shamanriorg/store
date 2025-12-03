@@ -37,6 +37,7 @@ import ContactFormDrawer from '~/modules/shared/components/ContactFormDrawer.vue
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  padding-top: 64px; /* Отступ для фиксированного хедера */
 }
 
 </style>

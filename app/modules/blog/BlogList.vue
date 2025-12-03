@@ -340,15 +340,6 @@ onMounted(() => {
 
 // Адаптивность
 @media (max-width: 768px) {
-  .blog-page {
-    padding: 16px 0 0 0;
-  }
-  
-  .page-title {
-    font-size: 44px;
-    margin-bottom: 24px;
-  }
-  
   .article-item {
     min-height: auto;
     // border-bottom: none;

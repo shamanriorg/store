@@ -388,18 +388,6 @@ const handleCardClick = async (id: string) => {
 }
 
 @media (max-width: 767px) {
-  .catalog-page {
-    padding: 40px 0;
-  }
-
-  .catalog-title {
-    font-size: 36px;
-  }
-
-  .catalog-note {
-    font-size: 18px;
-  }
-
   .catalog-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

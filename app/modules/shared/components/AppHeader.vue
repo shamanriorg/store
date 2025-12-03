@@ -117,13 +117,14 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .app-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 64px;
   background-color: var(--bg-primary);
-  z-index: 100;
-  // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  z-index: 1000;
 }
 
 .header-container {

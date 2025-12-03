@@ -364,10 +364,6 @@ function truncateText(text: string, maxLength = 160) {
 
 // Адаптивность
 @media (max-width: 768px) {
-  .article-view {
-    padding: 16px 0 0 0;
-  }
-  
   .content-embed {
     height: 250px;
   }

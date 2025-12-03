@@ -235,9 +235,6 @@ useHead({
 }
 
 @media (max-width: 767px) {
-  .page-title {
-    font-size: 44px;
-  }
 
   .about-section {
     h2 {

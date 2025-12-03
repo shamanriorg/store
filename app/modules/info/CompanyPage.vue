@@ -286,10 +286,6 @@ const copyToClipboard = async (text: string) => {
 }
 
 @media (max-width: 767px) {
-  .page-title {
-    font-size: 44px;
-  }
-
   .info-section {
     .info-title {
       font-size: 36px;

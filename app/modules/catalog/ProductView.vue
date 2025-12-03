@@ -203,10 +203,7 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .product-view {
-    padding: 16px 0 0 0;
-    width: 100%;
     max-width: 100vw;
-    overflow-x: hidden;
   }
   
   .product-view__container {
