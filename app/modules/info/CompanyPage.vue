@@ -44,9 +44,9 @@
             <div class="contact-row">
               <img src="~/assets/images/star-point.svg" alt="" class="contact-icon" />
               <p class="contact-text">
-                Почта: <span class="text-medium">shamanri@ya.ru</span>
+                Почта: <span class="text-medium">shamanri.art@gmail.com</span>
               </p>
-              <button class="icon-button" @click="copyToClipboard('shamanri@ya.ru')" title="Скопировать">
+              <button class="icon-button" @click="copyToClipboard('shamanri.art@gmail.com')" title="Скопировать">
                 <span class="material-icons">content_copy</span>
               </button>
             </div>
