@@ -46,7 +46,6 @@ import LatestArticles from '~/modules/shared/components/LatestArticles.vue'
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
   box-sizing: border-box;
 }
 

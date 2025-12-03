@@ -80,8 +80,12 @@ import OrnamentBanner from '~/modules/shared/components/OrnamentBanner.vue'
 .about-hero-image {
   flex-shrink: 0;
   width: 100%;
-  max-width: 100%;
+  max-width: 688px;
   box-sizing: border-box;
+  
+  @media (max-width: 1190px) {
+    max-width: 100%;
+  }
   
   @media (max-width: 375px) {
     width: 100%;
@@ -89,7 +93,8 @@ import OrnamentBanner from '~/modules/shared/components/OrnamentBanner.vue'
   }
 
   .mary-image {
-    width: 688px;
+    width: 100%;
+    max-width: 688px;
     height: 688px;
     object-fit: cover;
     border-radius: 8px;
@@ -115,6 +120,8 @@ import OrnamentBanner from '~/modules/shared/components/OrnamentBanner.vue'
   flex: 1;
   display: flex;
   align-items: flex-start;
+  min-width: 0;
+  max-width: 100%;
 
   @media (max-width: 1190px) {
     align-items: stretch;

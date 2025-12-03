@@ -43,6 +43,7 @@ const containerStyle = computed(() => ({
 <style scoped lang="scss">
 .ornament-banner {
   width: 100%;
+  overflow: visible;
 }
 
 .ornament-background {
