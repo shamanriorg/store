@@ -1,15 +1,11 @@
 <template>
   <div class="category-buttons">
-    <!-- NOTE: <NuxtLink to="/patterns" class="category-button"> Temporarily replaced NuxtLink to "/patterns" with a non-clickable div. Restore NuxtLink when pages are ready. -->
-    <div class="category-button is-disabled" role="button" aria-disabled="true" tabindex="-1">
+    <NuxtLink to="/catalog?category=patterns" class="category-button">
       <img
         src="~/assets/images/pattern-btn.jpg"
         alt="Паттерны"
         class="category-image"
       />
-      <div class="disabled-overlay">
-        <span class="coming-soon">Скоро</span>
-      </div>
       <div class="category-overlay">
         <span class="category-title">Паттерны</span>
         <div class="arrow-icon">
@@ -18,7 +14,7 @@
           </svg>
         </div>
       </div>
-    </div>
+    </NuxtLink>
 
     <!-- <NuxtLink to="/cards" class="category-button"> NOTE: Temporarily replaced NuxtLink to "/cards" with a non-clickable div. Restore NuxtLink when pages are ready. -->
     <div class="category-button is-disabled" role="button" aria-disabled="true" tabindex="-1">
