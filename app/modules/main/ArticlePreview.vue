@@ -107,6 +107,9 @@ const getArticleFolders = async (): Promise<string[]> => {
 
 // Загружаем закрепленную статью
 onMounted(async () => {
+  // Загружаем только на клиенте, чтобы избежать проблем с SSR
+  if (!import.meta.client) return
+  
   try {
     const folders = await getArticleFolders()
     
@@ -117,6 +120,11 @@ onMounted(async () => {
         if (!response.ok) continue
         
         const data = await response.json()
+        
+        // Проверяем, что данные валидны
+        if (!data || typeof data !== 'object') {
+          continue
+        }
         
         if (data.isPinned) {
           article.value = data

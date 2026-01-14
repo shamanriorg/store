@@ -86,7 +86,6 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const product = ref<Product | null>(null)
 const selectedImageIndex = ref(0)
 const cartStore = useCartStore()
 
@@ -98,17 +97,51 @@ const categoryToFileName: Record<string, string> = {
   other: 'others'
 }
 
-// Загрузка продукта
-const loadProduct = async () => {
-  try {
-    // Используем переданную категорию или дефолтную
-    const categoryName = props.category || 'patterns'
-    const fileName = categoryToFileName[categoryName] || 'patterns'
-    
-    const response = await fetch(`/catalog/${fileName}/${props.productId}/product.json`)
-    
-    if (response.ok) {
-      const data = await response.json()
+// Используем переданную категорию или дефолтную
+const categoryName = props.category || 'patterns'
+const fileName = categoryToFileName[categoryName] || 'patterns'
+
+// Загрузка продукта с использованием useAsyncData для SSR
+const { data: productData, error: productError } = await useAsyncData(
+  `product-${props.productId}-${categoryName}`,
+  async () => {
+    try {
+      let data: any
+      
+      // На сервере читаем файл напрямую, на клиенте используем fetch
+      if (import.meta.server) {
+        const { readFileSync } = await import('fs')
+        const { join } = await import('path')
+        const publicPath = join(process.cwd(), 'public')
+        const filePath = join(publicPath, 'catalog', fileName, props.productId, 'product.json')
+        try {
+          data = JSON.parse(readFileSync(filePath, 'utf-8'))
+        } catch (fileError) {
+          // Если файл не найден, выбрасываем 404
+          throw createError({
+            statusCode: 404,
+            statusMessage: 'Товар не найден'
+          })
+        }
+      } else {
+        const response = await fetch(`/catalog/${fileName}/${props.productId}/product.json`)
+        if (!response.ok) {
+          // Если товар не найден, выбрасываем 404
+          throw createError({
+            statusCode: 404,
+            statusMessage: 'Товар не найден'
+          })
+        }
+        data = await response.json()
+      }
+      
+      // Проверяем, что данные валидны
+      if (!data || typeof data !== 'object') {
+        throw createError({
+          statusCode: 404,
+          statusMessage: 'Товар не найден'
+        })
+      }
       
       // Преобразуем previewImage в полный путь к изображению
       const image = data.previewImage 
@@ -116,7 +149,7 @@ const loadProduct = async () => {
         : undefined
       
       // Преобразуем массив images в полные пути
-      const images = data.images 
+      const images = Array.isArray(data.images)
         ? data.images.map((img: string) => `/catalog/${fileName}/${props.productId}/${img}`)
         : []
       
@@ -125,22 +158,38 @@ const loadProduct = async () => {
         images.push(image)
       }
       
-      product.value = { 
-        ...data, 
+      // Используем Object.assign для безопасности на SSR
+      return Object.assign({}, data, {
         id: props.productId, 
         category: categoryName,
         image,
         images
+      })
+    } catch (error: any) {
+      // Если это уже созданная ошибка, пробрасываем её дальше
+      if (error?.statusCode) {
+        throw error
       }
-      
-      // Устанавливаем первое изображение из массива
-      selectedImageIndex.value = 0
-    } else {
-      console.error('Продукт не найден')
+      console.error('Ошибка загрузки продукта:', error)
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Товар не найден'
+      })
     }
-  } catch (error) {
-    console.error('Ошибка загрузки продукта:', error)
   }
+)
+
+const product = computed(() => productData.value as Product | null)
+
+// Обработка ошибок загрузки
+if (productError.value) {
+  // Если произошла ошибка, выбрасываем её для показа страницы 404
+  throw productError.value
+}
+
+// Устанавливаем первое изображение из массива после загрузки
+if (product.value) {
+  selectedImageIndex.value = 0
 }
 
 // Вычисляемые свойства для изображений
@@ -199,7 +248,10 @@ const seoImage = computed(() => {
 })
 
 const productUrl = computed(() => {
-  return `https://shamanri.ru${route.path}`
+  if (import.meta.server && !route.path) {
+    return 'https://shamanri.ru'
+  }
+  return `https://shamanri.ru${route.path || ''}`
 })
 
 // JSON-LD структурированные данные для товара
@@ -241,41 +293,80 @@ const openImageModal = () => {
   isImageModalOpen.value = true
 }
 
-// SEO мета-теги и структурированные данные
-watch([product, jsonLd], ([newProduct, newJsonLd]) => {
-  if (newProduct) {
-    useSeoMeta({
+// Функция для установки SEO тегов
+const updateSeoMeta = () => {
+  if (product.value) {
+    useHead({
       title: seoTitle.value,
-      description: seoDescription.value,
-      keywords: seoKeywords.value,
-      ogTitle: seoTitle.value,
-      ogDescription: seoDescription.value,
-      ogImage: seoImage.value,
-      ogUrl: productUrl.value,
-      ogType: 'product',
-      twitterCard: 'summary_large_image',
-      twitterTitle: seoTitle.value,
-      twitterDescription: seoDescription.value,
-      twitterImage: seoImage.value
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: seoDescription.value
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: seoKeywords.value
+        },
+        {
+          property: 'og:title',
+          content: seoTitle.value
+        },
+        {
+          property: 'og:description',
+          content: seoDescription.value
+        },
+        {
+          property: 'og:image',
+          content: seoImage.value
+        },
+        {
+          property: 'og:url',
+          content: productUrl.value
+        },
+        {
+          property: 'og:type',
+          content: 'product'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:title',
+          content: seoTitle.value
+        },
+        {
+          name: 'twitter:description',
+          content: seoDescription.value
+        },
+        {
+          name: 'twitter:image',
+          content: seoImage.value
+        }
+      ],
+      script: jsonLd.value ? [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(jsonLd.value)
+        }
+      ] : []
     })
-    
-    // JSON-LD структурированные данные
-    if (newJsonLd) {
-      useHead({
-        script: [
-          {
-            type: 'application/ld+json',
-            innerHTML: JSON.stringify(newJsonLd)
-          }
-        ]
-      })
-    }
   }
+}
+
+// SEO мета-теги и структурированные данные
+watch([product, jsonLd], () => {
+  updateSeoMeta()
 }, { immediate: true })
 
-onMounted(() => {
-  loadProduct()
-})
+// Обновляем SEO теги сразу после загрузки данных
+if (product.value) {
+  updateSeoMeta()
+}
+
+// Данные загружаются через useAsyncData выше
 </script>
 
 <style lang="scss" scoped>

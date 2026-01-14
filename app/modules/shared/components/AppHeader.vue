@@ -81,7 +81,11 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useCartStore } from '~/stores/cart'
 
 const cartStore = useCartStore()
-const cartTotal = computed(() => cartStore.totalPrice)
+const cartTotal = computed(() => {
+  // Безопасный доступ к store на сервере
+  if (import.meta.server) return 0
+  return cartStore.totalPrice
+})
 
 const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('ru-RU', {
@@ -93,7 +97,7 @@ const formatPrice = (price: number): string => {
 const isMenuOpen = ref(false)
 
 const handleResize = () => {
-  if (window.innerWidth >= 768 && isMenuOpen.value) {
+  if (import.meta.client && window.innerWidth >= 768 && isMenuOpen.value) {
     isMenuOpen.value = false
   }
 }
@@ -107,11 +111,15 @@ const closeMenu = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize)
+  if (import.meta.client) {
+    window.addEventListener('resize', handleResize)
+  }
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
+  if (import.meta.client) {
+    window.removeEventListener('resize', handleResize)
+  }
 })
 </script>
 

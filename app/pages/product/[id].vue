@@ -6,11 +6,11 @@
 // Редирект на новую структуру с категорией (по умолчанию patterns)
 const route = useRoute()
 const productId = route.params.id as string
-const router = useRouter()
 
-// Редиректим на новую структуру
-onMounted(() => {
-  router.replace(`/product/patterns/${productId}`)
+// Редиректим на новую структуру (работает и на сервере, и на клиенте)
+await navigateTo(`/product/patterns/${productId}`, { 
+  redirectCode: 301,
+  replace: true 
 })
 </script>
 

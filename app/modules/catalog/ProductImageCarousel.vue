@@ -166,7 +166,9 @@ onMounted(() => {
       checkScrollability()
     })
   }
-  window.addEventListener('resize', handleResize)
+  if (import.meta.client) {
+    window.addEventListener('resize', handleResize)
+  }
 })
 
 onUnmounted(() => {
@@ -176,7 +178,7 @@ onUnmounted(() => {
   if (resizeObserver) {
     resizeObserver.disconnect()
   }
-  if (handleResize) {
+  if (handleResize && import.meta.client) {
     window.removeEventListener('resize', handleResize)
   }
 })

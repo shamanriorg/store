@@ -9,16 +9,35 @@ export default defineNuxtConfig({
   },
   
   // SSG настройки
-  ssr: false,
+  // Используем гибридный режим: SSR для пререндеринга, но с безопасной обработкой
+  ssr: true,
   nitro: {
     compatibilityDate: '2025-10-23',
     prerender: {
-      routes: ['/'],
+      routes: (() => {
+        // Импортируем функцию для генерации маршрутов синхронно
+        const { getPrerenderRoutes } = require('./app/server/routes/prerender')
+        const dynamicRoutes = getPrerenderRoutes()
+        
+        // Базовые маршруты + динамические + sitemap
+        return [
+          '/',
+          '/about',
+          '/company',
+          '/catalog',
+          '/blog',
+          '/sitemap.xml',
+          ...dynamicRoutes
+        ]
+      })(),
       crawlLinks: true,
+      // Дополнительные настройки для лучшего пререндеринга
+      failOnError: false,
+      // Автоматически найдет все ссылки через crawlLinks
     },
     routeRules: {
-      // Редиректы со старых HTML страниц на новые
-      '/index.html': { redirect: '/' },
+      // Редиректы со старых HTML страниц на новые (обрабатываются через middleware)
+      // Убрали '/index.html': { redirect: '/' } чтобы избежать циклического редиректа
       '/cards.html': { redirect: '/catalog' },
       '/fabrics.html': { redirect: '/catalog' },
       '/prints.html': { redirect: '/catalog' },
@@ -26,6 +45,15 @@ export default defineNuxtConfig({
       '/scarfs.html': { redirect: '/catalog' },
       '/cart.html': { redirect: '/cart' },
       '/info.html': { redirect: '/about' },
+      // Статические страницы с SSR
+      '/': { prerender: true, index: true },
+      '/about': { prerender: true },
+      '/company': { prerender: true },
+      '/catalog': { prerender: true },
+      '/blog': { prerender: true },
+      // Динамические маршруты тоже пререндерим
+      '/product/**': { prerender: true },
+      '/blog/**': { prerender: true },
     }
   },
 
@@ -68,6 +96,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'canonical', href: 'https://shamanri.art' },
+        { rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },

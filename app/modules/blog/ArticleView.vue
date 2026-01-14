@@ -137,9 +137,73 @@ const props = defineProps<{
   articleId: string
 }>()
 
-const article = ref<Article | null>(null)
 const DEFAULT_DESCRIPTION =
   'Статья Shamanri о творчестве, природе, паттернах и вдохновении.'
+
+// Загрузка статьи с использованием useAsyncData для SSR
+const { data: articleData, error: articleError } = await useAsyncData(
+  `article-${props.articleId}`,
+  async () => {
+    try {
+      let data: any
+      
+      // На сервере читаем файл напрямую, на клиенте используем fetch
+      if (import.meta.server) {
+        const { readFileSync } = await import('fs')
+        const { join } = await import('path')
+        const publicPath = join(process.cwd(), 'public')
+        const filePath = join(publicPath, 'articles', props.articleId, 'article.json')
+        try {
+          data = JSON.parse(readFileSync(filePath, 'utf-8'))
+        } catch (fileError) {
+          // Если файл не найден, выбрасываем 404
+          throw createError({
+            statusCode: 404,
+            statusMessage: 'Статья не найдена'
+          })
+        }
+      } else {
+        const response = await fetch(`/articles/${props.articleId}/article.json`)
+        if (!response.ok) {
+          // Если статья не найдена, выбрасываем 404
+          throw createError({
+            statusCode: 404,
+            statusMessage: 'Статья не найдена'
+          })
+        }
+        data = await response.json()
+      }
+      
+      // Проверяем, что данные валидны
+      if (!data || typeof data !== 'object') {
+        throw createError({
+          statusCode: 404,
+          statusMessage: 'Статья не найдена'
+        })
+      }
+      
+      return data
+    } catch (error: any) {
+      // Если это уже созданная ошибка, пробрасываем её дальше
+      if (error?.statusCode) {
+        throw error
+      }
+      console.error('Ошибка загрузки статьи:', error)
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Статья не найдена'
+      })
+    }
+  }
+)
+
+const article = computed(() => articleData.value as Article | null)
+
+// Обработка ошибок загрузки
+if (articleError.value) {
+  // Если произошла ошибка, выбрасываем её для показа страницы 404
+  throw articleError.value
+}
 
 function truncateText(text: string, maxLength = 160) {
   if (text.length <= maxLength) return text
@@ -191,58 +255,78 @@ const articleKeywords = computed(() => {
   return baseKeywords.join(', ')
 })
 
-// SEO мета-теги
-watch([article, articleTitle, articleDescription, articleImage, articleKeywords], () => {
+// Функция для установки SEO тегов
+const updateSeoMeta = () => {
   if (article.value) {
-    useSeoMeta({
-      title: articleTitle.value,
-      description: articleDescription.value,
-      ogTitle: articleTitle.value,
-      ogDescription: articleDescription.value,
-      ogImage: articleImage.value || undefined,
-      ogType: 'article',
-      twitterCard: 'summary_large_image',
-      twitterTitle: articleTitle.value,
-      twitterDescription: articleDescription.value,
-      twitterImage: articleImage.value || undefined
-    })
-    
     useHead({
+      title: articleTitle.value,
       meta: [
         {
-          key: 'article-keywords',
+          hid: 'description',
+          name: 'description',
+          content: articleDescription.value
+        },
+        {
+          hid: 'keywords',
           name: 'keywords',
           content: articleKeywords.value
-        }
+        },
+        {
+          property: 'og:title',
+          content: articleTitle.value
+        },
+        {
+          property: 'og:description',
+          content: articleDescription.value
+        },
+        ...(articleImage.value ? [{
+          property: 'og:image',
+          content: articleImage.value
+        }] : []),
+        {
+          property: 'og:type',
+          content: 'article'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:title',
+          content: articleTitle.value
+        },
+        {
+          name: 'twitter:description',
+          content: articleDescription.value
+        },
+        ...(articleImage.value ? [{
+          name: 'twitter:image',
+          content: articleImage.value
+        }] : [])
       ]
     })
   }
+}
+
+// SEO мета-теги
+watch([article, articleTitle, articleDescription, articleImage, articleKeywords], () => {
+  updateSeoMeta()
 }, { immediate: true })
 
-// Загрузка статьи
-const loadArticle = async () => {
-  try {
-    const response = await fetch(`/articles/${props.articleId}/article.json`)
-    if (!response.ok) {
-      console.error('Статья не найдена')
-      return
-    }
-    
-    const data = await response.json()
-    article.value = data
-  } catch (error) {
-    console.error('Ошибка загрузки статьи:', error)
-  }
+// Обновляем SEO теги сразу после загрузки данных
+if (article.value) {
+  updateSeoMeta()
 }
+
+// Данные загружаются через useAsyncData выше
 
 // Обработка ошибок загрузки изображений
 
 // Используем полную дату для статьи
 const formatDate = formatRelativeDate
 
-onMounted(() => {
-  loadArticle()
-})
+// Загружаем данные сразу для SSR (top-level await)
+// Данные загружаются через useAsyncData выше
 </script>
 
 <style lang="scss" scoped>

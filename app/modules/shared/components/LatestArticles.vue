@@ -68,12 +68,17 @@ const articles = ref<Article[]>([])
 
 // Загрузка последних 4 статей (исключая закрепленную)
 const loadLatestArticles = async () => {
+  // Загружаем только на клиенте, чтобы избежать проблем с SSR
+  if (!import.meta.client) return
+  
   try {
     const response = await fetch('/articles/articles-list.json')
     if (!response.ok) return
     
     const data = await response.json()
-    const articleFolders = data.articles || []
+    if (!data || typeof data !== 'object') return
+    
+    const articleFolders = Array.isArray(data.articles) ? data.articles : []
     
     const loadedArticles: Article[] = []
     
@@ -83,6 +88,11 @@ const loadLatestArticles = async () => {
         if (!articleResponse.ok) continue
         
         const articleData = await articleResponse.json()
+        
+        // Проверяем, что данные валидны
+        if (!articleData || typeof articleData !== 'object') {
+          continue
+        }
         
         // Исключаем закрепленные статьи
         if (articleData.isPinned) {
@@ -95,24 +105,25 @@ const loadLatestArticles = async () => {
           coverImage = {
             type: 'image',
             src: articleData.previewImage,
-            alt: articleData.title
+            alt: articleData.title || ''
           }
-        } else {
+        } else if (Array.isArray(articleData.content)) {
           coverImage = articleData.content.find((item: ContentItem) => item.type === 'image')
         }
         
         // Формируем полный путь для изображения
         if (coverImage && coverImage.src) {
-          coverImage = {
-            ...coverImage,
+          coverImage = Object.assign({}, coverImage, {
             src: `/articles/${articleData.id}/${coverImage.src}`
-          }
+          })
         }
         
         // Получаем превью текст
-        const previewText = articleData.content.filter((item: ContentItem) => 
-          item.type === 'text' && item.isPreview
-        )
+        const previewText = Array.isArray(articleData.content)
+          ? articleData.content.filter((item: ContentItem) => 
+              item.type === 'text' && item.isPreview
+            )
+          : []
         
         const homeOrderValue = typeof articleData.homeOrder === 'number'
           ? articleData.homeOrder
@@ -120,13 +131,25 @@ const loadLatestArticles = async () => {
             ? Number(articleData.homeOrder)
             : undefined
 
-        loadedArticles.push({
-          ...articleData,
+        // Используем Object.assign вместо spread для безопасности на SSR
+        // Создаем новый объект с нормальным прототипом
+        const safeArticleData = Object.assign({}, {
+          id: articleData.id || folder,
+          title: articleData.title || '',
+          date: articleData.date || '',
+          isPinned: articleData.isPinned || false,
+          isNew: articleData.isNew || false,
+          annotation: articleData.annotation || '',
+          previewVideo: articleData.previewVideo,
+          previewImage: articleData.previewImage,
+          content: Array.isArray(articleData.content) ? articleData.content : [],
           homeOrder: Number.isFinite(homeOrderValue) ? homeOrderValue : undefined,
           coverImage,
           previewText,
           imageError: false
         })
+        
+        loadedArticles.push(safeArticleData)
       } catch (err) {
         console.warn(`Не удалось загрузить статью из ${folder}:`, err)
         continue

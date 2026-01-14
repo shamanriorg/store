@@ -78,8 +78,8 @@ const goToNext = () => {
 
 // Обработка клика по изображению - открываем модалку только на больших экранах
 const handleImageClick = () => {
-  // Проверяем ширину экрана
-  if (window.innerWidth >= 736) {
+  // Проверяем ширину экрана (только на клиенте)
+  if (import.meta.client && window.innerWidth >= 736) {
     emit('open-modal')
   }
 }

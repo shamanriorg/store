@@ -58,10 +58,12 @@ const handleClose = () => {
 
 // Блокируем прокрутку body при открытии модалки
 watch(() => props.isOpen, (isOpen) => {
-  if (isOpen) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
+  if (import.meta.client) {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
   }
 })
 </script>

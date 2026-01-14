@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from '#imports'
 import CategoryButton from '~/modules/catalog/CategoryButton.vue'
 import ProductCard from '~/modules/catalog/ProductCard.vue'
@@ -216,6 +216,13 @@ const loadProductData = async (category: string, productId: string): Promise<Pro
 
 // Загрузка всех товаров категории
 const loadCategoryProducts = async (category: string) => {
+  // На сервере не загружаем данные, чтобы избежать проблем с fetch
+  if (import.meta.server) {
+    products.value = []
+    isLoading.value = false
+    return
+  }
+  
   isLoading.value = true
   products.value = []
 
@@ -278,11 +285,35 @@ const applyCategoryFromQuery = (value?: string | string[]) => {
   return false
 }
 
-const hasValidInitialCategory = applyCategoryFromQuery(route.query.category)
-
-if (!hasValidInitialCategory) {
-  router.replace({ query: { ...route.query, category: selectedCategory.value } })
-}
+// Проверяем категорию из query только на клиенте
+// Используем onMounted для безопасности при SSR
+onMounted(() => {
+  if (!route.query) return
+  
+  try {
+    const hasValidInitialCategory = applyCategoryFromQuery(route.query.category)
+    
+    if (!hasValidInitialCategory) {
+      // Безопасное копирование query объекта
+      let currentQuery: Record<string, any> = {}
+      if (route.query && typeof route.query === 'object') {
+        try {
+          // Проверяем, что это обычный объект, а не null prototype
+          if (route.query.constructor === Object || Object.getPrototypeOf(route.query) === Object.prototype) {
+            currentQuery = Object.assign({}, route.query)
+          }
+        } catch (e) {
+          // Если не удалось скопировать, используем пустой объект
+          currentQuery = {}
+        }
+      }
+      router.replace({ query: { ...currentQuery, category: selectedCategory.value } })
+    }
+  } catch (error) {
+    // Игнорируем ошибки при инициализации
+    console.warn('Error applying category from query:', error)
+  }
+})
 
 // Загрузка товаров при изменении категории
 watch(
@@ -294,9 +325,11 @@ watch(
 )
 
 watch(
-  () => route.query.category,
+  () => route.query?.category,
   (value) => {
-    applyCategoryFromQuery(value)
+    if (import.meta.client) {
+      applyCategoryFromQuery(value)
+    }
   }
 )
 
@@ -304,7 +337,19 @@ const handleCardClick = async (id: string) => {
   if (selectedCategory.value === id) return
   selectedCategory.value = id
 
-  const newQuery = { ...route.query, category: id }
+  // Безопасное копирование query объекта
+  let currentQuery: Record<string, any> = {}
+  if (route.query && typeof route.query === 'object') {
+    try {
+      // Проверяем, что это обычный объект, а не null prototype
+      if (route.query.constructor === Object || Object.getPrototypeOf(route.query) === Object.prototype) {
+        currentQuery = Object.assign({}, route.query)
+      }
+    } catch (e) {
+      currentQuery = {}
+    }
+  }
+  const newQuery = { ...currentQuery, category: id }
   await router.replace({ query: newQuery })
 }
 

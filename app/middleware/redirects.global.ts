@@ -12,8 +12,8 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   const redirectPath = redirects[to.path]
-  if (redirectPath) {
-    return navigateTo(redirectPath, { redirectCode: 301, external: false })
+  if (redirectPath && redirectPath !== to.path) {
+    return navigateTo(redirectPath, { redirectCode: 301, replace: true })
   }
 })
 

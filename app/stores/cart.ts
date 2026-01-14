@@ -5,11 +5,16 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
   
   const totalItems = computed(() => {
-    return items.value.reduce((sum, item) => sum + item.quantity, 0)
+    if (!items.value || !Array.isArray(items.value)) return 0
+    return items.value.reduce((sum, item) => sum + (item?.quantity || 0), 0)
   })
   
   const totalPrice = computed(() => {
-    return items.value.reduce((sum, item) => sum + (item.product.price * item.quantity), 0)
+    if (!items.value || !Array.isArray(items.value)) return 0
+    return items.value.reduce((sum, item) => {
+      if (!item?.product?.price) return sum
+      return sum + (item.product.price * (item.quantity || 0))
+    }, 0)
   })
   
   const addToCart = (product: Product, quantity: number = 1) => {
