@@ -47,7 +47,7 @@
         <p class="product-licenses__item-note">
           <strong>Индивидуальная адаптация:</strong> За дополнительную плату мы можем изменить цветовую гамму или масштаб паттерна под ваши задачи.
         </p>
-        <p class="product-licenses__item-price">
+        <p v-if="false" class="product-licenses__item-price">
           <strong>Стоимость:</strong> 20 000 руб.
         </p>
       </div>
@@ -74,7 +74,7 @@
         <p class="product-licenses__item-note">
           <strong>Итог:</strong> Вы становитесь единственным владельцем прав на использование этого дизайна.
         </p>
-        <p class="product-licenses__item-price">
+        <p v-if="false" class="product-licenses__item-price">
           <strong>Стоимость:</strong> 50 000 руб.
         </p>
       </div>

@@ -17,7 +17,7 @@
         />
       </div>
 
-      <div class="catalog-filters">
+      <div v-if="false" class="catalog-filters">
         <Filter
           v-model="selectedCategories"
           text="Категория"

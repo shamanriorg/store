@@ -20,6 +20,8 @@
         </NuxtLink>
       </div>
 
+      <p class="product-notice">Напоминаем, все материалы защищены</p>
+
       <!-- Контейнер карточки продукта -->
       <div class="product-card-container">
         <ProductImageGallery
@@ -177,6 +179,16 @@ onMounted(() => {
 
 .back-to-catalog {
   margin-bottom: 24px;
+}
+
+.product-notice {
+  margin-bottom: 24px;
+  color: var(--text-tertiary, #6F615B);
+  font-family: Rubik;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .product-card-container {

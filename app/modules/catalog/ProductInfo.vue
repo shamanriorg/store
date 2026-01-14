@@ -3,7 +3,8 @@
     <div class="product-card-container__right-top">
       <h1 class="product-title">{{ product.title }}</h1>
       <!-- Для complex товаров показываем две цены -->
-      <div v-if="product.kind === 'complex' && (product.comPrice || product.exPrice)" class="product-prices">
+      <!-- <div v-if="product.kind === 'complex' && (product.comPrice || product.exPrice)" class="product-prices"> -->
+      <div v-if="false" class="product-prices">
         <div v-if="product.comPrice" class="product-price">
           <span class="product-price__label">Коммерческая:</span>
           <span class="product-price__value">{{ formatPriceNumber(product.comPrice) }}</span>
@@ -16,7 +17,8 @@
         </div>
       </div>
       <!-- Для остальных товаров показываем обычную цену -->
-      <div v-else-if="product.price" class="product-price">
+      <!-- <div v-else-if="product.price" class="product-price"> -->
+      <div v-if="false" class="product-price">
         <span class="product-price__value">{{ formatPriceNumber(product.price) }}</span>
         <span class="material-icons product-price__icon">currency_ruble</span>
       </div>
