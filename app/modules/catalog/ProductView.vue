@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import Button from '~/modules/shared/kit/Button.vue'
 import NotFoundPlaceholder from '~/modules/shared/components/NotFoundPlaceholder.vue'
 import ProductComplexDetails from '~/modules/catalog/ProductComplexDetails.vue'
@@ -71,6 +71,12 @@ interface Product {
   images?: string[]
   kind?: 'digital' | 'wb' | 'complex'
   link?: string
+  // SEO поля
+  metaDescription?: string
+  keywords?: string | string[]
+  ogImage?: string
+  ogTitle?: string
+  ogDescription?: string
   [key: string]: any
 }
 
@@ -79,6 +85,7 @@ const props = defineProps<{
   category?: string
 }>()
 
+const route = useRoute()
 const product = ref<Product | null>(null)
 const selectedImageIndex = ref(0)
 const cartStore = useCartStore()
@@ -141,6 +148,91 @@ const productImages = computed(() => {
   return product.value?.images || []
 })
 
+// Вычисляемые свойства для SEO
+const seoTitle = computed(() => {
+  if (product.value?.ogTitle) return product.value.ogTitle
+  if (product.value?.title) return `${product.value.title} | Shamanri`
+  return 'Товар | Shamanri'
+})
+
+const seoDescription = computed(() => {
+  if (product.value?.metaDescription) return product.value.metaDescription
+  if (product.value?.ogDescription) return product.value.ogDescription
+  if (product.value?.artDescr) {
+    const descr = Array.isArray(product.value.artDescr) 
+      ? product.value.artDescr.join(' ') 
+      : product.value.artDescr
+    return descr.length > 160 ? descr.substring(0, 157) + '...' : descr
+  }
+  return `Купить ${product.value?.title || 'товар'} в Shamanri. Авторские паттерны, плитка и открытки от Марии Матвеевой.`
+})
+
+const seoKeywords = computed(() => {
+  if (product.value?.keywords) {
+    return Array.isArray(product.value.keywords) 
+      ? product.value.keywords.join(', ') 
+      : product.value.keywords
+  }
+  const baseKeywords = ['Shamanri', 'Мария Матвеева', 'акварельные паттерны']
+  if (product.value?.title) baseKeywords.push(product.value.title)
+  if (product.value?.category) {
+    const categoryNames: Record<string, string> = {
+      patterns: 'паттерны',
+      postcards: 'открытки',
+      tiles: 'плитка',
+      other: 'разное'
+    }
+    baseKeywords.push(categoryNames[product.value.category] || product.value.category)
+  }
+  return baseKeywords.join(', ')
+})
+
+const seoImage = computed(() => {
+  if (product.value?.ogImage) {
+    const categoryName = product.value.category || 'patterns'
+    const fileName = categoryToFileName[categoryName] || 'patterns'
+    return `/catalog/${fileName}/${product.value.id}/${product.value.ogImage}`
+  }
+  if (product.value?.image) return product.value.image
+  if (product.value?.images?.[0]) return product.value.images[0]
+  return '/shamanri-logo.svg'
+})
+
+const productUrl = computed(() => {
+  return `https://shamanri.ru${route.path}`
+})
+
+// JSON-LD структурированные данные для товара
+const jsonLd = computed(() => {
+  if (!product.value) return null
+  
+  const categoryName = product.value.category || 'patterns'
+  const fileName = categoryToFileName[categoryName] || 'patterns'
+  const imageUrl = seoImage.value.startsWith('http') 
+    ? seoImage.value 
+    : `https://shamanri.ru${seoImage.value}`
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.value.title || 'Товар',
+    description: seoDescription.value,
+    image: imageUrl,
+    brand: {
+      '@type': 'Brand',
+      name: 'Shamanri'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: product.value.price || 0,
+      priceCurrency: 'RUB',
+      availability: 'https://schema.org/InStock',
+      url: productUrl.value
+    },
+    category: categoryName
+  }
+})
+
 // Состояние модального окна для просмотра изображений
 const isImageModalOpen = ref(false)
 
@@ -148,6 +240,38 @@ const isImageModalOpen = ref(false)
 const openImageModal = () => {
   isImageModalOpen.value = true
 }
+
+// SEO мета-теги и структурированные данные
+watch([product, jsonLd], ([newProduct, newJsonLd]) => {
+  if (newProduct) {
+    useSeoMeta({
+      title: seoTitle.value,
+      description: seoDescription.value,
+      keywords: seoKeywords.value,
+      ogTitle: seoTitle.value,
+      ogDescription: seoDescription.value,
+      ogImage: seoImage.value,
+      ogUrl: productUrl.value,
+      ogType: 'product',
+      twitterCard: 'summary_large_image',
+      twitterTitle: seoTitle.value,
+      twitterDescription: seoDescription.value,
+      twitterImage: seoImage.value
+    })
+    
+    // JSON-LD структурированные данные
+    if (newJsonLd) {
+      useHead({
+        script: [
+          {
+            type: 'application/ld+json',
+            innerHTML: JSON.stringify(newJsonLd)
+          }
+        ]
+      })
+    }
+  }
+}, { immediate: true })
 
 onMounted(() => {
   loadProduct()

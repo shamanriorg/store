@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 import { formatRelativeDate } from '~/modules/shared/utils/dateUtils'
 import Button from '~/modules/shared/kit/Button.vue'
 import NotFoundPlaceholder from '~/modules/shared/components/NotFoundPlaceholder.vue'
@@ -141,6 +141,11 @@ const article = ref<Article | null>(null)
 const DEFAULT_DESCRIPTION =
   'Статья Shamanri о творчестве, природе, паттернах и вдохновении.'
 
+function truncateText(text: string, maxLength = 160) {
+  if (text.length <= maxLength) return text
+  return `${text.slice(0, maxLength - 1).trim()}…`
+}
+
 const articleTitle = computed(() => article.value?.title ?? 'Статья Shamanri')
 
 const articleDescription = computed(() => {
@@ -167,13 +172,52 @@ const articleDescription = computed(() => {
   return DEFAULT_DESCRIPTION
 })
 
-useSeoMeta({
-  title: articleTitle,
-  description: articleDescription,
-  ogTitle: articleTitle,
-  ogDescription: articleDescription,
-  twitterCard: 'summary_large_image'
+const articleImage = computed(() => {
+  if (!article.value) return null
+  const firstImage = article.value.content.find(item => item.type === 'image' && item.src)
+  if (firstImage?.src) {
+    return `https://shamanri.ru/articles/${article.value.id}/${firstImage.src}`
+  }
+  return null
 })
+
+const articleKeywords = computed(() => {
+  const baseKeywords = ['Shamanri', 'блог Shamanri', 'статья', 'паттерны', 'иллюстрация']
+  if (article.value?.title) {
+    // Извлекаем ключевые слова из заголовка
+    const titleWords = article.value.title.toLowerCase().split(/\s+/)
+    baseKeywords.push(...titleWords.filter(w => w.length > 3))
+  }
+  return baseKeywords.join(', ')
+})
+
+// SEO мета-теги
+watch([article, articleTitle, articleDescription, articleImage, articleKeywords], () => {
+  if (article.value) {
+    useSeoMeta({
+      title: articleTitle.value,
+      description: articleDescription.value,
+      ogTitle: articleTitle.value,
+      ogDescription: articleDescription.value,
+      ogImage: articleImage.value || undefined,
+      ogType: 'article',
+      twitterCard: 'summary_large_image',
+      twitterTitle: articleTitle.value,
+      twitterDescription: articleDescription.value,
+      twitterImage: articleImage.value || undefined
+    })
+    
+    useHead({
+      meta: [
+        {
+          key: 'article-keywords',
+          name: 'keywords',
+          content: articleKeywords.value
+        }
+      ]
+    })
+  }
+}, { immediate: true })
 
 // Загрузка статьи
 const loadArticle = async () => {
@@ -199,11 +243,6 @@ const formatDate = formatRelativeDate
 onMounted(() => {
   loadArticle()
 })
-
-function truncateText(text: string, maxLength = 160) {
-  if (text.length <= maxLength) return text
-  return `${text.slice(0, maxLength - 1).trim()}…`
-}
 </script>
 
 <style lang="scss" scoped>

@@ -81,16 +81,6 @@ import pattern1 from '~/assets/images/button-pattern-1.png'
 import pattern2 from '~/assets/images/button-pattern-2.png'
 import pattern3 from '~/assets/images/button-pattern-3.png'
 
-useSeoMeta({
-  title: 'Каталог Shamanri — паттерны, плитка и открытки',
-  description:
-    'Каталог продуктов Shamanri. В ближайшее время здесь появятся паттерны, плитка, открытки и другие коллекции авторской иллюстрации Марии Матвеевой.',
-  ogTitle: 'Каталог Shamanri',
-  ogDescription:
-    'Раздел с продуктами Shamanri находится в разработке. Совсем скоро здесь можно будет найти паттерны, плитку, открытки и другие волшебные изделия.',
-  twitterCard: 'summary_large_image'
-})
-
 const route = useRoute()
 const router = useRouter()
 
@@ -145,6 +135,37 @@ const selectedSort = ref<typeof sortOptions[0] | null>(sortOptions[0])
 // Товары
 const products = ref<Product[]>([])
 const isLoading = ref(false)
+
+// Динамические SEO мета-теги для каталога
+const categoryNames: Record<string, string> = {
+  patterns: 'Паттерны',
+  postcards: 'Открытки',
+  tiles: 'Плитка',
+  other: 'Разное'
+}
+
+const seoTitle = computed(() => {
+  const categoryName = categoryNames[selectedCategory.value] || 'Каталог'
+  return `${categoryName} | Каталог Shamanri`
+})
+
+const seoDescription = computed(() => {
+  const categoryName = categoryNames[selectedCategory.value] || 'товары'
+  const categoryNameLower = categoryName.toLowerCase()
+  return `Купить ${categoryNameLower} в Shamanri. Авторские ${categoryNameLower} от Марии Матвеевой. Акварельные паттерны, плитка и открытки для интерьера, текстиля и полиграфии.`
+})
+
+watch([selectedCategory, products], () => {
+  useSeoMeta({
+    title: seoTitle.value,
+    description: seoDescription.value,
+    keywords: `Shamanri, Мария Матвеева, ${categoryNames[selectedCategory.value] || 'каталог'}, акварельные паттерны, авторские открытки, плитка с узорами, цифровые принты`,
+    ogTitle: seoTitle.value,
+    ogDescription: seoDescription.value,
+    ogType: 'website',
+    twitterCard: 'summary_large_image'
+  })
+}, { immediate: true })
 
 // Маппинг категорий на имена файлов
 const categoryToFileName: Record<string, string> = {
