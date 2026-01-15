@@ -7,21 +7,12 @@
         @click.self="closeForm"
       >
         <div class="overlay-content">
-          <button
-            type="button"
-            class="close-btn close-btn--desktop"
-            aria-label="Закрыть форму"
-            @click="closeForm"
-          >
-            <span aria-hidden="true">✕</span>
-          </button>
-
           <div class="form-drawer" role="dialog" aria-modal="true">
             <div class="drawer-header">
               <h3 class="form-title">Форма связи</h3>
               <button
                 type="button"
-                class="close-btn close-btn--mobile"
+                class="close-btn"
                 aria-label="Закрыть форму"
                 @click="closeForm"
               >
@@ -326,10 +317,10 @@ watch(isOpen, (value) => {
   inset: 0;
   display: flex;
   justify-content: flex-end;
-  align-items: stretch;
+  align-items: flex-end;
   background: rgba(28, 21, 17, 0.35);
   backdrop-filter: blur(8px);
-  z-index: 1000;
+  z-index: 1100;
 
   @media (max-width: 767px) {
     justify-content: center;
@@ -340,10 +331,12 @@ watch(isOpen, (value) => {
 
 .overlay-content {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 16px;
   height: 100vh;
   padding-left: 24px;
+  padding-bottom: 0;
+  pointer-events: none;
 
   @media (max-width: 767px) {
     justify-content: center;
@@ -369,31 +362,17 @@ watch(isOpen, (value) => {
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin-top: 24px;
+  margin-top: 0;
+  flex-shrink: 0;
 
   &:hover {
     background: rgba(249, 245, 239, 0.85);
   }
 }
 
-.close-btn--desktop {
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-
-.close-btn--mobile {
-  display: none;
-
-  @media (max-width: 767px) {
-    display: flex;
-    margin-top: 0;
-  }
-}
-
 .form-drawer {
   width: 570px;
-  height: 100vh;
+  height: 85vh;
   background: #F9F5EF;
   border-radius: 8px 0 0 8px;
   padding: 24px;
@@ -402,12 +381,13 @@ watch(isOpen, (value) => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  pointer-events: auto;
 
   @media (max-width: 767px) {
     width: 100vw !important;
-    height: min(950px, 100vh);
-    min-height: min(950px, 100vh);
-    max-height: 100vh;
+    height: 85vh;
+    min-height: 85vh;
+    max-height: 85vh;
     border-radius: 16px 16px 0 0;
     padding: 24px 20px;
   }
@@ -415,15 +395,10 @@ watch(isOpen, (value) => {
 
 .drawer-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-
-  @media (max-width: 767px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
 }
 
 .form-title {
@@ -622,22 +597,5 @@ watch(isOpen, (value) => {
   margin-top: 4px;
 }
 
-@media (max-width: 768px) {
-
-  .overlay-content {
-    gap: 12px;
-  }
-
-  .close-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .form-drawer {
-    width: min(100%, 480px);
-    border-radius: 16px;
-    height: auto;
-  }
-}
 </style>
 
