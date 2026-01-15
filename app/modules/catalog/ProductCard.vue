@@ -1,7 +1,7 @@
 <template>
   <div :class="['product-card', { 'product-card--double': double }]">
     <NuxtLink 
-      :to="`/product/${category || 'patterns'}/${id}`"
+      :to="getProductLink(id, category)"
       class="product-card__image-container"
     >
       <div class="product-card__image">
@@ -25,7 +25,7 @@
     </NuxtLink>
     <NuxtLink 
       v-if="title" 
-      :to="`/product/${category || 'patterns'}/${id}`"
+      :to="getProductLink(id, category)"
       class="product-card__title"
     >
       {{ title }}
@@ -42,9 +42,25 @@
         В корзине
       </Button>
     </NuxtLink>
+    <a
+      v-else-if="kind === 'wb' && link"
+      :href="link"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="product-card__price-button-link"
+      @click.stop
+    >
+      <Button
+        variant="wb"
+        class="product-card__price-button"
+        right-icon="north_east"
+      >
+        WB
+      </Button>
+    </a>
     <NuxtLink
       v-else-if="category === 'patterns'"
-      :to="`/product/${category || 'patterns'}/${id}`"
+      :to="getProductLink(id, category)"
       class="product-card__price-button-link"
     >
       <Button
@@ -69,6 +85,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRoute } from '#imports'
 import Button from '~/modules/shared/kit/Button.vue'
 import { useCartStore } from '~/stores/cart'
 import type { Product } from '~/types'
@@ -81,11 +98,27 @@ interface Props {
   category?: string
   double?: boolean
   isNew?: boolean
+  kind?: 'digital' | 'wb' | 'complex'
+  link?: string
   [key: string]: any
 }
 
 const props = defineProps<Props>()
+const route = useRoute()
 const cartStore = useCartStore()
+
+// Формируем ссылку на товар с сохранением категории из query
+const getProductLink = (productId: string, productCategory?: string) => {
+  const category = productCategory || 'patterns'
+  const currentCategory = route.query?.category as string | undefined
+  
+  // Если есть категория в query (текущая категория каталога), сохраняем её
+  if (currentCategory) {
+    return `/product/${category}/${productId}?fromCategory=${currentCategory}`
+  }
+  
+  return `/product/${category}/${productId}`
+}
 
 const imageError = ref(false)
 
@@ -167,7 +200,7 @@ const formatPriceNumber = (price: number): string => {
 .product-card__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -220,6 +253,16 @@ const formatPriceNumber = (price: number): string => {
 
   :deep(.btn__icon--right) {
     font-weight: 700;
+  }
+  
+  &.btn--wb {
+    min-width: 120px;
+    
+    :deep(.btn__icon--right) {
+      font-weight: 400;
+      font-size: 18px;
+      margin-left: 2px;
+    }
   }
 }
 

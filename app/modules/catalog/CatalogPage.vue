@@ -45,6 +45,8 @@
           :category="product.category"
           :double="product.double"
           :is-new="product.isNew"
+          :kind="product.kind"
+          :link="product.link"
         />
       </div>
 
@@ -82,6 +84,11 @@ import pattern1 from '~/assets/images/button-pattern-1.png'
 import pattern2 from '~/assets/images/button-pattern-2.png'
 import pattern3 from '~/assets/images/button-pattern-3.png'
 
+// Импортируем изображения для "Разное"
+import other1 from '~/assets/images/button-others-1.png'
+import other2 from '~/assets/images/button-others-2.png'
+import other3 from '~/assets/images/button-others-3.png'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -109,7 +116,8 @@ const categories = [
     id: 'other',
     label: 'Разное',
     hoverBackground: '#76819B',
-    activeBackground: '#34405C'
+    activeBackground: '#34405C',
+    fanImages: [other1, other2, other3]
   }
 ]
 

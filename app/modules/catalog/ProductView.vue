@@ -13,7 +13,7 @@
     <div class="container container-adaptive product-view__container">
       <!-- Кнопка "В каталог" -->
       <div class="back-to-catalog">
-        <NuxtLink to="/catalog">
+        <NuxtLink :to="catalogLink">
           <Button variant="transparent" left-icon="arrow_back">
             В каталог
           </Button>
@@ -86,6 +86,19 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+
+// Формируем ссылку на каталог с восстановлением категории
+const catalogLink = computed(() => {
+  const fromCategory = route.query?.fromCategory as string | undefined
+  if (fromCategory) {
+    return `/catalog?category=${fromCategory}`
+  }
+  // Если категория товара известна, используем её
+  if (product.value?.category) {
+    return `/catalog?category=${product.value.category}`
+  }
+  return '/catalog'
+})
 const selectedImageIndex = ref(0)
 const cartStore = useCartStore()
 
