@@ -17,8 +17,9 @@
         />
       </div>
 
-      <div v-if="false" class="catalog-filters">
+      <div class="catalog-filters">
         <Filter
+          v-if="false"
           v-model="selectedCategories"
           text="Категория"
           type="checkbox"
@@ -124,9 +125,7 @@ const categoryFilterOptions = [
 
 const sortOptions = [
   { id: 'new-to-old', text: 'От нового к старому' },
-  { id: 'old-to-new', text: 'От старого к новому' },
-  { id: 'cheaper', text: 'Дешевле' },
-  { id: 'expensive', text: 'Дороже' }
+  { id: 'old-to-new', text: 'От старого к новому' }
 ]
 
 const selectedCategories = ref<typeof categoryFilterOptions>([])
@@ -253,22 +252,42 @@ const filteredAndSortedProducts = computed(() => {
     })
   }
 
+  // Функция для парсинга даты в формате DD-MM-YYYY
+  const parseDate = (dateStr: string | undefined): number => {
+    if (!dateStr) return 0
+    try {
+      // Формат: DD-MM-YYYY
+      const [day, month, year] = dateStr.split('-').map(Number)
+      return new Date(year, month - 1, day).getTime()
+    } catch {
+      return 0
+    }
+  }
+  
   // Сортировка
   if (selectedSort.value) {
     const sortId = selectedSort.value.id
     result.sort((a, b) => {
+      const dateA = parseDate(a.createdDate)
+      const dateB = parseDate(b.createdDate)
+      
       switch (sortId) {
         case 'new-to-old':
-          return (new Date(b.date || 0).getTime()) - (new Date(a.date || 0).getTime())
+          // Новые сначала (большая дата идет первой)
+          return dateB - dateA
         case 'old-to-new':
-          return (new Date(a.date || 0).getTime()) - (new Date(b.date || 0).getTime())
-        case 'cheaper':
-          return (a.price || 0) - (b.price || 0)
-        case 'expensive':
-          return (b.price || 0) - (a.price || 0)
+          // Старые сначала (меньшая дата идет первой)
+          return dateA - dateB
         default:
           return 0
       }
+    })
+  } else {
+    // По умолчанию сортируем от нового к старому
+    result.sort((a, b) => {
+      const dateA = parseDate(a.createdDate)
+      const dateB = parseDate(b.createdDate)
+      return dateB - dateA
     })
   }
 
@@ -388,7 +407,7 @@ const handleCardClick = async (id: string) => {
 
 .catalog-filters {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
   margin-bottom: 24px;
   width: 100%;
