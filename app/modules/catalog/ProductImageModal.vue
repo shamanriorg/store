@@ -4,6 +4,7 @@
       <!-- Левая часть с каруселью и большой картинкой -->
       <div class="image-modal__left">
         <ProductImageCarousel
+          v-if="images.length > 1"
           :images="images"
           :selected-index="selectedIndex"
           :product-title="productTitle"

@@ -17,6 +17,18 @@
         />
       </div>
 
+      <div
+        v-if="selectedCategory === 'postcards'"
+        class="catalog-illustrations-text"
+      >
+        <p>
+          Две мои любимые темы в иллюстрации - это сказочный Новый год и теплая славная осень. И, хотя в последнее время я поняла, что гораздо больше, чем иллюстрации, люблю создавать паттерны, здесь можно увидеть работы, которые нравятся мне больше всего.
+        </p>
+        <p>
+          Все иллюстрации выполнены в смешанной технике с использованием акварели, цветных карандашей и цифровой доработки.
+        </p>
+      </div>
+
       <div class="catalog-filters">
         <Filter
           v-if="false"
@@ -47,8 +59,20 @@
           :is-new="product.isNew"
           :kind="product.kind"
           :link="product.link"
+          :created-date="product.createdDate"
+          @open-image-modal="handleOpenImageModal"
         />
       </div>
+
+      <!-- Модальное окно для просмотра изображений иллюстраций -->
+      <ProductImageModal
+        v-if="selectedCategory === 'postcards'"
+        :is-open="isImageModalOpen"
+        :images="modalImages"
+        :selected-index="0"
+        :product-title="modalImageTitle"
+        @update:open="isImageModalOpen = $event"
+      />
 
       <div v-else-if="!isLoading" class="catalog-placeholder">
         <span>В этой категории пока нет товаров. Следите за обновлениями!</span>
@@ -66,6 +90,7 @@ import { ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from '#imports'
 import CategoryButton from '~/modules/catalog/CategoryButton.vue'
 import ProductCard from '~/modules/catalog/ProductCard.vue'
+import ProductImageModal from '~/modules/catalog/ProductImageModal.vue'
 import Filter from '~/modules/shared/kit/Filter.vue'
 
 interface Product {
@@ -102,7 +127,7 @@ const categories = [
   },
   {
     id: 'postcards',
-    label: 'Открытки',
+    label: 'Иллюстрации',
     hoverBackground: '#A37F7F',
     activeBackground: '#5C3434'
   },
@@ -126,7 +151,7 @@ const selectedCategory = ref<string>(categories[0].id)
 // Данные для фильтров
 const categoryFilterOptions = [
   { id: 'patterns', text: 'Паттерны' },
-  { id: 'postcards', text: 'Открытки' },
+  { id: 'postcards', text: 'Иллюстрации' },
   { id: 'tiles', text: 'Плитка' },
   { id: 'other', text: 'Разное' }
 ]
@@ -143,10 +168,21 @@ const selectedSort = ref<typeof sortOptions[0] | null>(sortOptions[0])
 const products = ref<Product[]>([])
 const isLoading = ref(false)
 
+// Модальное окно для иллюстраций
+const isImageModalOpen = ref(false)
+const modalImages = ref<string[]>([])
+const modalImageTitle = ref<string>('')
+
+const handleOpenImageModal = (image: string, title?: string) => {
+  modalImages.value = [image]
+  modalImageTitle.value = title || ''
+  isImageModalOpen.value = true
+}
+
 // Динамические SEO мета-теги для каталога
 const categoryNames: Record<string, string> = {
   patterns: 'Паттерны',
-  postcards: 'Открытки',
+  postcards: 'Иллюстрации',
   tiles: 'Плитка',
   other: 'Разное'
 }
@@ -213,7 +249,8 @@ const loadProductData = async (category: string, productId: string): Promise<Pro
       ...data, 
       id: productId, 
       category,
-      image 
+      image,
+      createdDate: data.createdDate
     }
   } catch (error) {
     console.error(`Ошибка загрузки товара ${productId}:`, error)
@@ -411,6 +448,18 @@ const handleCardClick = async (id: string) => {
   gap: 16px;
   margin-bottom: 32px;
   width: 100%;
+}
+
+.catalog-illustrations-text {
+  margin-bottom: 24px;
+  font-family: Rubik, var(--font-primary);
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--text-primary, #2b2521);
+}
+
+.catalog-illustrations-text p + p {
+  margin-top: 8px;
 }
 
 .catalog-filters {

@@ -1,6 +1,31 @@
 <template>
-  <div :class="['product-card', { 'product-card--double': double }]">
+  <div :class="['product-card', { 'product-card--double': double, 'product-card--postcard': category === 'postcards' }]">
+    <div 
+      v-if="category === 'postcards'"
+      class="product-card__image-container product-card__image-container--clickable"
+      @click="handleImageClick"
+    >
+      <div class="product-card__image">
+        <img
+          v-if="image && !imageError"
+          :src="image"
+          :alt="title || id"
+          class="product-card__img"
+          @error="handleImageError"
+        />
+        <div v-else class="product-card__placeholder">
+          <span>{{ title || id }}</span>
+        </div>
+      </div>
+      <img
+        v-if="isNew"
+        src="~/assets/images/badge-new.svg"
+        alt="NEW"
+        class="product-card__badge"
+      />
+    </div>
     <NuxtLink 
+      v-else
       :to="getProductLink(id, category)"
       class="product-card__image-container"
     >
@@ -23,8 +48,14 @@
         class="product-card__badge"
       />
     </NuxtLink>
+    <div 
+      v-if="title && category === 'postcards'" 
+      class="product-card__title product-card__title--postcard"
+    >
+      {{ formattedPostcardTitle }}
+    </div>
     <NuxtLink 
-      v-if="title" 
+      v-else-if="title" 
       :to="getProductLink(id, category)"
       class="product-card__title"
     >
@@ -59,7 +90,7 @@
       </Button>
     </a>
     <NuxtLink
-      v-else-if="category === 'patterns'"
+      v-else-if="category === 'patterns' || category === 'tiles'"
       :to="getProductLink(id, category)"
       class="product-card__price-button-link"
     >
@@ -100,10 +131,14 @@ interface Props {
   isNew?: boolean
   kind?: 'digital' | 'wb' | 'complex'
   link?: string
+  createdDate?: string
   [key: string]: any
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{
+  'open-image-modal': [image: string, title?: string]
+}>()
 const route = useRoute()
 const cartStore = useCartStore()
 
@@ -145,6 +180,38 @@ const handleCartClick = () => {
     cartStore.addToCart(product, 1)
   }
 }
+
+const handleImageClick = () => {
+  if (props.category === 'postcards' && props.image) {
+    emit('open-image-modal', props.image, props.title)
+  }
+}
+
+// Форматирование названия для иллюстраций
+const formattedPostcardTitle = computed(() => {
+  if (props.category !== 'postcards' || !props.title) return props.title
+  
+  let year = ''
+  
+  if (props.createdDate) {
+    // Формат: DD-MM-YYYY
+    const parts = props.createdDate.split('-')
+    if (parts.length === 3) {
+      year = parts[2]
+    }
+  }
+  
+  // Формируем строку: Мария Матвеева. Иллюстрация "название" год год
+  const parts = []
+  parts.push('Мария Матвеева.')
+  parts.push(`Иллюстрация "${props.title}"`)
+  if (year) {
+    parts.push(year)
+    parts.push('год')
+  }
+  
+  return parts.join(' ')
+})
 
 const formatPriceNumber = (price: number): string => {
   return new Intl.NumberFormat('ru-RU', {
@@ -246,6 +313,18 @@ const formatPriceNumber = (price: number): string => {
   cursor: pointer;
   text-decoration: none;
   display: block;
+}
+
+.product-card__title--postcard {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  cursor: default;
+  line-height: 1.4;
+}
+
+.product-card__image-container--clickable {
+  cursor: pointer;
 }
 
 .product-card__price-button {

@@ -16,6 +16,13 @@
           <span class="material-icons product-price__icon">currency_ruble</span>
         </div>
       </div>
+      <div v-if="product.priceTile" class="product-prices">
+        <div class="product-price">
+          <span class="product-price__label">От:</span>
+          <span class="product-price__value">{{ formatPriceNumber(product.priceTile) }}</span>
+          <span class="material-icons product-price__icon">currency_ruble</span>
+        </div>
+      </div>
       <!-- Для остальных товаров показываем обычную цену -->
       <!-- <div v-else-if="product.price" class="product-price"> -->
       <div v-if="false" class="product-price">
