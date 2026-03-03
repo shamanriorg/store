@@ -100,6 +100,9 @@ interface Product {
   image?: string
   category?: string
   date?: string
+  /**
+   * Расширенная карточка (занимает две колонки в гриде).
+   */
   double?: boolean
   [key: string]: any
 }
@@ -244,13 +247,14 @@ const loadProductData = async (category: string, productId: string): Promise<Pro
     const image = data.previewImage 
       ? `/catalog/${fileName}/${productId}/${data.previewImage}`
       : undefined
-    
+
     return { 
       ...data, 
       id: productId, 
       category,
       image,
-      createdDate: data.createdDate
+      createdDate: data.createdDate,
+      double: data.double === true
     }
   } catch (error) {
     console.error(`Ошибка загрузки товара ${productId}:`, error)
@@ -473,6 +477,9 @@ const handleCardClick = async (id: string) => {
 .catalog-grid-products {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Позволяет гриду автоматически уплотнять элементы и заполнять свободные ячейки,
+     уменьшая визуальные «дыры» при сочетании одинарных и двойных карточек. */
+  grid-auto-flow: row dense;
   row-gap: 24px;
   column-gap: 16px;
   width: 100%;
