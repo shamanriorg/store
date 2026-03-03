@@ -60,26 +60,25 @@ export default defineEventHandler(async (event) => {
       console.warn('Не удалось загрузить список статей для sitemap:', error)
     }
     
-    // Категории товаров
-    const categories = ['patterns', 'tiles', 'cards', 'others']
-    const categoryToFileName: Record<string, string> = {
-      patterns: 'patterns',
-      tiles: 'tiles',
-      cards: 'cards',
-      others: 'others'
-    }
+    // Категории товаров, для которых есть отдельные страницы товара
+    // Иллюстрации (cards/postcards) сюда НЕ включаем, т.к. по ним нет
+    // отдельных detail-страниц — они отображаются только в каталоге.
+    const categories: Array<{ slug: string; fileName: string; listKey: string }> = [
+      { slug: 'patterns', fileName: 'patterns', listKey: 'patterns' },
+      { slug: 'tiles', fileName: 'tiles', listKey: 'tiles' },
+      { slug: 'other', fileName: 'others', listKey: 'others' }
+    ]
     
     // Читаем товары из каждой категории
-    for (const category of categories) {
+    for (const { slug, fileName, listKey } of categories) {
       try {
-        const fileName = categoryToFileName[category] || category
         const listPath = join(publicPath, 'catalog', fileName, `${fileName}-list.json`)
         const listData = JSON.parse(readFileSync(listPath, 'utf-8'))
         
         // Получаем массив товаров (может быть в разных форматах)
         let productIds: string[] = []
-        if (Array.isArray(listData[category])) {
-          productIds = listData[category]
+        if (Array.isArray(listData[listKey])) {
+          productIds = listData[listKey]
         } else if (Array.isArray(listData.products)) {
           productIds = listData.products
         } else if (Array.isArray(listData)) {
@@ -103,7 +102,7 @@ export default defineEventHandler(async (event) => {
           }
           
           routes.push({
-            url: `${siteUrl}/product/${category}/${productId}`,
+            url: `${siteUrl}/product/${slug}/${productId}`,
             priority: '0.7',
             changefreq: 'monthly',
             lastmod
@@ -111,7 +110,7 @@ export default defineEventHandler(async (event) => {
         })
       } catch (error) {
         // Игнорируем ошибки для категорий, которых может не быть
-        console.warn(`Не удалось загрузить список товаров для категории ${category} в sitemap:`, error)
+        console.warn(`Не удалось загрузить список товаров для категории ${slug} в sitemap:`, error)
       }
     }
   } catch (error) {
