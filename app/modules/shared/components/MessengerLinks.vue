@@ -7,13 +7,13 @@
         class="messenger-icon"
       />
     </a>
-    <div class="messenger-icon messenger-icon--disabled">
+    <a href="https://ru.pinterest.com/shamanri_art/" target="_blank" rel="noopener noreferrer">
       <img
         src="~/assets/images/pin-btn.svg"
         alt="Pinterest"
-        class="messenger-icon__image"
+        class="messenger-icon"
       />
-    </div>
+    </a>
     <a href="https://instagram.com/shamanri_art" target="_blank" rel="noopener noreferrer">
       <img
         src="~/assets/images/insta-btn.svg"

@@ -83,6 +83,17 @@
                 <span class="material-icons">open_in_new</span>
               </a>
             </div>
+
+            <!-- Пинтерест -->
+            <div class="contact-row">
+              <img src="~/assets/images/star-point.svg" alt="" class="contact-icon" />
+              <p class="contact-text">
+                Пинтерест: <a href="https://ru.pinterest.com/shamanri_art/" target="_blank" rel="noopener noreferrer" class="text-medium">shamanri_art</a>
+              </p>
+              <a href="https://ru.pinterest.com/shamanri_art/" target="_blank" rel="noopener noreferrer" class="icon-button" title="Открыть">
+                <span class="material-icons">open_in_new</span>
+              </a>
+            </div>
             
             <!-- ВК -->
             <div class="contact-row">
