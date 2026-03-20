@@ -81,7 +81,7 @@
                 class="submit-btn"
                 variant="default"
                 size="medium"
-                :disabled="!isFormValid"
+                :disabled="!isFormValid || !isEmailJsConfigured"
                 :loading="isSubmitting"
                 @click="submitForm"
               >
@@ -112,6 +112,20 @@ const personalDataConsent = ref(true)
 const isSubmitting = ref(false)
 const submitError = ref<string | null>(null)
 const submitSuccess = ref(false)
+
+const isEmailJsConfigured = computed(() => {
+  const { serviceId, templateId, publicKey } = config.public.emailjs || {}
+  return Boolean(serviceId && templateId && publicKey)
+})
+
+const getMissingEmailJsVars = (): string[] => {
+  const { serviceId, templateId, publicKey } = config.public.emailjs || {}
+  const missing: string[] = []
+  if (!serviceId) missing.push('EMAILJS_SERVICE_ID')
+  if (!templateId) missing.push('EMAILJS_TEMPLATE_ID')
+  if (!publicKey) missing.push('EMAILJS_PUBLIC_KEY')
+  return missing
+}
 
 // Защита от спама: ограничение отправки раз в 5 минут
 const RATE_LIMIT_MS = 5 * 60 * 1000 // 5 минут в миллисекундах
@@ -215,6 +229,15 @@ const resetForm = () => {
 
 const submitForm = async () => {
   if (isSubmitting.value) return
+
+  if (!isEmailJsConfigured.value) {
+    const missing = getMissingEmailJsVars()
+    submitError.value =
+      missing.length > 0
+        ? `EmailJS не настроен. Проверьте конфигурацию: отсутствуют ${missing.join(', ')}.`
+        : 'EmailJS не настроен. Проверьте конфигурацию.'
+    return
+  }
 
   // По закону согласие на обработку персональных данных нужно получать до отправки.
   if (!personalDataConsent.value) {
