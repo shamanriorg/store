@@ -14,10 +14,10 @@
         class="messenger-icon"
       />
     </a>
-    <a href="https://instagram.com/shamanri_art" target="_blank" rel="noopener noreferrer">
+    <a href="https://vk.com/public214270972" target="_blank" rel="noopener noreferrer">
       <img
-        src="~/assets/images/insta-btn.svg"
-        alt="Instagram"
+        src="~/assets/images/vk-btn.svg"
+        alt="VK"
         class="messenger-icon"
       />
     </a>

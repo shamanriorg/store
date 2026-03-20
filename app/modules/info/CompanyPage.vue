@@ -73,13 +73,13 @@
               </a>
             </div>
             
-            <!-- Инстаграм -->
+            <!-- ВК -->
             <div class="contact-row">
               <img src="~/assets/images/star-point.svg" alt="" class="contact-icon" />
               <p class="contact-text">
-                Инстаграм: <a href="https://instagram.com/shamanri_art" target="_blank" rel="noopener noreferrer" class="text-medium">shamanri_art</a>
+                ВК: <a href="https://vk.com/public214270972" target="_blank" rel="noopener noreferrer" class="text-medium">public214270972</a>
               </p>
-              <a href="https://instagram.com/shamanri_art" target="_blank" rel="noopener noreferrer" class="icon-button" title="Открыть">
+              <a href="https://vk.com/public214270972" target="_blank" rel="noopener noreferrer" class="icon-button" title="Открыть">
                 <span class="material-icons">open_in_new</span>
               </a>
             </div>
@@ -95,14 +95,7 @@
               </a>
             </div>
             
-            <!-- ВК -->
-            <div class="contact-row">
-              <img src="~/assets/images/star-point.svg" alt="" class="contact-icon" />
-              <a href="https://vk.com/shamanri" target="_blank" rel="noopener noreferrer" class="contact-text text-medium contact-link">ВК</a>
-              <a href="https://vk.com/shamanri" target="_blank" rel="noopener noreferrer" class="icon-button" title="Открыть">
-                <span class="material-icons">open_in_new</span>
-              </a>
-            </div>
+            <!-- ВК (указано выше) -->
           </div>
         </section>
 
