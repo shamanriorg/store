@@ -73,6 +73,14 @@
       Свяжитесь с нами в <a href="https://t.me/mveeva" target="_blank" rel="noopener noreferrer" class="product-complex-link">Телеграм</a> или <button type="button" class="product-complex-link product-complex-link--button" @click="openContactForm">заполните форму</button>
     </p>
   </template>
+
+  <!-- Блок для плитки (как в паттернах/complex товарах) -->
+  <template v-if="product.kind === 'tile'">
+    <p class="product-complex-text">
+      Заинтересовал товар?<br>
+      Свяжитесь с нами в <a href="https://t.me/mveeva" target="_blank" rel="noopener noreferrer" class="product-complex-link">Телеграм</a> или <button type="button" class="product-complex-link product-complex-link--button" @click="openContactForm">заполните форму</button>
+    </p>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -85,7 +93,7 @@ interface Product {
   id: string
   title?: string
   price?: number
-  kind?: 'digital' | 'wb' | 'complex'
+  kind?: 'digital' | 'wb' | 'complex' | 'tile'
   link?: string
   [key: string]: any
 }

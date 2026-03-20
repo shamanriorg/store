@@ -74,11 +74,17 @@
         @update:open="isImageModalOpen = $event"
       />
 
-      <div v-else-if="!isLoading" class="catalog-placeholder">
+      <div
+        v-if="products.length === 0 && !isLoading"
+        class="catalog-placeholder"
+      >
         <span>В этой категории пока нет товаров. Следите за обновлениями!</span>
       </div>
 
-      <div v-else class="catalog-placeholder">
+      <div
+        v-else-if="products.length === 0 && isLoading"
+        class="catalog-placeholder"
+      >
         <span>Загрузка...</span>
       </div>
     </div>

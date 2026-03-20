@@ -42,6 +42,25 @@
                   <textarea v-model="message" placeholder="Напишите сообщение" required :disabled="isSubmitting"></textarea>
                 </label>
 
+                <label class="consent-field">
+                  <input
+                    v-model="personalDataConsent"
+                    type="checkbox"
+                    required
+                    :disabled="isSubmitting"
+                    aria-label="Согласие на обработку персональных данных"
+                  />
+                  <span class="consent-text">
+                    Подтверждаю согласие на обработку персональных данных и согласен(на) на связь по моему обращению.
+                    <NuxtLink
+                      to="/personal-data-consent"
+                      class="consent-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >Подробнее</NuxtLink>
+                  </span>
+                </label>
+
                 <!-- Сообщения об ошибке и успехе -->
                 <div v-if="submitError" class="form-message form-message--error">
                   {{ submitError }}
@@ -77,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import Button from '~/modules/shared/kit/Button.vue'
 import emailjs from '@emailjs/browser'
 
@@ -89,6 +108,7 @@ const name = ref('')
 const email = ref('')
 const phone = ref('')
 const message = ref('')
+const personalDataConsent = ref(true)
 const isSubmitting = ref(false)
 const submitError = ref<string | null>(null)
 const submitSuccess = ref(false)
@@ -194,7 +214,16 @@ const resetForm = () => {
 }
 
 const submitForm = async () => {
-  if (!isFormValid.value || isSubmitting.value) return
+  if (isSubmitting.value) return
+
+  // По закону согласие на обработку персональных данных нужно получать до отправки.
+  if (!personalDataConsent.value) {
+    submitError.value = 'Чтобы отправить форму, подтвердите согласие на обработку персональных данных.'
+    return
+  }
+
+  // Проверка валидности полей формы (имя, почта, сообщение).
+  if (!isFormValid.value) return
 
   // Проверка лимита отправки
   if (!canSubmit()) {
@@ -236,6 +265,7 @@ const submitForm = async () => {
         from_email: email.value.trim(),
         phone: phone.value.trim() || 'Не указан',
         message: message.value.trim(),
+        personal_data_consent: personalDataConsent.value ? 'Да' : 'Нет',
         time: formattedTime
       },
       publicKey
@@ -265,6 +295,7 @@ const isFormValid = computed(() => {
   return name.value.trim().length > 0 &&
     email.value.trim().length > 0 &&
     message.value.trim().length > 0 &&
+    personalDataConsent.value &&
     !isSubmitting.value
 })
 
@@ -294,6 +325,8 @@ watch(isOpen, (value) => {
   if (value) {
     // Загружаем сохраненные данные при открытии формы
     loadFormData()
+    // Галочка должна быть включена автоматически при каждом открытии
+    personalDataConsent.value = true
   } else {
     // При закрытии только сбрасываем ошибки и статусы
     resetForm()
@@ -429,6 +462,32 @@ watch(isOpen, (value) => {
   @media (max-width: 767px) {
     gap: 16px;
   }
+}
+
+.consent-field {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-family: Rubik;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text-tertiary, #6F615B);
+
+  input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+  }
+}
+
+.consent-link {
+  color: var(--bg-primary-default);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.consent-text {
+  display: inline;
 }
 
 .form-field {
