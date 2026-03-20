@@ -306,8 +306,17 @@ const submitForm = async () => {
     }, 5000)
   } catch (error) {
     console.error('Ошибка отправки формы:', error)
-    submitError.value = error instanceof Error 
-      ? error.message 
+    const anyErr = error as any
+    if (anyErr?.text && typeof anyErr.text === 'string') {
+      submitError.value = anyErr.text
+      if (anyErr.text.toLowerCase().includes('public key')) {
+        submitError.value =
+          `${anyErr.text}\nПроверьте, что секрет ${'EMAILJS_PUBLIC_KEY'} задан в GitHub Actions и соответствует вашему EmailJS Public Key.`
+      }
+      return
+    }
+    submitError.value = error instanceof Error
+      ? error.message
       : 'Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.'
   } finally {
     isSubmitting.value = false

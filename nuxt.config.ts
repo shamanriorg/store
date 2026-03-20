@@ -122,9 +122,9 @@ export default defineNuxtConfig({
       siteUrl: 'https://shamanri.art',
       apiBase: process.env.API_BASE || '/api',
       emailjs: {
-        serviceId: process.env.EMAILJS_SERVICE_ID || '',
-        templateId: process.env.EMAILJS_TEMPLATE_ID || '',
-        publicKey: process.env.EMAILJS_PUBLIC_KEY || ''
+        serviceId: (process.env.EMAILJS_SERVICE_ID || '').trim(),
+        templateId: (process.env.EMAILJS_TEMPLATE_ID || '').trim(),
+        publicKey: (process.env.EMAILJS_PUBLIC_KEY || '').trim()
       }
     }
   }
