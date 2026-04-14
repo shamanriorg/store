@@ -6,6 +6,7 @@
       :images="productImages"
       :selected-index="selectedImageIndex"
       :product-title="product.title"
+      :category="product.category"
       @update:open="isImageModalOpen = $event"
       @update:selected="selectedImageIndex = $event"
     />
@@ -23,13 +24,24 @@
       <p class="product-notice">Напоминаем, все материалы защищены</p>
 
       <!-- Контейнер карточки продукта -->
-      <div class="product-card-container">
+      <div
+        :class="[
+          'product-card-container',
+          {
+            'product-card-container--postcard-landscape': isPostcardLandscape,
+            'product-card-container--orientation-pending': isPostcardOrientationPending
+          }
+        ]"
+      >
         <ProductImageGallery
           :images="productImages"
           :selected-index="selectedImageIndex"
           :product-title="product.title"
+          :category="product.category"
           @update:selected="selectedImageIndex = $event"
           @open-modal="openImageModal"
+          @orientation-change="handleOrientationChange"
+          @orientation-pending-change="handleOrientationPendingChange"
         />
         <ProductInfo :product="product">
           <template #actions>
@@ -100,6 +112,8 @@ const catalogLink = computed(() => {
   return '/catalog'
 })
 const selectedImageIndex = ref(0)
+const isPostcardLandscape = ref(false)
+const isPostcardOrientationPending = ref(Boolean(props.category === 'postcards'))
 const cartStore = useCartStore()
 
 // Маппинг категорий на имена файлов
@@ -210,6 +224,27 @@ const productImages = computed(() => {
   return product.value?.images || []
 })
 
+const categorySeoNames: Record<string, string> = {
+  patterns: 'паттерн',
+  postcards: 'иллюстрация',
+  tiles: 'плитка',
+  other: 'товар'
+}
+
+const categorySeoDescriptions: Record<string, string> = {
+  patterns: 'Авторский паттерн Shamanri: акварельные бесшовные узоры Марии Матвеевой для текстиля, упаковки и интерьерной печати.',
+  postcards: 'Авторская иллюстрация Shamanri в смешанной технике: акварель, графика и цифровая доработка.',
+  tiles: 'Авторская декоративная плитка Shamanri для кухни, ванной и акцентного интерьера.',
+  other: 'Авторская работа Shamanri от Марии Матвеевой: уникальный декор и коллекционные изделия.'
+}
+
+const categorySeoKeywords: Record<string, string[]> = {
+  patterns: ['паттерн', 'акварельный паттерн', 'бесшовный узор', 'принт для текстиля', 'авторский орнамент'],
+  postcards: ['иллюстрация', 'авторская иллюстрация', 'акварельная иллюстрация', 'арт-принт', 'смешанная техника'],
+  tiles: ['авторская плитка', 'декоративная керамическая плитка', 'плитка для кухни', 'плитка для ванной', 'орнаментальная плитка'],
+  other: ['авторские изделия', 'дизайнерский декор', 'арт-объект', 'коллекционные изделия', 'уникальный декор']
+}
+
 // Вычисляемые свойства для SEO
 const seoTitle = computed(() => {
   if (product.value?.ogTitle) return product.value.ogTitle
@@ -226,7 +261,10 @@ const seoDescription = computed(() => {
       : product.value.artDescr
     return descr.length > 160 ? descr.substring(0, 157) + '...' : descr
   }
-  return `Купить ${product.value?.title || 'товар'} в Shamanri. Авторские паттерны, плитка и открытки от Марии Матвеевой.`
+  const category = product.value?.category || 'other'
+  const categoryDescription = categorySeoDescriptions[category] || categorySeoDescriptions.other
+  const categoryName = categorySeoNames[category] || categorySeoNames.other
+  return `${product.value?.title || categoryName} — ${categoryDescription}`
 })
 
 const seoKeywords = computed(() => {
@@ -235,12 +273,13 @@ const seoKeywords = computed(() => {
       ? product.value.keywords.join(', ') 
       : product.value.keywords
   }
-  const baseKeywords = ['Shamanri', 'Мария Матвеева', 'акварельные паттерны']
+  const category = product.value?.category || 'other'
+  const baseKeywords = ['Shamanri', 'Мария Матвеева', ...((categorySeoKeywords[category] || categorySeoKeywords.other))]
   if (product.value?.title) baseKeywords.push(product.value.title)
   if (product.value?.category) {
     const categoryNames: Record<string, string> = {
       patterns: 'паттерны',
-      postcards: 'открытки',
+      postcards: 'иллюстрации',
       tiles: 'плитка',
       other: 'разное'
     }
@@ -305,6 +344,26 @@ const isImageModalOpen = ref(false)
 const openImageModal = () => {
   isImageModalOpen.value = true
 }
+
+const handleOrientationChange = (landscape: boolean) => {
+  isPostcardLandscape.value = Boolean(landscape && product.value?.category === 'postcards')
+}
+
+const handleOrientationPendingChange = (pending: boolean) => {
+  isPostcardOrientationPending.value = Boolean(pending && product.value?.category === 'postcards')
+}
+
+// Для иллюстраций включаем pending до определения ориентации,
+// чтобы избежать первого "прыжка" сетки при загрузке страницы/изображения.
+watch(
+  [() => product.value?.category, selectedImageIndex],
+  ([category]) => {
+    if (category === 'postcards') {
+      isPostcardOrientationPending.value = true
+    }
+  },
+  { immediate: true }
+)
 
 // Функция для установки SEO тегов
 const updateSeoMeta = () => {
@@ -427,6 +486,16 @@ if (product.value) {
   align-items: stretch;
   width: 100%;
   box-sizing: border-box;
+}
+
+.product-card-container--postcard-landscape {
+  grid-template-columns: 1fr;
+  min-height: auto;
+}
+
+.product-card-container--orientation-pending {
+  visibility: hidden;
+  min-height: 684px;
 }
 
 // Адаптивность

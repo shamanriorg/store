@@ -23,10 +23,9 @@ export function getPrerenderRoutes(): string[] {
     }
     
     // Категории товаров, для которых есть отдельные страницы товара
-    // Иллюстрации (cards/postcards) здесь НЕ указываем, т.к. по ним нет
-    // отдельных карточек товара — они показываются только внутри каталога.
     const categories: Array<{ slug: string; fileName: string; listKey: string }> = [
       { slug: 'patterns', fileName: 'patterns', listKey: 'patterns' },
+      { slug: 'postcards', fileName: 'cards', listKey: 'cards' },
       { slug: 'tiles', fileName: 'tiles', listKey: 'tiles' },
       { slug: 'other', fileName: 'others', listKey: 'others' }
     ]

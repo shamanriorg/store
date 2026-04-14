@@ -61,10 +61,9 @@ export default defineEventHandler(async (event) => {
     }
     
     // Категории товаров, для которых есть отдельные страницы товара
-    // Иллюстрации (cards/postcards) сюда НЕ включаем, т.к. по ним нет
-    // отдельных detail-страниц — они отображаются только в каталоге.
     const categories: Array<{ slug: string; fileName: string; listKey: string }> = [
       { slug: 'patterns', fileName: 'patterns', listKey: 'patterns' },
+      { slug: 'postcards', fileName: 'cards', listKey: 'cards' },
       { slug: 'tiles', fileName: 'tiles', listKey: 'tiles' },
       { slug: 'other', fileName: 'others', listKey: 'others' }
     ]

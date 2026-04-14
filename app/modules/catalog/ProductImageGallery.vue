@@ -1,7 +1,12 @@
 <template>
-  <div class="product-card-container__left">
+  <div
+    :class="[
+      'product-card-container__left',
+      { 'product-card-container__left--postcard-landscape': isPostcardLandscape }
+    ]"
+  >
     <ProductImageCarousel
-      v-if="images.length > 0"
+      v-if="showCarousel"
       :images="images"
       :selected-index="selectedIndex"
       :product-title="productTitle"
@@ -9,7 +14,13 @@
     />
     
     <!-- Большая текущая картинка -->
-    <div class="product-main-image" @click="handleImageClick">
+    <div
+      :class="[
+        'product-main-image',
+        { 'product-main-image--postcard-landscape': isPostcardLandscape }
+      ]"
+      @click="handleImageClick"
+    >
       <img
         v-if="currentImage"
         :src="currentImage"
@@ -42,23 +53,86 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import ProductImageCarousel from '~/modules/catalog/ProductImageCarousel.vue'
 
 interface Props {
   images: string[]
   selectedIndex: number
   productTitle?: string
+  category?: string
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<{
   'update:selected': [index: number]
   'open-modal': []
+  'orientation-change': [isLandscape: boolean]
+  'orientation-pending-change': [isPending: boolean]
 }>()
 
 const currentImage = computed(() => {
   return props.images[props.selectedIndex] || null
+})
+
+const isPostcardLandscape = ref(false)
+const viewportWidth = ref<number>(Number.POSITIVE_INFINITY)
+
+const showCarousel = computed(() => {
+  if (props.images.length === 0) return false
+
+  // Для горизонтальных иллюстраций скрываем миниатюры на узких экранах.
+  if (props.category === 'postcards' && isPostcardLandscape.value && viewportWidth.value < 1120) {
+    return false
+  }
+
+  return true
+})
+
+const updateViewportWidth = () => {
+  if (!import.meta.client) return
+  viewportWidth.value = window.innerWidth
+}
+
+const detectOrientation = (src: string | null) => {
+  if (!import.meta.client || !src || props.category !== 'postcards') {
+    isPostcardLandscape.value = false
+    emit('orientation-change', false)
+    emit('orientation-pending-change', false)
+    return
+  }
+
+  emit('orientation-pending-change', true)
+  const img = new Image()
+  img.onload = () => {
+    const landscape = img.naturalWidth > img.naturalHeight
+    isPostcardLandscape.value = landscape
+    emit('orientation-change', landscape)
+    emit('orientation-pending-change', false)
+  }
+  img.onerror = () => {
+    isPostcardLandscape.value = false
+    emit('orientation-change', false)
+    emit('orientation-pending-change', false)
+  }
+  img.src = src
+}
+
+watch(currentImage, (src) => {
+  detectOrientation(src)
+}, { immediate: true })
+
+onMounted(() => {
+  updateViewportWidth()
+  if (import.meta.client) {
+    window.addEventListener('resize', updateViewportWidth)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (import.meta.client) {
+    window.removeEventListener('resize', updateViewportWidth)
+  }
 })
 
 // Навигация по изображениям
@@ -103,6 +177,11 @@ const handleImageClick = () => {
     max-width: 100%;
     overflow-x: hidden;
   }
+}
+
+.product-card-container__left--postcard-landscape {
+  width: 100%;
+  justify-content: center;
 }
 
 .product-main-image {
@@ -156,6 +235,18 @@ const handleImageClick = () => {
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+}
+
+.product-main-image--postcard-landscape {
+  width: min(100%, 920px);
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: 16 / 10;
+
+  img {
+    object-fit: contain;
   }
 }
 

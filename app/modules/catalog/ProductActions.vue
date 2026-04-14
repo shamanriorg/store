@@ -66,16 +66,8 @@
     </a>
   </template>
   
-  <!-- Блок для complex товара -->
-  <template v-if="product.kind === 'complex'">
-    <p class="product-complex-text">
-      Заинтересовал товар?<br>
-      Свяжитесь с нами в <a href="https://t.me/mveeva" target="_blank" rel="noopener noreferrer" class="product-complex-link">Телеграм</a> или <button type="button" class="product-complex-link product-complex-link--button" @click="openContactForm">заполните форму</button>
-    </p>
-  </template>
-
-  <!-- Блок для плитки (как в паттернах/complex товарах) -->
-  <template v-if="product.kind === 'tile'">
+  <!-- Блок для связи (паттерны/плитка/иллюстрации) -->
+  <template v-if="showContactCta">
     <p class="product-complex-text">
       Заинтересовал товар?<br>
       Свяжитесь с нами в <a href="https://t.me/mveeva" target="_blank" rel="noopener noreferrer" class="product-complex-link">Телеграм</a> или <button type="button" class="product-complex-link product-complex-link--button" @click="openContactForm">заполните форму</button>
@@ -111,6 +103,12 @@ const wbLink = computed(() => {
     return props.product.link || 'https://www.wildberries.ru/seller/4253084'
   }
   return ''
+})
+
+const showContactCta = computed(() => {
+  return props.product?.kind === 'complex' ||
+    props.product?.kind === 'tile' ||
+    props.product?.category === 'postcards'
 })
 
 // Проверка, есть ли товар в корзине

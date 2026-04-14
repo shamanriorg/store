@@ -60,19 +60,8 @@
           :kind="product.kind"
           :link="product.link"
           :created-date="product.createdDate"
-          @open-image-modal="handleOpenImageModal"
         />
       </div>
-
-      <!-- Модальное окно для просмотра изображений иллюстраций -->
-      <ProductImageModal
-        v-if="selectedCategory === 'postcards'"
-        :is-open="isImageModalOpen"
-        :images="modalImages"
-        :selected-index="0"
-        :product-title="modalImageTitle"
-        @update:open="isImageModalOpen = $event"
-      />
 
       <div
         v-if="products.length === 0 && !isLoading"
@@ -96,7 +85,6 @@ import { ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from '#imports'
 import CategoryButton from '~/modules/catalog/CategoryButton.vue'
 import ProductCard from '~/modules/catalog/ProductCard.vue'
-import ProductImageModal from '~/modules/catalog/ProductImageModal.vue'
 import Filter from '~/modules/shared/kit/Filter.vue'
 
 interface Product {
@@ -176,17 +164,6 @@ const selectedSort = ref<typeof sortOptions[0] | null>(sortOptions[0])
 // Товары
 const products = ref<Product[]>([])
 const isLoading = ref(false)
-
-// Модальное окно для иллюстраций
-const isImageModalOpen = ref(false)
-const modalImages = ref<string[]>([])
-const modalImageTitle = ref<string>('')
-
-const handleOpenImageModal = (image: string, title?: string) => {
-  modalImages.value = [image]
-  modalImageTitle.value = title || ''
-  isImageModalOpen.value = true
-}
 
 // Динамические SEO мета-теги для каталога
 const categoryNames: Record<string, string> = {

@@ -1,31 +1,6 @@
 <template>
   <div :class="['product-card', { 'product-card--double': double, 'product-card--postcard': category === 'postcards' }]">
-    <div 
-      v-if="category === 'postcards'"
-      class="product-card__image-container product-card__image-container--clickable"
-      @click="handleImageClick"
-    >
-      <div class="product-card__image">
-        <img
-          v-if="image && !imageError"
-          :src="image"
-          :alt="title || id"
-          class="product-card__img"
-          @error="handleImageError"
-        />
-        <div v-else class="product-card__placeholder">
-          <span>{{ title || id }}</span>
-        </div>
-      </div>
-      <img
-        v-if="isNew"
-        src="~/assets/images/badge-new.svg"
-        alt="NEW"
-        class="product-card__badge"
-      />
-    </div>
-    <NuxtLink 
-      v-else
+    <NuxtLink
       :to="getProductLink(id, category)"
       class="product-card__image-container"
     >
@@ -48,18 +23,12 @@
         class="product-card__badge"
       />
     </NuxtLink>
-    <div 
-      v-if="title && category === 'postcards'" 
-      class="product-card__title product-card__title--postcard"
-    >
-      {{ formattedPostcardTitle }}
-    </div>
-    <NuxtLink 
-      v-else-if="title" 
+    <NuxtLink
+      v-if="title"
       :to="getProductLink(id, category)"
-      class="product-card__title"
+      :class="['product-card__title', { 'product-card__title--postcard': category === 'postcards' }]"
     >
-      {{ title }}
+      {{ category === 'postcards' ? formattedPostcardTitle : title }}
     </NuxtLink>
     <NuxtLink
       v-if="price && isInCart"
@@ -136,9 +105,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const emit = defineEmits<{
-  'open-image-modal': [image: string, title?: string]
-}>()
 const route = useRoute()
 const cartStore = useCartStore()
 
@@ -178,12 +144,6 @@ const handleCartClick = () => {
       inStock: true
     }
     cartStore.addToCart(product, 1)
-  }
-}
-
-const handleImageClick = () => {
-  if (props.category === 'postcards' && props.image) {
-    emit('open-image-modal', props.image, props.title)
   }
 }
 
