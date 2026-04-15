@@ -101,15 +101,14 @@ interface Product {
   [key: string]: any
 }
 
-// Импортируем изображения для паттернов
-import pattern1 from '~/assets/images/button-pattern-1.png'
-import pattern2 from '~/assets/images/button-pattern-2.png'
-import pattern3 from '~/assets/images/button-pattern-3.png'
-
-// Импортируем изображения для "Разное"
-import other1 from '~/assets/images/button-others-1.png'
-import other2 from '~/assets/images/button-others-2.png'
-import other3 from '~/assets/images/button-others-3.png'
+// Временно скрыли выплывающие изображения на кнопках категорий.
+// Для восстановления просто раскомментируйте импорты и fanImages ниже.
+// import pattern1 from '~/assets/images/button-pattern-1.png'
+// import pattern2 from '~/assets/images/button-pattern-2.png'
+// import pattern3 from '~/assets/images/button-pattern-3.png'
+// import other1 from '~/assets/images/button-others-1.png'
+// import other2 from '~/assets/images/button-others-2.png'
+// import other3 from '~/assets/images/button-others-3.png'
 
 const route = useRoute()
 const router = useRouter()
@@ -120,7 +119,7 @@ const categories = [
     label: 'Паттерны',
     hoverBackground: '#A79D83',
     activeBackground: '#5C5034',
-    fanImages: [pattern1, pattern2, pattern3]
+    // fanImages: [pattern1, pattern2, pattern3]
   },
   {
     id: 'postcards',
@@ -139,7 +138,7 @@ const categories = [
     label: 'Разное',
     hoverBackground: '#76819B',
     activeBackground: '#34405C',
-    fanImages: [other1, other2, other3]
+    // fanImages: [other1, other2, other3]
   }
 ]
 
